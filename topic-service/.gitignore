@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.cache/
+evaluation_runs/cache/
+
+# Raw data downloads and generated output
+data/
+evaluation_runs/**/results.json

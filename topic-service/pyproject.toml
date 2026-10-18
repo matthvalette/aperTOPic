@@ -1,0 +1,33 @@
+[project]
+name = "parltopics"
+version = "0.1.0"
+description = "Multilingual search and topic classification for Swiss parliamentary affairs, built on OpenParlData, Apertus and TypeSafe Jev."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "httpx>=0.27",
+    "pydantic>=2.12",
+    "pydantic-settings>=2.4",
+    "typesafe-sdk>=0.7.5,<0.8",
+    "pypdf>=5.0",
+    "python-multipart>=0.0.9",
+    "openpyxl>=3.1.5",
+]
+
+[project.scripts]
+parltopics-eval = "parltopics.evaluation.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "anyio>=4"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/parltopics"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
