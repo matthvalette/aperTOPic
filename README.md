@@ -19,6 +19,48 @@ Today there is no common way to turn this large body of parliamentary informatio
 
 Develop an open and reusable classification service for Swiss parliamentary data, based on Apertus and OpenParlData. The service processes parliamentary affairs — titles, texts and associated documents — in German, French, Italian and Romansh, and automatically returns either topics from a standard two-level classification (such as the Année Politique Suisse scheme) or ad-hoc topics defined by users (such as "digitalisation" or "Covid-19"). The approach is validated through a practical use case with Digital Administration Switzerland (DVS), automatically identifying digitalisation-related affairs across the OpenParlData dataset as an alternative to the current manual process.
 
+# Expected Output
+
+    Source code in a public repository under an open-source licence (README with setup and usage)
+    A working prototype (API endpoint, script or small demo UI) that classifies affairs from the OpenParlData API
+    Short evaluation results on a labelled sample
+    5-minute pitch / demo on the final day
+
+# Success Criteria
+
+    Classification quality on a labelled sample (e.g. DVS "digitalisation", accuracy on APS topics)
+    Works across languages (at least de / fr / it) and parliament levels
+    Ad-hoc topics can be added without retraining
+    Feasible runtime for 300,000+ affairs
+
+# Evaluation Criteria
+
+    Usefulness for the OpenParlData community and public-sector users
+    Technical quality and reproducibility
+    Multilingual performance
+    Innovation
+    Ease of integration into OpenParlData
+    Quality of the pitch
+
+# Final Jury Criteria
+
+    Purposeful use of AI
+    Technical rigour
+    Value, cost & scalability
+    Sovereign deployability
+    Implementation feasibility
+
+# Ethics: Transparency
+
+    Explainable results: show why a topic was assigned (confidence, relevant text passage)
+    Topic labels are suggestions; a human must be able to correct them
+
+# Ethics: Neutrality
+
+    Check for bias between languages, regions and parties
+    Classification must stay neutral and must not judge political positions
+
+
 ## 🔧 Resources & Tools
 
 Check our resources & tools page for detailed information:
