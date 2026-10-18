@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parliament Topics Console</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <h1>Parliament topics</h1>
+        <p class="sub">Test console for multilingual search and topic classification</p>
+      </div>
+    </div>
+    <div class="status" id="status" aria-live="polite"><span class="pill">Checking the service…</span></div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Tools">
+    <button type="button" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="true">Search</button>
+    <button type="button" role="tab" id="tab-classify" aria-controls="panel-classify" aria-selected="false">Classify</button>
+  </nav>
+
+  <main>
+    <!-- ================= SEARCH ================= -->
+    <section id="panel-search" role="tabpanel" aria-labelledby="tab-search">
+      <form id="search-form" class="card form" autocomplete="off">
+        <div class="query-row">
+          <label for="q" class="sr-only">Search request</label>
+          <input id="q" name="q" type="search" required minlength="2" maxlength="500"
+                 placeholder="Describe what you are looking for, in any language">
+          <button type="submit" class="primary" id="search-submit">Search</button>
+        </div>
+        <div class="examples" aria-label="Example requests">
+          <span class="muted">Try</span>
+          <button type="button" class="chip" data-q="artificial intelligence in public administration">AI in public administration</button>
+          <button type="button" class="chip" data-q="Lärmschutz an Autobahnen">Lärmschutz an Autobahnen</button>
+          <button type="button" class="chip" data-q="logements abordables pour les familles">logements abordables</button>
+          <button type="button" class="chip" data-q="cybersecurity of hospitals">cybersecurity of hospitals</button>
+        </div>
+        <details class="options">
+          <summary>Options</summary>
+          <div class="option-grid">
+            <fieldset>
+              <legend>Search in these languages</legend>
+              <label class="check"><input type="checkbox" name="lang" value="de" checked> German</label>
+              <label class="check"><input type="checkbox" name="lang" value="fr" checked> French</label>
+              <label class="check"><input type="checkbox" name="lang" value="it" checked> Italian</label>
+              <label class="check"><input type="checkbox" name="lang" value="rm" checked> Romansh</label>
+            </fieldset>
+            <div class="field">
+              <label for="scope">Match in</label>
+              <select id="scope">
+                <option value="metadata" selected>Titles (fast)</option>
+                <option value="metadata,texts">Titles and texts (slower)</option>
+                <option value="docs">Documents (about 10 s)</option>
+                <option value="all">Everything (about 10 s)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bodies">Parliaments</label>
+              <input id="bodies" list="parliament-list" placeholder="All, or e.g. CHE, BE, 261">
+              <datalist id="parliament-list"></datalist>
+            </div>
+            <div class="field">
+              <label for="variants">Queries per language</label>
+              <input id="variants" type="number" min="1" max="5" value="3">
+            </div>
+            <div class="field">
+              <label for="max">Results to show</label>
+              <input id="max" type="number" min="1" max="300" value="40">
+            </div>
+            <label class="check"><input type="checkbox" id="rank" checked> Rank by relevance with Jev</label>
+          </div>
+        </details>
+      </form>
+      <div id="search-out" class="out" aria-live="polite">
+        <div class="empty">
+          <h2>Search every parliament in every language</h2>
+          <p>Apertus writes short queries in German, French, Italian and Romansh. OpenParlData runs them, and the hits are merged per affair. With ranking on, Jev orders them by relevance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CLASSIFY ================= -->
+    <section id="panel-classify" role="tabpanel" aria-labelledby="tab-classify" hidden>
+      <div class="split">
+        <form id="classify-form" class="card form" autocomplete="off">
+          <div class="segmented" role="radiogroup" aria-label="What to classify">
+            <label><input type="radio" name="mode" value="link" checked><span>Link or id</span></label>
+            <label><input type="radio" name="mode" value="text"><span>Text</span></label>
+            <label><input type="radio" name="mode" value="file"><span>File</span></label>
+          </div>
+
+          <div class="mode" data-mode="link">
+            <label for="ref">OpenParlData link, document link, Curia Vista link or affair id</label>
+            <input id="ref" placeholder="https://openparldata.ch/item/affairs/70435">
+            <div class="examples">
+              <span class="muted">Examples</span>
+              <button type="button" class="chip" data-ref="https://openparldata.ch/item/affairs/70435" title="Federal postulate 24.3010, official labels: Bildung, Beschäftigung und Arbeit, Sozialer Schutz">Federal 24.3010</button>
+              <button type="button" class="chip" data-ref="https://www.parlament.ch/de/ratsbetrieb/suche-curia-vista/geschaeft?AffairId=20103010" title="Federal motion 10.3010 via Curia Vista, official label: Verkehr">Curia Vista link</button>
+              <button type="button" class="chip" data-ref="https://openparldata.ch/item/affairs/341363" title="Schwyz postulate, text only in its PDF">Schwyz (PDF only)</button>
+              <button type="button" class="chip" data-ref="https://api.openparldata.ch/v1/docs/927844" title="A document by id">Document link</button>
+            </div>
+          </div>
+
+          <div class="mode" data-mode="text" hidden>
+            <label for="title">Title (optional)</label>
+            <input id="title" maxlength="500">
+            <label for="text">Text</label>
+            <textarea id="text" rows="8" maxlength="200000" placeholder="Paste a motion, a question or any text, in any language"></textarea>
+          </div>
+
+          <div class="mode" data-mode="file" hidden>
+            <label for="file" class="drop" id="drop">
+              <input id="file" type="file" accept=".pdf,.docx,.html,.htm,.txt,.md">
+              <span id="file-label"><strong>Choose a file</strong> or drop it here<br><span class="muted">PDF, DOCX, HTML or text, up to 25 MB</span></span>
+            </label>
+            <label for="file-title">Title (optional)</label>
+            <input id="file-title" maxlength="500">
+          </div>
+
+          <fieldset>
+            <legend>Label sets</legend>
+            <div id="taxonomies" class="taxonomies"><span class="muted">Loading…</span></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Ad-hoc topics <span class="muted">(no training needed)</span></legend>
+            <div id="custom-topics" class="custom-topics"></div>
+            <div class="examples">
+              <button type="button" class="chip add" id="add-topic">+ Add topic</button>
+              <button type="button" class="chip" data-topic="Digitalisierung">Digitalisierung</button>
+              <button type="button" class="chip" data-topic="Covid-19">Covid-19</button>
+              <button type="button" class="chip" data-topic="Klimawandel">Klimawandel</button>
+            </div>
+          </fieldset>
+
+          <details class="options">
+            <summary>Options</summary>
+            <div class="option-grid">
+              <div class="field">
+                <label for="language">Text language for federal affairs</label>
+                <select id="language">
+                  <option value="">Automatic (German first)</option>
+                  <option value="de">German</option>
+                  <option value="fr">French</option>
+                  <option value="it">Italian</option>
+                </select>
+              </div>
+              <label class="check"><input type="checkbox" id="include-answer"> Also read the Federal Council's answer</label>
+              <div class="field">
+                <label class="check"><input type="checkbox" id="override"> Override thresholds</label>
+                <div class="range-row">
+                  <input id="threshold" type="range" min="0.05" max="0.95" step="0.05" value="0.5" disabled aria-label="Threshold">
+                  <output id="threshold-out" for="threshold">0.50</output>
+                </div>
+                <p class="hint">Otherwise each label set uses its tuned default (0.75 for the subject areas).</p>
+              </div>
+            </div>
+          </details>
+
+          <button type="submit" class="primary wide" id="classify-submit">Classify</button>
+        </form>
+
+        <div id="classify-out" class="out" aria-live="polite">
+          <div class="empty">
+            <h2>Topic probabilities, explained</h2>
+            <p>Give an affair, a document or any text. Jev answers one yes/no question per topic and returns a probability for each one. Topics above the threshold are assigned.</p>
+            <p class="muted">The 28 Curia Vista subject areas are the default: they are the labelled set, so their accuracy is known (top topic correct for about 92% of affairs).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <template id="topic-row">
+    <div class="topic">
+      <input type="text" class="topic-name" placeholder="Topic name" aria-label="Topic name" maxlength="200">
+      <input type="text" class="topic-desc" placeholder="What it covers (optional)" aria-label="What the topic covers" maxlength="1000">
+      <button type="button" class="icon remove" aria-label="Remove topic">×</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
