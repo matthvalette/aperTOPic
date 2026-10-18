@@ -1,0 +1,252 @@
+{
+  "metadata": {
+    "created_at": "2026-10-18T13:39:59.048600+00:00",
+    "source_scheme": "cantonal_SG",
+    "target_scheme": "APS_2026-10-18",
+    "apertus_model": "apertus-v1-5-8b",
+    "stats": {
+      "n_labels": 10,
+      "n_with_primary": 10,
+      "n_with_error": 0,
+      "mean_aps_per_label": 8.6
+    }
+  },
+  "mappings": [
+    {
+      "source_id": "SG-37",
+      "source_label_de": "Grundlagen und Organisation",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1478,
+      "aps_primary": [
+        "1.2.4",
+        "1.2.7"
+      ],
+      "aps_secondary": [
+        "1.2.1",
+        "1.2.2",
+        "1.2.3",
+        "1.2.5",
+        "1.2.6",
+        "1.2.8",
+        "1.2.9",
+        "1.2.10",
+        "1.2.11",
+        "1.2.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "36f5bc07aeb9c3a18b530bc07833a33c8596f50f2d1892d72d8fd181d954d0e0",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-38",
+      "source_label_de": "Verkehr, Bau, Energie, Gewässer",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1154,
+      "aps_primary": [
+        "6.1.3",
+        "6.1.4",
+        "6.1.5",
+        "6.1.6",
+        "6.1.7"
+      ],
+      "aps_secondary": [
+        "6.1.1",
+        "6.2.1",
+        "6.2.2",
+        "6.2.3",
+        "6.2.4",
+        "6.2.5",
+        "6.2.6",
+        "6.3.1",
+        "6.3.2",
+        "6.3.3",
+        "6.3.4",
+        "6.4.1",
+        "6.4.2",
+        "6.4.3",
+        "6.4.4",
+        "6.4.5",
+        "6.4.6",
+        "6.4.7",
+        "6.4.8",
+        "6.4.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "9726453f424dfa371454a6b436827e4aed0ad40cd3e744191820740f0fe196cc",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-39",
+      "source_label_de": "Erziehung, Bildung, Kultur",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1044,
+      "aps_primary": [
+        "4.2.3",
+        "4.2.4",
+        "4.3.1",
+        "4.3.2",
+        "4.3.3"
+      ],
+      "aps_secondary": [
+        "4.2.1",
+        "4.2.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "4d92aba3e46d2530bd44477f562cd330ce9c32aae63468381c2a137c0f903020",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-40",
+      "source_label_de": "Gesundheitspflege, Sozialversicherung, Sozialhilfe",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 954,
+      "aps_primary": [
+        "5.1.1",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.9",
+        "5.2.10"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.6",
+        "5.2.1",
+        "5.2.4",
+        "5.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "12566b060a46fe876dd583c06b4ba98e36c40b2b2137b10b612a87b409250c36",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-41",
+      "source_label_de": "Finanzen, Regalien, Unternehmungen, Feuerschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 678,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [
+        "8.2.1",
+        "8.2.2",
+        "8.2.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "c65cadeed6f92768144bcf09e93f342c2db14e9147fc58b7a357bab794cd1c61",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-42",
+      "source_label_de": "Landwirtschaft, Tierhaltung, Waldwirtschaft, Umweltschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 494,
+      "aps_primary": [
+        "8.4.10"
+      ],
+      "aps_secondary": [
+        "8.4.4",
+        "8.4.5",
+        "8.4.6",
+        "8.4.7",
+        "8.4.8",
+        "8.4.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "2ca8185b06d8c58e2226ebabe8b6a1dd5091f0bd31a2f265a58867664aa9c0bb",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-43",
+      "source_label_de": "Landesverteidigung, Sicherheit und Ordnung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 343,
+      "aps_primary": [
+        "7.2.8",
+        "7.2.5",
+        "7.2.2"
+      ],
+      "aps_secondary": [
+        "7.2.7",
+        "7.2.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "36bbfc2f74fa98f40965e4075d51b4128c8e5ee9dc301f3591b60093df07ae2b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-44",
+      "source_label_de": "Zivilrecht, Strafrecht, Rechtspflege",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 287,
+      "aps_primary": [
+        "7.1.2",
+        "7.1.3"
+      ],
+      "aps_secondary": [
+        "7.1.1",
+        "7.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "8b66c973b3e661a71b9c144b216e103da5f1d27bef6425bbfb11525411a6fdf8",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-45",
+      "source_label_de": "Arbeit und Gewerbe",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 275,
+      "aps_primary": [
+        "8.5.1",
+        "8.5.2",
+        "8.5.3"
+      ],
+      "aps_secondary": [
+        "8.5.4",
+        "8.5.5",
+        "8.5.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "63aeeed52f5de8a451311a7de90c3cd98c5c57992dc748a55a6008772c9221d3",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "SG-46",
+      "source_label_de": "Allgemein",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 85,
+      "aps_primary": [
+        "4.1.4",
+        "4.1.5",
+        "4.1.6"
+      ],
+      "aps_secondary": [
+        "4.1.2",
+        "4.1.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "5ebd9a20501313c06d450fcedec23c8fd9bba16ae57d724679f6c5d66e19c55d",
+      "review_status": "auto",
+      "error": null
+    }
+  ]
+}

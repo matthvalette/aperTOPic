@@ -1,0 +1,23 @@
+{
+  "created_at": "2026-10-18T13:39:59.061893+00:00",
+  "apertus_model": "apertus-v1-5-8b",
+  "aps_version": "2026-10-18",
+  "schemes": [
+    "curia_vista_subject_areas",
+    "cantonal_SG",
+    "cantonal_TG",
+    "cantonal_ZH"
+  ],
+  "coverage": {
+    "coverage_pct": 96.97,
+    "n_covered": 160,
+    "n_total": 165,
+    "uncovered_codes": [
+      "2.1.4",
+      "2.1.9",
+      "4.1.10",
+      "5.2.11",
+      "7.2.10"
+    ]
+  }
+}

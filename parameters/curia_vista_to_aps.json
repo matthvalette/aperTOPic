@@ -1,0 +1,653 @@
+{
+  "metadata": {
+    "created_at": "2026-10-18T13:39:59.043555+00:00",
+    "source_scheme": "curia_vista_subject_areas",
+    "target_scheme": "APS_2026-10-18",
+    "apertus_model": "apertus-v1-5-8b",
+    "stats": {
+      "n_labels": 28,
+      "n_with_primary": 28,
+      "n_with_error": 3,
+      "mean_aps_per_label": 7.93
+    }
+  },
+  "mappings": [
+    {
+      "source_id": "15",
+      "source_label_de": "Wirtschaft",
+      "source_label_fr": "Économie",
+      "source_label_it": "Economia",
+      "source_affair_count": 11023,
+      "aps_primary": [
+        "8.1.1",
+        "8.1.2",
+        "8.1.3",
+        "8.1.4",
+        "8.1.5"
+      ],
+      "aps_secondary": [
+        "8.1.6",
+        "8.1.7",
+        "8.2.1",
+        "8.2.2",
+        "8.2.3",
+        "8.2.4",
+        "8.2.5",
+        "8.2.6",
+        "8.3.1",
+        "8.3.2",
+        "8.3.3",
+        "8.3.4",
+        "8.3.5",
+        "8.3.6",
+        "8.4.1",
+        "8.5.1",
+        "8.5.2",
+        "8.5.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "2246bf9fdc04071a96af3b744661056d19a3d198fc8da07fef63db97f894255f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "2841",
+      "source_label_de": "Gesundheit",
+      "source_label_fr": "Santé",
+      "source_label_it": "Salute",
+      "source_affair_count": 10273,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6",
+        "5.1.7",
+        "5.1.8",
+        "5.2.1",
+        "5.2.4",
+        "5.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "637f5be3c97107e98940e926d0a6b5027b9f1c7faca84df7e1c974f0e615decc",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "4",
+      "source_label_de": "Staatspolitik",
+      "source_label_fr": "Politique d'Etat",
+      "source_label_it": "Politica nazionale",
+      "source_affair_count": 8855,
+      "aps_primary": [
+        "1.1.1",
+        "1.1.2",
+        "1.2.7"
+      ],
+      "aps_secondary": [
+        "1.1.3",
+        "1.1.4",
+        "1.2.1",
+        "1.2.2",
+        "1.2.3",
+        "1.2.4",
+        "1.2.5",
+        "1.2.6",
+        "1.2.8",
+        "1.2.9",
+        "1.2.10",
+        "1.2.11",
+        "1.2.12",
+        "2.1.7"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "8cad9c7937241fa4804c01668a7037d1e9c6792017f73d582f84ce3fb419fe5c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "24",
+      "source_label_de": "Finanzwesen",
+      "source_label_fr": "Finances",
+      "source_label_it": "Finanze",
+      "source_affair_count": 8488,
+      "aps_primary": [
+        "8.3.2",
+        "8.3.4",
+        "8.3.5"
+      ],
+      "aps_secondary": [
+        "8.3.1",
+        "8.4.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "44d597fe4c7f42d1a5e9950a64126732c6cc7a9c2a01f9e110489ac02c9027a5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "52",
+      "source_label_de": "Umwelt",
+      "source_label_fr": "Environnement",
+      "source_label_it": "Ambiente",
+      "source_affair_count": 7596,
+      "aps_primary": [
+        "6.4.1",
+        "6.4.2",
+        "6.4.3",
+        "6.4.4",
+        "6.4.5",
+        "6.4.6",
+        "6.4.7",
+        "6.4.8",
+        "6.4.9"
+      ],
+      "aps_secondary": [
+        "6.1.1",
+        "6.2.1",
+        "6.2.2",
+        "6.2.3",
+        "6.2.4",
+        "6.2.5",
+        "6.2.6",
+        "6.3.1",
+        "6.3.2",
+        "6.3.3",
+        "6.3.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "bbdc7a862944e4cbeecdc3231421d3dd65fdcbfc3dbf63639810f9897958bca6",
+      "review_status": "auto",
+      "error": "invalid_codes: ['6.2.7']"
+    },
+    {
+      "source_id": "8",
+      "source_label_de": "Internationale Politik",
+      "source_label_fr": "Politique internationale",
+      "source_label_it": "Politica internazionale",
+      "source_affair_count": 7342,
+      "aps_primary": [
+        "3.1.1",
+        "3.1.2",
+        "3.1.3",
+        "3.1.4",
+        "3.1.5"
+      ],
+      "aps_secondary": [
+        "3.1.6",
+        "3.1.7",
+        "3.1.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d12aaa9c8edd6c91d0ced252a7cd3425de3b3ef9a0112a08f27c146811648581",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "28",
+      "source_label_de": "Soziale Fragen",
+      "source_label_fr": "Questions sociales",
+      "source_label_it": "Questioni sociali",
+      "source_affair_count": 6977,
+      "aps_primary": [
+        "4.1.4",
+        "4.1.5",
+        "4.1.6",
+        "5.1.1",
+        "5.1.9"
+      ],
+      "aps_secondary": [
+        "4.1.2",
+        "4.1.3",
+        "4.1.7",
+        "4.1.8",
+        "4.1.9",
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6",
+        "5.1.7",
+        "5.1.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "aff84909c390fbe69aaa3ec9056669bebb2d853f14e33bc34f67548f61a3fd9a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "9",
+      "source_label_de": "Sicherheitspolitik",
+      "source_label_fr": "Politique de sécurité",
+      "source_label_it": "Politica di sicurezza",
+      "source_affair_count": 6651,
+      "aps_primary": [
+        "7.2.1",
+        "7.2.2",
+        "7.2.3",
+        "7.2.4",
+        "7.2.5"
+      ],
+      "aps_secondary": [
+        "7.2.6",
+        "7.2.7",
+        "7.2.8",
+        "7.2.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "1a9486371cd1f87d27ee7f0f7d2ad42a9af78439ad4bde81ea51f3d70ca3c7ce",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "48",
+      "source_label_de": "Verkehr",
+      "source_label_fr": "Transports",
+      "source_label_it": "Trasporti",
+      "source_affair_count": 6548,
+      "aps_primary": [
+        "6.1.1",
+        "6.1.2",
+        "6.1.3",
+        "6.1.4",
+        "6.1.5"
+      ],
+      "aps_secondary": [
+        "6.1.6",
+        "6.1.7",
+        "6.1.8",
+        "6.1.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "cf90881dacac779221c534fd1701a1e96bdad79a4e6beaecacd21b09e62ef70b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "2811",
+      "source_label_de": "Migration",
+      "source_label_fr": "Politique migratoire",
+      "source_label_it": "Migrazione",
+      "source_affair_count": 4827,
+      "aps_primary": [
+        "4.1.2"
+      ],
+      "aps_secondary": [
+        "4.1.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "ac8d0b21661bca4e4da4e067fc8b45b5b6c82b276e2e67e3eea474fe4981fbd4",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "34",
+      "source_label_de": "Medien und Kommunikation",
+      "source_label_fr": "Médias et communication",
+      "source_label_it": "Media e comunicazione",
+      "source_affair_count": 4697,
+      "aps_primary": [
+        "4.4.3",
+        "4.4.4",
+        "4.4.5"
+      ],
+      "aps_secondary": [
+        "4.4.1",
+        "4.4.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "43d13cdf1a455527af4e3f9f06c6e5d6c15689ffdbbb4ac197a2ebd2fe888bd4",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "55",
+      "source_label_de": "Landwirtschaft",
+      "source_label_fr": "Agriculture",
+      "source_label_it": "Agricoltura",
+      "source_affair_count": 3894,
+      "aps_primary": [
+        "8.4.1"
+      ],
+      "aps_secondary": [
+        "8.4.2",
+        "8.4.3",
+        "8.4.4",
+        "8.4.5",
+        "8.4.6",
+        "8.4.7",
+        "8.4.8",
+        "8.4.9",
+        "8.4.10",
+        "8.4.11",
+        "8.4.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "a4f198df99ee6c3a8d165d02c028db75798a229eff8b09db637466f3757cc081",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "66",
+      "source_label_de": "Energie",
+      "source_label_fr": "Énergie",
+      "source_label_it": "Energia",
+      "source_affair_count": 3703,
+      "aps_primary": [
+        "6.2.1",
+        "6.2.3",
+        "6.2.5"
+      ],
+      "aps_secondary": [
+        "6.2.2",
+        "6.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "8e4e9a6fc30dacd6ebdbae52e8271eac4c102c7380cac2b602bc9610a203612b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "44",
+      "source_label_de": "Beschäftigung und Arbeit",
+      "source_label_fr": "Emploi et travail",
+      "source_label_it": "Occupazione e lavoro",
+      "source_affair_count": 3004,
+      "aps_primary": [
+        "8.5.1",
+        "8.5.2",
+        "8.5.3",
+        "8.5.4",
+        "8.5.5"
+      ],
+      "aps_secondary": [
+        "8.5.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "49bf7ebdfa11b85168ef0d5d2fb5744fc8c6f2bc5bc469cb0828b1e3c683283e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "10",
+      "source_label_de": "Europapolitik",
+      "source_label_fr": "Politique européenne",
+      "source_label_it": "Politica europea",
+      "source_affair_count": 2815,
+      "aps_primary": [
+        "3.1.1"
+      ],
+      "aps_secondary": [
+        "3.1.2",
+        "3.1.3",
+        "3.1.4",
+        "3.1.5",
+        "3.1.6",
+        "3.1.7",
+        "3.1.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "cae07a45b77bc3671b8fbe8be1126efb42f31d467fc43e9b9545db9887ef05b5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "12",
+      "source_label_de": "Recht Allgemein",
+      "source_label_fr": "Droit",
+      "source_label_it": "Diritto generale",
+      "source_affair_count": 2505,
+      "aps_primary": [
+        "7.1.2",
+        "7.1.3",
+        "7.1.4",
+        "7.1.5",
+        "7.1.6"
+      ],
+      "aps_secondary": [
+        "7.1.1"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "b1799b42cade040320c2b44e75a9cdfd5fff789ba99a4f7fe79d6b63812dbe58",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "32",
+      "source_label_de": "Bildung",
+      "source_label_fr": "Éducation",
+      "source_label_it": "Formazione",
+      "source_affair_count": 2452,
+      "aps_primary": [
+        "4.2.1",
+        "4.2.2",
+        "4.2.3",
+        "4.2.4"
+      ],
+      "aps_secondary": [
+        "4.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "94d6d89ea922c6034fcd359499d95b33da7d318511e4c8d93e7420ec9250396f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "2836",
+      "source_label_de": "Sozialer Schutz",
+      "source_label_fr": "Protection sociale",
+      "source_label_it": "Protezione sociale",
+      "source_affair_count": 2100,
+      "aps_primary": [
+        "5.1.1",
+        "5.1.9",
+        "5.2.1",
+        "5.2.4",
+        "5.2.5"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6",
+        "5.1.7",
+        "5.1.8",
+        "5.2.2",
+        "5.2.3",
+        "5.2.6",
+        "5.2.7",
+        "5.2.8",
+        "5.2.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "45ff7a7663664e156583cb6c2d7d9a4c9d243fe6984b856add9e8444c4a44170",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "2846",
+      "source_label_de": "Raumplanung und Wohnungswesen",
+      "source_label_fr": "Aménagement du territoire et logement",
+      "source_label_it": "Pianificazione territoriale e alloggi",
+      "source_affair_count": 2096,
+      "aps_primary": [
+        "6.3.1",
+        "6.3.2",
+        "6.3.3",
+        "6.3.4"
+      ],
+      "aps_secondary": [
+        "6.1.6",
+        "6.1.7",
+        "6.1.8",
+        "6.1.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "dacb4d0c6f32c4be4c267a6ca9790ab133ff79713a98f6dfc9597090b4e05466",
+      "review_status": "auto",
+      "error": "invalid_codes: ['6.3.5']"
+    },
+    {
+      "source_id": "2446",
+      "source_label_de": "Steuer",
+      "source_label_fr": "Fiscalité",
+      "source_label_it": "Imposte",
+      "source_affair_count": 2019,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [
+        "8.2.1",
+        "8.2.2",
+        "8.2.3",
+        "8.2.5",
+        "8.2.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "85169df0874325165435f3bb21fc4ccb27faf992c08a3d7ccbde1f2cf8dee728",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "1236",
+      "source_label_de": "Menschenrechte",
+      "source_label_fr": "Droits de l'homme",
+      "source_label_it": "Diritti umani",
+      "source_affair_count": 1947,
+      "aps_primary": [
+        "7.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "ad1b0aadfb47fb41d0fafaef17ffc06a984b636d790954be3739392644fa8bc6",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "1216",
+      "source_label_de": "Strafrecht",
+      "source_label_fr": "Droit pénal",
+      "source_label_it": "Diritto penale",
+      "source_affair_count": 1817,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "2831",
+      "source_label_de": "Kultur",
+      "source_label_fr": "Culture",
+      "source_label_it": "Cultura",
+      "source_affair_count": 1740,
+      "aps_primary": [
+        "4.3.1",
+        "4.3.2",
+        "4.3.3",
+        "4.3.4",
+        "4.3.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "841284bdf0f2f256dca721ed48fd7082c3a63746bf0f39492f3bf3f8b2dcac5e",
+      "review_status": "auto",
+      "error": "invalid_codes: ['4.3.6', '4.3.7', '4.3.8']"
+    },
+    {
+      "source_id": "36",
+      "source_label_de": "Wissenschaft und Forschung",
+      "source_label_fr": "Science et recherche",
+      "source_label_it": "Scienza e ricerca",
+      "source_affair_count": 1610,
+      "aps_primary": [
+        "4.2.5"
+      ],
+      "aps_secondary": [
+        "4.2.1",
+        "4.2.2",
+        "4.2.3",
+        "4.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "88028b9a426593974e7aca0d1a69faefe446e03c73775ddc6039843b693b4ff2",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "421",
+      "source_label_de": "Parlament",
+      "source_label_fr": "Parlement",
+      "source_label_it": "Parlamento",
+      "source_affair_count": 1365,
+      "aps_primary": [
+        "1.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "b6e9f6b876234e107c7807da186d62a2cd8b8a4f4834cb83e379e1331f47ea1d",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "1211",
+      "source_label_de": "Zivilrecht",
+      "source_label_fr": "Droit civil",
+      "source_label_it": "Diritto civile",
+      "source_affair_count": 1146,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "1231",
+      "source_label_de": "Internationales Recht",
+      "source_label_fr": "Droit international",
+      "source_label_it": "Diritto internazionale",
+      "source_affair_count": 826,
+      "aps_primary": [
+        "7.1.4"
+      ],
+      "aps_secondary": [
+        "7.1.5",
+        "7.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "beb0791bf4a536793306f9d5222c9fae25739fd185b0dd79327c7ed16918567e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "1221",
+      "source_label_de": "Gerichtswesen",
+      "source_label_fr": "Justice",
+      "source_label_it": "Giustizia",
+      "source_affair_count": 434,
+      "aps_primary": [
+        "7.1.2",
+        "7.1.3",
+        "7.1.5"
+      ],
+      "aps_secondary": [
+        "7.1.1",
+        "7.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "1876090287580a06a828668dcfb726bd6356fdc15c5324014daa7a5e88e9e481",
+      "review_status": "auto",
+      "error": null
+    }
+  ]
+}

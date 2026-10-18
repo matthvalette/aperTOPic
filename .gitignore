@@ -1,3 +1,13 @@
+# Project-specific ignores (local-only working files)
+data/
+TODO.txt
+AGENTS.md
+Agents.md
+LOG.md
+Log.md
+PLAN.md
+Plan.md
+
 # Secrets and local config
 .env
 .env.*

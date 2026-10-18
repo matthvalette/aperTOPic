@@ -1,0 +1,1342 @@
+{
+  "metadata": {
+    "created_at": "2026-10-18T13:39:59.058234+00:00",
+    "source_scheme": "cantonal_ZH",
+    "target_scheme": "APS_2026-10-18",
+    "apertus_model": "apertus-v1-5-8b",
+    "stats": {
+      "n_labels": 81,
+      "n_with_primary": 81,
+      "n_with_error": 1,
+      "mean_aps_per_label": 2.06
+    }
+  },
+  "mappings": [
+    {
+      "source_id": "ZH-165",
+      "source_label_de": "Totalrevision",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 7,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-166",
+      "source_label_de": "PBG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 6,
+      "aps_primary": [
+        "6.3.1",
+        "6.3.2",
+        "6.3.3"
+      ],
+      "aps_secondary": [
+        "6.3.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "60253991360344f24a1c938393c25c2d407eb95c5de2f82ad2e557ecc92b6ea2",
+      "review_status": "auto",
+      "error": "invalid_codes: ['6.3.5']"
+    },
+    {
+      "source_id": "ZH-167",
+      "source_label_de": "KVG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-168",
+      "source_label_de": "Änderung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "7.1.2",
+        "7.1.3"
+      ],
+      "aps_secondary": [
+        "7.1.1"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "142df92dc251bf198bc08ca3a6fd7825cc431308c79975f928c32e14174d75a6",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-169",
+      "source_label_de": "Strassengesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [
+        "6.1.1",
+        "6.1.2",
+        "6.1.4",
+        "6.1.5",
+        "6.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "fa003858b6f4b58b58243802c6a9f242d03a6c0e6fa5485573ce4939d7cf9d56",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-170",
+      "source_label_de": "SPFG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [
+        "5.1.1",
+        "5.1.2",
+        "5.1.4",
+        "5.1.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "aeed9c3b00803c8bcd9fab4760aa0a67bc1aa9617ec7e41fced4afe0c380c7e3",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-171",
+      "source_label_de": "GOG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-172",
+      "source_label_de": "Parlamentarische Initiative",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "2.1.3",
+        "2.1.6"
+      ],
+      "aps_secondary": [
+        "2.1.1",
+        "2.1.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "c0b761911d5d1e5a3c14f489ec4019a3128c5211c4e7ce5b503c8f4887f5af2d",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-173",
+      "source_label_de": "Vernehmlassung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "fa37768debdf59f47c0dd07e7a336d55d794bde9785dd236cba2beda9dfd7f73",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-174",
+      "source_label_de": "Geodaten",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "6.3.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "c55a710ce18f80d4a153029ebaf58ce522da9e4ebb45a541efcf53b8b53f355a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-175",
+      "source_label_de": "Strukturbericht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-176",
+      "source_label_de": "Revision",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "1.2.5"
+      ],
+      "aps_secondary": [
+        "1.2.1",
+        "1.2.2",
+        "1.2.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d395eeb0e87a14f1d3d92523c1fef145f7ecd4f688d7dbba15c41c22bb18c465",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-177",
+      "source_label_de": "KGeoIG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-178",
+      "source_label_de": "Prämienverbilligung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "f7f04ff9fe7a93debac52b2b949ce815fc428a859d912f96205c1fe6bdf563e8",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-179",
+      "source_label_de": "EG KVG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "f6902edb7ff52802cfe6028490a8cb4be818243c58b62bc29637309aff88f119",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-180",
+      "source_label_de": "USZ",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-181",
+      "source_label_de": "KSW",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "f7f04ff9fe7a93debac52b2b949ce815fc428a859d912f96205c1fe6bdf563e8",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-182",
+      "source_label_de": "Gesundheitsdirektion",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.3",
+        "5.1.4",
+        "5.1.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "b62ccc614d61fe21be686f883b48ef669eac2bd229ac0045a188a60a7160b4bc",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-183",
+      "source_label_de": "Spitalplanung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-184",
+      "source_label_de": "Straf- und Justizvollzugsgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-185",
+      "source_label_de": "Stadt Zürich",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "afffb9dd203360144631dcdc5a7208d1d959a8cffc6a9a285fabf11457c89229",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-186",
+      "source_label_de": "Spitalliste",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-187",
+      "source_label_de": "Staatsbeitragsgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-188",
+      "source_label_de": "Staatsbeiträge",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-189",
+      "source_label_de": "Versorgungsbericht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-190",
+      "source_label_de": "Gebührenverordnung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.3.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "32856c7122c46455216074057a418bd8fe7a6c2f15938556fed0a1f933ca1d8b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-191",
+      "source_label_de": "Geoinformationsgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-192",
+      "source_label_de": "Gebäude- und Wohnungsregister",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.3.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "e372333d645037a8b6021e5b2e47887f2c55fbaf0d21d0a0e3709988fb145ab4",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-193",
+      "source_label_de": "VEG KVG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-194",
+      "source_label_de": "Einführungsgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-195",
+      "source_label_de": "IPV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-196",
+      "source_label_de": "KLGV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-197",
+      "source_label_de": "Lebensmittel",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-198",
+      "source_label_de": "Tierseuchengesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.6"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "e2f76fc5e0b11ead5ccdb2c8b0a513871ff36554709f34c47fe84a1498a54376",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-199",
+      "source_label_de": "Lehrmittel",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [
+        "4.2.1",
+        "4.2.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "b9e410626b390dd12336db601f78cf2cc478f64497e1f6f1626304ef4f1e39c6",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-200",
+      "source_label_de": "Administrativuntersuchung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "1.2.6"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "16205baf625391f8e857a0bd38b589866037bd6696ed5958c19e1e2094a458df",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-201",
+      "source_label_de": "Personalgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-202",
+      "source_label_de": "GesG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "bf32a46c20e750cdb8f0b98abe64fae476348d962b45f80c6227140b05bdc746",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-203",
+      "source_label_de": "Gesundheitsgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-204",
+      "source_label_de": "Lehrmittelverlag",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "37c59687ea0f3e4285059d44b6f80705fd18bbf3a882b6e616272d5182ef5471",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-205",
+      "source_label_de": "Aktiengesellschaft",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "8.3.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "61a8de6f4b0c5343b2044354cc3904da7b5d8b9169af2e25e084b6077bef77b2",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-206",
+      "source_label_de": "AG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-207",
+      "source_label_de": "Baurecht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.3.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fee27ba088107b25096fb6c261aeb4585e62308a365842aa833745b768a2c80f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-208",
+      "source_label_de": "Eigentümerstrategie",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "347a540c1765e8ba73879b93ba93eacdae54db5ed16e4008501413ac091f4b1c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-209",
+      "source_label_de": "USZG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-210",
+      "source_label_de": "öffentlich-rechtliche Anstalt",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "1.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "faf4ce51a44c0d8b8ab067e8bb3b105f18150ad4cf462fcf9e2018ad35a3f934",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-211",
+      "source_label_de": "Spital",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-212",
+      "source_label_de": "Verselbstständigung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-213",
+      "source_label_de": "ipw",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-214",
+      "source_label_de": "Integrierte Psychiatrie Winterthur",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-215",
+      "source_label_de": "Impfung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-216",
+      "source_label_de": "Impfen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-217",
+      "source_label_de": "Apotheke",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-218",
+      "source_label_de": "Impfungen in Apotheken",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-219",
+      "source_label_de": "Apothekerinnen und Apotheker",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-220",
+      "source_label_de": "MedBV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-221",
+      "source_label_de": "universitäre Medizinalberufe",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-222",
+      "source_label_de": "Hepatitis",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-223",
+      "source_label_de": "PUK",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "a000f7caea5df903797c62afed4bf9b2deaaf2d090fe411296668542f77f2979",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-224",
+      "source_label_de": "Einführungsgesetz zum Krankenversicherungsgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-225",
+      "source_label_de": "Optimierung Prämienverbilligung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d75395bcb0482071b841be5ca28f5469e581a4f4ca90c5353b254ff3f7f7a573",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-226",
+      "source_label_de": "KGeolV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-227",
+      "source_label_de": "Mehrwertausgleich",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "255555bbd725e19433ce5a0d59902baa205c6d80b8466a71cc6a11fce9beecf4",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-228",
+      "source_label_de": "MAG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "72199cac116f61f68e2f68ac15c27ff608f3b2a60b5a73162f09d1c72f3ea6f5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-229",
+      "source_label_de": "Teilrevision",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.3",
+        "5.1.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "cc90452ce33c2a47b8aaf205649e49ed3e93a95974d09aa066e928fb1718addf",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-230",
+      "source_label_de": "Fachhochschulgesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "347a540c1765e8ba73879b93ba93eacdae54db5ed16e4008501413ac091f4b1c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-231",
+      "source_label_de": "BVV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.3.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "e372333d645037a8b6021e5b2e47887f2c55fbaf0d21d0a0e3709988fb145ab4",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-232",
+      "source_label_de": "Gymnasium",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "37c59687ea0f3e4285059d44b6f80705fd18bbf3a882b6e616272d5182ef5471",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-233",
+      "source_label_de": "Zürcher Spitalplanung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-234",
+      "source_label_de": "KBüV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "1.2.10"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "ee0119183d4f25a2f161457676cd2acab30aa99f167ee2fe786b82ed487af37f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-235",
+      "source_label_de": "JVV",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-236",
+      "source_label_de": "IDG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.7"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "43fff3c1ae1f7c8fb1e0e8b121d834f51f8bbb7c689cfa3ef0212fee9e5f2744",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-237",
+      "source_label_de": "Solaranlagen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.2.5"
+      ],
+      "aps_secondary": [
+        "6.4.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "cc041a3767f34cedc1d7b16180e9bf7e31c319e8e95a510d6be2c9992cd49246",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-238",
+      "source_label_de": "&quot",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.3.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "32856c7122c46455216074057a418bd8fe7a6c2f15938556fed0a1f933ca1d8b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-239",
+      "source_label_de": "Fonds",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [
+        "6.1.1",
+        "6.1.4",
+        "6.1.5",
+        "6.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "4c787cfcb9ed37b5c8b2e078bda571d4d661961e6a0df4662fd39e3c91f48503",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-240",
+      "source_label_de": "VRG",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-241",
+      "source_label_de": "Elektronische Verfahrenshandlungen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-242",
+      "source_label_de": "Kostenanteile",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "72199cac116f61f68e2f68ac15c27ff608f3b2a60b5a73162f09d1c72f3ea6f5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-243",
+      "source_label_de": "Energiegesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.2.5"
+      ],
+      "aps_secondary": [
+        "6.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "56a1551915ec9fb21bb0c8b7018912380718e7ff5a408d8cb999cd9599651278",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-244",
+      "source_label_de": "Gesetz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "ZH-245",
+      "source_label_de": "Verbot",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    }
+  ]
+}

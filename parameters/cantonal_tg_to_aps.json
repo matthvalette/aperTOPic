@@ -1,0 +1,2069 @@
+{
+  "metadata": {
+    "created_at": "2026-10-18T13:39:59.052677+00:00",
+    "source_scheme": "cantonal_TG",
+    "target_scheme": "APS_2026-10-18",
+    "apertus_model": "apertus-v1-5-8b",
+    "stats": {
+      "n_labels": 118,
+      "n_with_primary": 118,
+      "n_with_error": 2,
+      "mean_aps_per_label": 2.86
+    }
+  },
+  "mappings": [
+    {
+      "source_id": "17.1",
+      "source_label_de": "Grosser Rat",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 311,
+      "aps_primary": [
+        "1.2.4"
+      ],
+      "aps_secondary": [
+        "1.2.10"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "2227ccf27efb9273603ce5c39625b7aa6396f01d71e167cdeeadc1a95348c37e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "14.1",
+      "source_label_de": "Bürgerrecht, Ein- und Ausbürgerungen, Taxen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 84,
+      "aps_primary": [
+        "7.1.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "c60fda01497335410350cf23166c6b4458a63d28383eb292b557fe4f8252c72a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.0",
+      "source_label_de": "Unterrichtswesen, Lehrerorganisation und -fortbildung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 76,
+      "aps_primary": [
+        "4.2.1",
+        "4.2.2",
+        "4.2.3",
+        "4.2.4"
+      ],
+      "aps_secondary": [
+        "4.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "94d6d89ea922c6034fcd359499d95b33da7d318511e4c8d93e7420ec9250396f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.0",
+      "source_label_de": "Allgemeine Aufsicht, Verwaltungsrechtspflege",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 73,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "64.1",
+      "source_label_de": "Staats- und Gemeindesteuern, allgemeine Organisation",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 72,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [
+        "8.2.1",
+        "8.2.2",
+        "8.2.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "c65cadeed6f92768144bcf09e93f342c2db14e9147fc58b7a357bab794cd1c61",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.3",
+      "source_label_de": "Richterliche Behörden, Anwaltswesen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 69,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "10.1",
+      "source_label_de": "Kantonsverfassung und Staatsverträge",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 66,
+      "aps_primary": [
+        "1.2.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "977a8eddd9a633045cc7598dc102b868f690d88d2d6268008b11d1833603f592",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "81.0",
+      "source_label_de": "Allgemeines, Organisation, Gesetz, Taxen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 60,
+      "aps_primary": [
+        "5.1.1",
+        "5.1.3"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6",
+        "5.1.7",
+        "5.1.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "aa53b6f149314fd42300e0afd372b98b66f07d518b8ef3b3aca88daca07e1c29",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "72.3",
+      "source_label_de": "Strassenwesen: Gesetz, Strassenbau, Autobahnen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 58,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [
+        "6.1.1",
+        "6.1.4",
+        "6.1.5",
+        "6.1.6",
+        "6.1.7"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "a84075d1d1d1fc73bd741dd2051624238fc62ad60c3b4e7f372a7bcd5518629c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "14.2",
+      "source_label_de": "Niederlassung, Aufenthalt, Asyl",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 51,
+      "aps_primary": [
+        "4.1.3"
+      ],
+      "aps_secondary": [
+        "4.1.1",
+        "4.1.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "cefec44d3803ed2ff73cd32e317e8bad90258104e86d5dcac79ec43b16385162",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "83.2",
+      "source_label_de": "Kranken- und Unfallversicherung, Vereinbarungen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 49,
+      "aps_primary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.2.4",
+        "5.2.5"
+      ],
+      "aps_secondary": [
+        "5.1.1",
+        "5.1.6",
+        "5.2.10"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "8cda4d61b53d103b560a304f36dc5fa78bcc658d7913e80d97d50f0d0657fba2",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "13.1",
+      "source_label_de": "Gebiet, Organisation, Reglemente, Verwaltung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 47,
+      "aps_primary": [
+        "1.2.9"
+      ],
+      "aps_secondary": [
+        "1.2.10",
+        "4.3.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "324e544c4862f488c7913dc13b93f17f9023c20690fc5541201722e8b25abcf9",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "81.8",
+      "source_label_de": "Krankheitsbekämpfung / Unfallverhütung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 45,
+      "aps_primary": [
+        "5.1.1"
+      ],
+      "aps_secondary": [
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d78063dafff5c9103baeec5a0549bb53b63a7db5a3c0413e756006af9df5e444",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "70.2",
+      "source_label_de": "Baugesetz; Planungen Hoch- und Tiefbau, Baulinien",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 45,
+      "aps_primary": [
+        "6.3.2"
+      ],
+      "aps_secondary": [
+        "6.3.1",
+        "6.4.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "7e485daf0ff26f519061b275f03da29ee4287d2ea484866a56df58553f6b6b68",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "81.4",
+      "source_label_de": "Umweltschutz: Allgemein, Boden, Wasser, Luft, Abfall",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 45,
+      "aps_primary": [
+        "6.4.1",
+        "6.4.2",
+        "6.4.3",
+        "6.4.4",
+        "6.4.5"
+      ],
+      "aps_secondary": [
+        "6.4.6",
+        "6.4.7",
+        "6.4.8",
+        "6.4.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "781c7c5d2e94b77fc75c88f022d9dacd9e7a0bebc57f66c542dfa204af08585b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.2",
+      "source_label_de": "Regierungsrat",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 44,
+      "aps_primary": [
+        "1.2.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "977a8eddd9a633045cc7598dc102b868f690d88d2d6268008b11d1833603f592",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "73.3",
+      "source_label_de": "Andere Energien: Gas, Fernwärme, Solarenergie etc.",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 43,
+      "aps_primary": [
+        "6.2.5"
+      ],
+      "aps_secondary": [
+        "6.2.4",
+        "6.4.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "90e478634ee30eb91c54d6204ecbe01f292746e713b3406b68634920f85ac7d1",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "61.1",
+      "source_label_de": "Finanzhaushalt, Finanzverwaltung und -kontrolle",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 40,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [
+        "8.2.1",
+        "8.2.2",
+        "8.2.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "c65cadeed6f92768144bcf09e93f342c2db14e9147fc58b7a357bab794cd1c61",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "55.1",
+      "source_label_de": "Polizeikorps / interkantonale Zusammenarbeit",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 40,
+      "aps_primary": [
+        "7.2.8"
+      ],
+      "aps_secondary": [
+        "7.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d316247551715b059296c90f06171e285cac8c2b80e72847086a46981866c32a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.7",
+      "source_label_de": "Staatspersonal: einzelne Personalentscheide",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 40,
+      "aps_primary": [
+        "1.2.5"
+      ],
+      "aps_secondary": [
+        "1.2.1",
+        "1.2.2",
+        "1.2.3",
+        "1.2.4",
+        "1.2.6",
+        "1.2.7",
+        "1.2.8",
+        "1.2.9",
+        "1.2.10",
+        "1.2.11",
+        "1.2.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "1cb528ce73b9b55c75aecdfd0582ba932d42d9c446ae6c9fd25b5bdf14fa7419",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "95.1",
+      "source_label_de": "TKB, Bankenaufsicht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 38,
+      "aps_primary": [
+        "8.3.4"
+      ],
+      "aps_secondary": [
+        "8.3.5",
+        "8.3.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "542775d31f8ecbbd712c77dc62d31c7a9de48d3162e9fbbc3fd6f2fd0559c803",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "81.1",
+      "source_label_de": "Berufe, Ausbildung, Schulen, Spitäler, Anstalten",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 38,
+      "aps_primary": [
+        "4.2.1",
+        "4.2.3",
+        "5.1.3",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "aps_secondary": [
+        "4.2.2",
+        "4.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "84177278adadd4bb44ee0413842539d0e153d02e9944bb282adaeca597ad4baf",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "70.1",
+      "source_label_de": "Raumplanung, Richtpläne",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 35,
+      "aps_primary": [
+        "6.3.1",
+        "6.3.2",
+        "6.3.3"
+      ],
+      "aps_secondary": [
+        "6.3.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "60253991360344f24a1c938393c25c2d407eb95c5de2f82ad2e557ecc92b6ea2",
+      "review_status": "auto",
+      "error": "invalid_codes: ['6.3.5']"
+    },
+    {
+      "source_id": "72.1",
+      "source_label_de": "Wasserwirtschaft, Wasserbau, Oeffentliche Gewässer",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 35,
+      "aps_primary": [
+        "6.4.2",
+        "6.4.4",
+        "6.4.5"
+      ],
+      "aps_secondary": [
+        "6.4.3",
+        "6.4.6",
+        "6.4.7",
+        "6.4.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "4db277701002e1aea302ecc1907c2023cf23253cb6c813841ead4db221b98f0a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "74.1",
+      "source_label_de": "Strassenverkehr, öffentlicher Verkehr auf Strassen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 35,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [
+        "6.1.1",
+        "6.1.4",
+        "6.1.5",
+        "6.1.6",
+        "6.1.7"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "a84075d1d1d1fc73bd741dd2051624238fc62ad60c3b4e7f372a7bcd5518629c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.6",
+      "source_label_de": "Hochschulen: Universitäten, Technika, Höhere Fachschule",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 35,
+      "aps_primary": [
+        "4.2.4"
+      ],
+      "aps_secondary": [
+        "4.2.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "917dca76dc461330ed3cb7f90e23e33214308cea199073cfc55f1e56e85ecd91",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "85.0",
+      "source_label_de": "Fürsorge, Massnahmen, Kinderheime, Heimaufsicht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 33,
+      "aps_primary": [
+        "5.1.9"
+      ],
+      "aps_secondary": [
+        "5.1.1",
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "f8ed94c4363b0b9af60113946788a55fa9d87a018a0b1cbea3d28407b76e63b8",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "95.4",
+      "source_label_de": "EKT (und NOK)",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 32,
+      "aps_primary": [
+        "7.2.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "86228888671455d0b04397b4f36190c59f75e961afee9a75e04ce87a3dc0eaa7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "61.2",
+      "source_label_de": "Budget, Finanzplan, Staatsrechnung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 31,
+      "aps_primary": [
+        "8.2.2"
+      ],
+      "aps_secondary": [
+        "8.2.1",
+        "8.2.3",
+        "8.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "9cf3193809c17c946c40f2821e5de797a7f3dba8bf40ab0c014c9de7ca2b3ef0",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "73.1",
+      "source_label_de": "Allgemeines, Energiegesetz, Kernenergie, Strahlenschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 30,
+      "aps_primary": [
+        "6.2.4",
+        "6.4.6"
+      ],
+      "aps_secondary": [
+        "6.2.3",
+        "6.4.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "8a453725166afdfbff7341d3b3e84c1f04d3da6dff96d3ece76ebc5c5d891bca",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "82.3",
+      "source_label_de": "Arbeitsmarkt, Wirtschaftsförderung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 29,
+      "aps_primary": [
+        "8.5.2"
+      ],
+      "aps_secondary": [
+        "8.5.1",
+        "8.5.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "bd26b494f92e3aef32d0220346ab5e585011b386d7ff448b4c7d5c8765a9dead",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "95.6",
+      "source_label_de": "TGV, Feuerversicherung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 28,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [
+        "5.1.1",
+        "5.1.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "295e8f4db7dc69f897c1e71868ed7e0a8465412116079abb63d22cc2e72b5641",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.1",
+      "source_label_de": "Unterstufen: Kindergarten, Volks- und Primarschule",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 25,
+      "aps_primary": [
+        "4.2.1"
+      ],
+      "aps_secondary": [
+        "4.2.2",
+        "4.2.3",
+        "4.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "4a21b37577bd62597e7561f12b5bb00815ac02ab2c2bd1a01261cc22a5f43a5f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.0",
+      "source_label_de": "Agrarpolitische Massnahmen, bäuerliches Bodenrecht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 25,
+      "aps_primary": [
+        "8.4.1",
+        "8.4.4",
+        "8.4.5"
+      ],
+      "aps_secondary": [
+        "8.4.2",
+        "8.4.3",
+        "8.4.6",
+        "8.4.7",
+        "8.4.8",
+        "8.4.9",
+        "8.4.10",
+        "8.4.11",
+        "8.4.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d3b9dd7f85990f4aedf85f45c3c218583af8933213bad521bb9c8c525f5b3222",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "72.0",
+      "source_label_de": "Submissionswesen Bau, Beschaffungswesen öffentliche Hand",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 24,
+      "aps_primary": [
+        "6.3.2"
+      ],
+      "aps_secondary": [
+        "6.3.1",
+        "6.3.3",
+        "6.3.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "92ab493b65530538f59ca31be6e86e0aaecd2af5c056d93b7a40be3d632054aa",
+      "review_status": "auto",
+      "error": "invalid_codes: ['6.3.5']"
+    },
+    {
+      "source_id": "92.1",
+      "source_label_de": "Forstwesen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 23,
+      "aps_primary": [
+        "8.4.10"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "3a47b38eb764ca99352e32e937a68ae0c55ebeeffa969babcb54bbde3a911ee9",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "45.1",
+      "source_label_de": "Natur-, Pflanzen-, Tierschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 23,
+      "aps_primary": [
+        "4.1.6",
+        "4.1.9"
+      ],
+      "aps_secondary": [
+        "4.1.4",
+        "4.3.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "2b99ffc938cf716cc8d692b4899fbddd76618edd055d4e0dd3fdd78fc2c06e2d",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "73.2",
+      "source_label_de": "Elektrizität inkl. Versorgung, Wasserkraft, AKW",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 23,
+      "aps_primary": [
+        "6.2.4",
+        "6.2.5"
+      ],
+      "aps_secondary": [
+        "6.1.6",
+        "6.4.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "0cc80cf5f7e58391f4040ed2187397b6dac1b64ef293b06ea6c0b38a1d5bcfdf",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "16.1",
+      "source_label_de": "Initiativen, Referenden",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 22,
+      "aps_primary": [
+        "2.1.3",
+        "2.1.5"
+      ],
+      "aps_secondary": [
+        "2.1.2",
+        "2.1.1"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "59715702548c99923f12961936b6a8d7e4b8eca4b20c62623e526d99983a69ac",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "16.2",
+      "source_label_de": "Abstimmungen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 22,
+      "aps_primary": [
+        "2.1.5",
+        "2.1.6"
+      ],
+      "aps_secondary": [
+        "2.1.7",
+        "2.1.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "57ccfb80ed4e9477fe7f467f816b316871bf72d096aea24783c3ddc18192b69f",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.4",
+      "source_label_de": "Berufliches Bildungswesen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 21,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [
+        "4.2.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "daeaf52bd4aa903313ccd48b32a38798f1ed7b07307711263cd56c15113536da",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "21.1",
+      "source_label_de": "ZGB, EG/ZGB, Vormundschaft, Waisenämter",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 21,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "92.2",
+      "source_label_de": "Jagd und Vogelschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 18,
+      "aps_primary": [
+        "8.4.8"
+      ],
+      "aps_secondary": [
+        "8.4.9"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "35473808d82b8889b850d9ab66b8eeee8602b5ffc65909c13da9fa03bdede667",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "83.1",
+      "source_label_de": "AHV, IV, EL",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 18,
+      "aps_primary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4",
+        "5.1.5",
+        "5.1.6"
+      ],
+      "aps_secondary": [
+        "5.1.1",
+        "5.2.1",
+        "5.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d763d070a35a12e7722ef1f845c382fa4b23033ea8a898a8bf5d78cade9bb615",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "90.0",
+      "source_label_de": "Wirtschaftliche Entwicklung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 16,
+      "aps_primary": [
+        "8.1.1",
+        "8.1.2",
+        "8.1.3",
+        "8.1.4",
+        "8.1.5"
+      ],
+      "aps_secondary": [
+        "8.1.6",
+        "8.2.1",
+        "8.2.2",
+        "8.2.3",
+        "8.2.4",
+        "8.2.5",
+        "8.2.6",
+        "8.3.1",
+        "8.3.2",
+        "8.3.3",
+        "8.3.4",
+        "8.3.5",
+        "8.3.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "41a7936e11ffd022ec76541a2790923dd476559b543053270fc7e8bc83b3f0d5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "31.1",
+      "source_label_de": "StGB, EG/StGB, Verwaltungsstrafrecht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 15,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "13.3",
+      "source_label_de": "Uebereinkünfte, Vereinbarungen, Zweckverbände",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 14,
+      "aps_primary": [
+        "1.2.3",
+        "1.2.5",
+        "4.3.3"
+      ],
+      "aps_secondary": [
+        "1.2.1",
+        "1.2.2",
+        "1.2.6",
+        "4.3.1",
+        "4.3.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "bdb81f225c5a2da5caea94b1ce40f968b5bc48764a3c810298ea1a04f22d6fcb",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.4",
+      "source_label_de": "Kantonale Zentralverwaltung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 13,
+      "aps_primary": [
+        "1.2.9"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "581de7dd0998eb1b47b41872c5764cb179e5662181418dd5aa2fa0b1ce8e214a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "61.0",
+      "source_label_de": "Organisation, Finanzhaushalt allgemein",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 13,
+      "aps_primary": [
+        "8.2.3"
+      ],
+      "aps_secondary": [
+        "8.2.4",
+        "8.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "07b22e91d8918fa6a7d6afae3c2d721c3aafaedda2409caa57b1d9c4993e43f7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.5",
+      "source_label_de": "Mittelschulen: Kantonsschulen und Seminare",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 12,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [
+        "4.2.1",
+        "4.2.2",
+        "4.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d51ffb969eeb75f63efcc24978466d6cfa36b8810b4ef6baff584b33bbda4243",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "44.0",
+      "source_label_de": "Kultur, Kunst (inklusive Lotteriefonds)",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 12,
+      "aps_primary": [
+        "4.3.1",
+        "4.3.2",
+        "4.3.3"
+      ],
+      "aps_secondary": [
+        "4.3.4",
+        "4.3.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "01901efcf4f5e596813f3b59ab31c65269654c4ed3aeda67b4905446a8b64f4c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.8",
+      "source_label_de": "Tierseuchen und -krankheiten, Viehhandel",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 11,
+      "aps_primary": [
+        "8.4.6"
+      ],
+      "aps_secondary": [
+        "8.4.7",
+        "8.4.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "addc871d8612ce75de417220edf24f3e9ee84385be7da7188bf511f833201094",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.2",
+      "source_label_de": "Oberstufen: Real- und Sekundarschulen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 11,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [
+        "4.2.1",
+        "4.2.2",
+        "4.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d51ffb969eeb75f63efcc24978466d6cfa36b8810b4ef6baff584b33bbda4243",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "10.0",
+      "source_label_de": "Bundesverfassung / Menschenrechte",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 11,
+      "aps_primary": [
+        "7.1.2",
+        "7.1.3",
+        "7.1.5"
+      ],
+      "aps_secondary": [
+        "7.1.1",
+        "7.2.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "1876090287580a06a828668dcfb726bd6356fdc15c5324014daa7a5e88e9e481",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "45.2",
+      "source_label_de": "Heimatschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 11,
+      "aps_primary": [
+        "4.3.4"
+      ],
+      "aps_secondary": [
+        "4.3.3",
+        "4.3.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "aa368746efb714ef08258215e4436f404e62b9ed903f0c5b92969c7086056dce",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "83.6",
+      "source_label_de": "Familien- und Kinderzulagen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 10,
+      "aps_primary": [
+        "5.1.5"
+      ],
+      "aps_secondary": [
+        "5.1.2",
+        "5.1.3",
+        "5.1.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "7c22eb394f8d0dca225fc598e7323382c207f88cf452bae9a74bf4e6398d6b55",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "81.2",
+      "source_label_de": "Heilmittel, Betäubungsmittel, Suchtprobleme",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 10,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [
+        "5.1.5",
+        "5.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "a6797da6192f381f3a0d06e574f0ff9387c124894fdd969de386a64a1eae32dc",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "61.3",
+      "source_label_de": "Finanzausgleich",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 9,
+      "aps_primary": [
+        "8.2.5"
+      ],
+      "aps_secondary": [
+        "8.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "f8edb63181aaa91f9dac23c52016120ca0e55d0980e165a30ca0a7b669ec2e66",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "74.2",
+      "source_label_de": "Schienenverkehr, Bahnen, NEAT, Bahn 2000, Regional",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 8,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [
+        "6.1.4",
+        "6.1.5",
+        "6.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "a0894ce370cd997f52cbedbcb1a2e5f2b225f6781c12b902f69adbcf2191246d",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.6",
+      "source_label_de": "Staatspersonal: generelle Fragen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 8,
+      "aps_primary": [
+        "1.2.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "93a0a939b543f485dd797fcaa85626746d595b78ccbfa82b5e2c2871334fcc4e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "34.2",
+      "source_label_de": "Anstalten, Massnahmen, Schutzaufsicht, Opferhilfe, Begnadigung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 8,
+      "aps_primary": [
+        "7.2.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "86228888671455d0b04397b4f36190c59f75e961afee9a75e04ce87a3dc0eaa7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "43.2",
+      "source_label_de": "Bibliotheken, Museen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 8,
+      "aps_primary": [
+        "4.3.1"
+      ],
+      "aps_secondary": [
+        "4.3.2",
+        "4.3.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "1bea57bbdb8a81c64047360ffb9f7747d866ec121a36833a8bf0d41536a8c739",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "82.2",
+      "source_label_de": "Arbeitnehmerschutz, Oeffentliche Ruhe",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 7,
+      "aps_primary": [
+        "8.5.6"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "52a91066da8225d6869f0d9e073bf1e60dd2c35808a38d6f651022fa38140b65",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "21.2",
+      "source_label_de": "Sachenrecht, Grundbesitz, Grundbuch, Vermessung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 7,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [
+        "4.3.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "d6652eb927169362b0b6f9ecbb6bfdc1ddd9b9827de4d126498cac4dfbbb6af9",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.5",
+      "source_label_de": "Pflanzenanbau und -schutz, Rebkorporationen, Engerlingsfonds",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 7,
+      "aps_primary": [
+        "8.4.4"
+      ],
+      "aps_secondary": [
+        "8.4.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "b38b54563967fce63f9b05e4f8fcaeeb3058730478b55d824cf1fcac1681eacf",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "14.3",
+      "source_label_de": "Fremdenpolizei, Grenzverkehr, Ausweisschriften",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 6,
+      "aps_primary": [
+        "7.2.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "99503ada723515a05678ea1196991553237017e9d3fa183723bd58a0c0ace327",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "16.4",
+      "source_label_de": "Proporzwahlen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 6,
+      "aps_primary": [
+        "2.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "e914dad72b44cf9f590f3c00b5dfe3b2f8702b36507b485aa506d48ae2445dde",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "52.0",
+      "source_label_de": "inkl.ZFS, Gesamtverteidigung, Notlagen, Alarmierun",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 6,
+      "aps_primary": [
+        "7.2.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "86228888671455d0b04397b4f36190c59f75e961afee9a75e04ce87a3dc0eaa7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.9",
+      "source_label_de": "Jugendpolitik",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "4.1.6"
+      ],
+      "aps_secondary": [
+        "4.1.2",
+        "4.1.5"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "b78aee0579918146659031db5380abf17a7dec69637a5690ba1b1d308178c6e5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.6",
+      "source_label_de": "Tierwirtschaftliche Produktion: Versicherungen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "8.4.5"
+      ],
+      "aps_secondary": [
+        "8.4.6",
+        "8.4.7"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "74d50e98299438b93a576d4f1f3f01ce1cac7611440e02ec2f6187e5feb85b3e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "31.2",
+      "source_label_de": "Strafverfolgung: Staatsanwaltschaft, Jugendanwaltschaft",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "64.2",
+      "source_label_de": "Sondersteuern: Erbschaft, Schenkungen, Hundesteuer",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [
+        "8.4.11"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "eab4192d190c2261207dda9c94e9ba2c0f4b4de7f7f0cdd589bfdc76b66ab3f9",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "13.2",
+      "source_label_de": "Rechnungswesen, Finanzen, Vermögen, Gebühren",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "8.2.4"
+      ],
+      "aps_secondary": [
+        "8.2.1",
+        "8.2.2",
+        "8.2.3"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "c65cadeed6f92768144bcf09e93f342c2db14e9147fc58b7a357bab794cd1c61",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "83.7",
+      "source_label_de": "Arbeitslosenversicherung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 5,
+      "aps_primary": [
+        "5.2.6"
+      ],
+      "aps_secondary": [
+        "5.2.7"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "225241d2770ece1c3d5b225037a598393c94b05bae5fc56f3218ce502d2bc43e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "27.0",
+      "source_label_de": "Zivilrechtspflege",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "74.6",
+      "source_label_de": "PTT, Radio, Fernsehen etc.",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "4.4.3"
+      ],
+      "aps_secondary": [
+        "4.4.2",
+        "4.4.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "7d291fae8bab64625abd62beeb1c80f6810ef7d99ce2b548dffaeaeaf5225c24",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.7",
+      "source_label_de": "Turnen und Sport, J+S",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "5.1.10"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d5ad2d451ebe8a07309a0fe93c8b2686b83415946286e1a20b94f61e80464fd4",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "70.3",
+      "source_label_de": "Feuerschutz, Feuerpolizei",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "7.2.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "86228888671455d0b04397b4f36190c59f75e961afee9a75e04ce87a3dc0eaa7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "63.0",
+      "source_label_de": "Gebühren, Abgaben (GR, RR, SK, Verwaltung und Gerichte)",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "5.1.9"
+      ],
+      "aps_secondary": [
+        "5.2.1",
+        "5.2.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "0b2d50d8cb0c636a34f56ba481421b5081a5b642a20fe4178ddb3a77f7560b81",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "28.0",
+      "source_label_de": "Schuldbetreibung und Konkurs",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "16.3",
+      "source_label_de": "Majorzwahlen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "2.2.1",
+        "2.2.2",
+        "2.2.3",
+        "2.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "87f03aa35a4cebeb8bf9ae464ba5dfc2c12a839d73f425623f411f798e524d37",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "34.1",
+      "source_label_de": "Konkordate, Zusammenarbeit mit anderen Kantonen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 4,
+      "aps_primary": [
+        "1.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "faf4ce51a44c0d8b8ab067e8bb3b105f18150ad4cf462fcf9e2018ad35a3f934",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.3",
+      "source_label_de": "Sonderschulen, Privatschulen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "4.2.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "cd6f30c148d5652060104aed41220cfba699cae9069c319c65fea23103ed28dd",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.8",
+      "source_label_de": "Stipendien, Ausbildungsdarlehen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [
+        "4.2.1",
+        "4.2.2"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "b9e410626b390dd12336db601f78cf2cc478f64497e1f6f1626304ef4f1e39c6",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.3",
+      "source_label_de": "Flurwesen, Meliorationen, Unterhalts-Korporationen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "6.3.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "32856c7122c46455216074057a418bd8fe7a6c2f15938556fed0a1f933ca1d8b",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "51.1",
+      "source_label_de": "Militärwesen, Beförderungen, Schiesswesen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "7.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "7180246bb26cad7165af38e065545a255a920179a2323ae94d16a7dfcbf50053",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "74.4",
+      "source_label_de": "Schiffahrt, Wasserfahrzeuge, Steuern",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "6.1.9"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "5c5c3ae2affe44748af274365459651043936f6f1a3d49e7eadda942f4a296e0",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "55.3",
+      "source_label_de": "Gewerbepolizei, Marktwesen, Ladenschluss, Ausverkäufe",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "8.5.6"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "52a91066da8225d6869f0d9e073bf1e60dd2c35808a38d6f651022fa38140b65",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "22.1",
+      "source_label_de": "Miete, Pacht, Arbeitsvertrag, Handelsregister",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 3,
+      "aps_primary": [
+        "4.3.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "77528e930eb1f8b465d0692591e8440899278978bb8b69055357ce5bdd2c658c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "74.5",
+      "source_label_de": "Luftfahrt, Flugplätze",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "6.1.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "121e9ec4cd051cb2c79da5ee358f23302738742e2f08aefdf367fd73bae55e0a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.4",
+      "source_label_de": "Landw. Kredite, Beihilfen, Beiträge an Betriebsbau",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "8.4.1"
+      ],
+      "aps_secondary": [
+        "8.4.12"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "1f390003ae0b256b408291013091d5a0f02b8495c8c6a1b05576fec064bf59cb",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "51.2",
+      "source_label_de": "Waffen, Munition (Sprengstoffe - 94.1)",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "7180246bb26cad7165af38e065545a255a920179a2323ae94d16a7dfcbf50053",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "69.0",
+      "source_label_de": "Salzregal",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "8.4.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "c438d69efefc4daae7f1f3f9510c4a38836f0d7176f308108249ba255e0e4c0d",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "43.1",
+      "source_label_de": "Archive, Statistik",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "55.4",
+      "source_label_de": "Alkohol: Handel, Wirteprüfung, Alkoholzehntel",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "92.3",
+      "source_label_de": "Fischerei",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "8.4.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d002f8c18f9915da57560903f170d579d0707d9b51629710c32179fcc3c32587",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "18.3",
+      "source_label_de": "Katholische Landeskirche",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "71.0",
+      "source_label_de": "Enteignung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 2,
+      "aps_primary": [
+        "7.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "27da9d84b4be9d363048f5cbab8340121dad7106ad28876f4d5de4532ae9bbea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "81.7",
+      "source_label_de": "Lebensmittelpolizei / Gifte",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "5.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1bad72c58d1cb79989da28b94e6cb84fa454a5f09a90e912b959cfdd759dbac7",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "10.1",
+      "source_label_de": "Kantonsverfassung und Staatsverträge, 61.1 Finanzhaushalt, Finanzverwaltung und -kontrolle",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "1.2.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "977a8eddd9a633045cc7598dc102b868f690d88d2d6268008b11d1833603f592",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "41.8",
+      "source_label_de": "Stipendien, Ausbildungsdarlehen, 85.0 Fürsorge, Massnahmen, Kinderheime, Heimaufsicht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "4.2.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "cd6f30c148d5652060104aed41220cfba699cae9069c319c65fea23103ed28dd",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "16.1",
+      "source_label_de": "Initiativen, Referenden, 41.0 Unterrichtswesen, Lehrerorganisation und -fortbildung",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "4.2.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "37c59687ea0f3e4285059d44b6f80705fd18bbf3a882b6e616272d5182ef5471",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "14.2",
+      "source_label_de": "Niederlassung, Aufenthalt, Asyl, 85.0 Fürsorge, Massnahmen, Kinderheime, Heimaufsicht",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "4.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "5dc3134f90641812458f53d35e15119535a4f2824e3e68a5d345db4f34f612ef",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "13.1",
+      "source_label_de": "Gebiet, Organisation, Reglemente, Verwaltung, 14.2 Niederlassung, Aufenthalt, Asyl",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "1.2.9"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "581de7dd0998eb1b47b41872c5764cb179e5662181418dd5aa2fa0b1ce8e214a",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "55.2",
+      "source_label_de": "Private Polizeitätigkeiten",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "7.2.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "99503ada723515a05678ea1196991553237017e9d3fa183723bd58a0c0ace327",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "70.1",
+      "source_label_de": "Raumplanung, Richtpläne, 72.3 Strassenwesen: Gesetz, Strassenbau, Autobahnen, 73.1 Allgemeines, Energiegesetz, Kernenergie, Strahlenschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "6.3.1"
+      ],
+      "aps_secondary": [
+        "6.1.3",
+        "6.1.4"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "314f36609dc3973e1a964aa349652cb4855acbb503e32e247d718f617e4822d3",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "95.4",
+      "source_label_de": "EKT (und NOK), 73.2 Elektrizität inkl. Versorgung, Wasserkraft, AKW",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "6.2.4"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "1761415cdf51588b998c8057040e4c52d8adcf6d26025cf2003450527ab6f9e1",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "33.0",
+      "source_label_de": "Strafregister",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "7.1.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "fbef6bba6299f7effc8ea38a7a2a8a11280132a698f845a5fcdff42af37bba23",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "91.7",
+      "source_label_de": "Milchproduktion",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "8.4.5"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "e76f4b9d2042cd01fd40ad446202b578d3d4ce9c4720ce7069878c6ca11cc6c6",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "17.2",
+      "source_label_de": "Regierungsrat, 61.0 Organisation, Finanzhaushalt allgemein",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "1.2.2"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "93a0a939b543f485dd797fcaa85626746d595b78ccbfa82b5e2c2871334fcc4e",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "74.1",
+      "source_label_de": "Strassenverkehr, öffentlicher Verkehr auf Strassen, 64.1 Staats- und Gemeindesteuern, allgemeine Organisation",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "6.1.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "afffb9dd203360144631dcdc5a7208d1d959a8cffc6a9a285fabf11457c89229",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "22.3",
+      "source_label_de": "Unlauterer Wettbewerb: UWG, Kartelle, Konsumentenschutz",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "8.1.5"
+      ],
+      "aps_secondary": [
+        "8.1.6"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "25c69c19c79b288bd43eaa12940f212dc83e6090c82c80090120712a6e1954a2",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "82.1",
+      "source_label_de": "Arbeitsvertrag, GAV, NAV, Kollektive Arbeitsstreite",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "8.5.1"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "b4ae2c963ef149b8e76fcba0dfb1c186c81bc782d00dc39a96da5bebc2b7f98c",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "TG-160",
+      "source_label_de": "Evangelische Landeskirche",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "94.2",
+      "source_label_de": "Preise, Löhne, Gewinne",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "8.5.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "9a6b463e1a45c63c424959e4bc467da5e6f4b9cdfc240843a071c69b4966c2ea",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "93.2",
+      "source_label_de": "Dienstleistungen, Tourismus, Lotterien, Sport-Toto",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "8.1.6"
+      ],
+      "aps_secondary": [
+        "6.1.5",
+        "6.1.8"
+      ],
+      "method": "apertus",
+      "raw_response_hash": "462fa69bf4757dcb85eee3ecf4228daa67d6161064ac5ae79fca5f7ee951c24d",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "18.1",
+      "source_label_de": "Allgemeines, Parität, diverse Konfessionen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "4.3.3"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "d8164714b81f9572662dc681b4d00339110b94eb00757fdb845c4b14d1408eb5",
+      "review_status": "auto",
+      "error": null
+    },
+    {
+      "source_id": "11.0",
+      "source_label_de": "Kantonsgebiet, Wappen",
+      "source_label_fr": null,
+      "source_label_it": null,
+      "source_affair_count": 1,
+      "aps_primary": [
+        "1.2.8"
+      ],
+      "aps_secondary": [],
+      "method": "apertus",
+      "raw_response_hash": "977a8eddd9a633045cc7598dc102b868f690d88d2d6268008b11d1833603f592",
+      "review_status": "auto",
+      "error": null
+    }
+  ]
+}

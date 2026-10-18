@@ -1,0 +1,112 @@
+{
+  "federal_affairs_sample": 5000,
+  "federal_coverage_pct": 100.0,
+  "politmonitor_digitalisierung": {
+    "n_tagged_che_affairs": 1448,
+    "n_with_labels": 1387,
+    "total_primary_assignments": 14400,
+    "top_aps_codes": [
+      {
+        "code": "4.4.5",
+        "count": 1122,
+        "is_digi": false
+      },
+      {
+        "code": "4.4.3",
+        "count": 1122,
+        "is_digi": false
+      },
+      {
+        "code": "4.4.4",
+        "count": 1122,
+        "is_digi": true
+      },
+      {
+        "code": "5.1.1",
+        "count": 509,
+        "is_digi": false
+      },
+      {
+        "code": "8.1.1",
+        "count": 435,
+        "is_digi": false
+      },
+      {
+        "code": "8.1.5",
+        "count": 435,
+        "is_digi": false
+      },
+      {
+        "code": "8.1.3",
+        "count": 435,
+        "is_digi": false
+      },
+      {
+        "code": "8.1.4",
+        "count": 435,
+        "is_digi": false
+      },
+      {
+        "code": "8.1.2",
+        "count": 435,
+        "is_digi": false
+      },
+      {
+        "code": "1.1.1",
+        "count": 415,
+        "is_digi": false
+      },
+      {
+        "code": "1.1.2",
+        "count": 415,
+        "is_digi": false
+      },
+      {
+        "code": "1.2.7",
+        "count": 415,
+        "is_digi": false
+      },
+      {
+        "code": "5.1.9",
+        "count": 256,
+        "is_digi": false
+      },
+      {
+        "code": "7.2.1",
+        "count": 249,
+        "is_digi": false
+      },
+      {
+        "code": "7.2.2",
+        "count": 249,
+        "is_digi": false
+      },
+      {
+        "code": "7.2.3",
+        "count": 249,
+        "is_digi": false
+      },
+      {
+        "code": "7.2.5",
+        "count": 249,
+        "is_digi": false
+      },
+      {
+        "code": "7.2.4",
+        "count": 249,
+        "is_digi": false
+      },
+      {
+        "code": "7.1.1",
+        "count": 229,
+        "is_digi": false
+      },
+      {
+        "code": "4.1.5",
+        "count": 223,
+        "is_digi": false
+      }
+    ],
+    "digi_related_share_pct": 7.79
+  }
+}
