@@ -1,0 +1,1831 @@
+{
+  "metadata": {
+    "name": "Année Politique Suisse (APS): thematic classification",
+    "source": "https://anneepolitique.swiss/de/themen/",
+    "structure": "8 domains > 22 chapters > 165 topics",
+    "languages": [
+      "de",
+      "fr",
+      "it"
+    ],
+    "note": "DE/FR labels are official APS labels. IT labels are unofficial translations (APS does not publish Italian).",
+    "rights": "Labels belong to Année Politique Suisse, University of Bern. Cite APS when using the scheme."
+  },
+  "domains": [
+    {
+      "code": "1",
+      "labels": {
+        "de": "Akteure und Institutionen",
+        "fr": "Institutions et acteurs",
+        "it": "Attori e istituzioni"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "1.1",
+          "labels": {
+            "de": "Politische Grundfragen",
+            "fr": "Problèmes politiques fondamentaux",
+            "it": "Questioni politiche fondamentali"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/politische-grundfragen/",
+          "topics": [
+            {
+              "code": "1.1.1",
+              "labels": {
+                "de": "Nationale Identität",
+                "fr": "Identité nationale",
+                "it": "Identità nazionale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/nationale-identitaet/"
+            },
+            {
+              "code": "1.1.2",
+              "labels": {
+                "de": "Verfassungsfragen",
+                "fr": "Questions constitutionnelles",
+                "it": "Questioni costituzionali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/verfassungsfragen/"
+            },
+            {
+              "code": "1.1.3",
+              "labels": {
+                "de": "Territorialfragen",
+                "fr": "Questions territoriales",
+                "it": "Questioni territoriali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/territorialfragen/"
+            },
+            {
+              "code": "1.1.4",
+              "labels": {
+                "de": "Jurafrage",
+                "fr": "Question jurassienne",
+                "it": "Questione giurassiana"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/jurafrage/"
+            }
+          ]
+        },
+        {
+          "code": "1.2",
+          "labels": {
+            "de": "Institutionen",
+            "fr": "Institutions",
+            "it": "Istituzioni"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/institutionen/",
+          "topics": [
+            {
+              "code": "1.2.1",
+              "labels": {
+                "de": "Bundesrat",
+                "fr": "Conseil fédéral",
+                "it": "Consiglio federale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/bundesrat/"
+            },
+            {
+              "code": "1.2.2",
+              "labels": {
+                "de": "Verwaltung",
+                "fr": "Administration",
+                "it": "Amministrazione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/verwaltung/"
+            },
+            {
+              "code": "1.2.3",
+              "labels": {
+                "de": "Konkordanz",
+                "fr": "Concordance",
+                "it": "Concordanza"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/konkordanz/"
+            },
+            {
+              "code": "1.2.4",
+              "labels": {
+                "de": "Parlament",
+                "fr": "Parlement",
+                "it": "Parlamento"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/parlament/"
+            },
+            {
+              "code": "1.2.5",
+              "labels": {
+                "de": "Lobbyismus",
+                "fr": "Lobbyisme",
+                "it": "Lobbismo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/lobbyismus/"
+            },
+            {
+              "code": "1.2.6",
+              "labels": {
+                "de": "Judikative",
+                "fr": "Tribunaux",
+                "it": "Tribunali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/judikative/"
+            },
+            {
+              "code": "1.2.7",
+              "labels": {
+                "de": "Föderalismus",
+                "fr": "Fédéralisme",
+                "it": "Federalismo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/foederalismus/"
+            },
+            {
+              "code": "1.2.8",
+              "labels": {
+                "de": "Kantone",
+                "fr": "Cantons",
+                "it": "Cantoni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/kantone/"
+            },
+            {
+              "code": "1.2.9",
+              "labels": {
+                "de": "Städte, Regionen, Gemeinden",
+                "fr": "Villes, régions, communes",
+                "it": "Città, regioni, comuni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/staedte-regionen-gemeinden/"
+            },
+            {
+              "code": "1.2.10",
+              "labels": {
+                "de": "Parteiensystem",
+                "fr": "Système des partis",
+                "it": "Sistema dei partiti"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/parteiensystem/"
+            },
+            {
+              "code": "1.2.11",
+              "labels": {
+                "de": "Parteien",
+                "fr": "Partis",
+                "it": "Partiti"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/parteien/"
+            },
+            {
+              "code": "1.2.12",
+              "labels": {
+                "de": "Verbände",
+                "fr": "Associations",
+                "it": "Associazioni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/verbaende/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "2",
+      "labels": {
+        "de": "Direkte Demokratie und Wahlen",
+        "fr": "Démocratie directe et élections",
+        "it": "Democrazia diretta ed elezioni"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "2.1",
+          "labels": {
+            "de": "Direkte Demokratie",
+            "fr": "Démocratie directe",
+            "it": "Democrazia diretta"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/direkte-demokratie/",
+          "topics": [
+            {
+              "code": "2.1.1",
+              "labels": {
+                "de": "Volksabstimmung",
+                "fr": "Votation populaire",
+                "it": "Votazione popolare"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/volksabstimmung/"
+            },
+            {
+              "code": "2.1.2",
+              "labels": {
+                "de": "Referendum",
+                "fr": "Référendum",
+                "it": "Referendum"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/referendum/"
+            },
+            {
+              "code": "2.1.3",
+              "labels": {
+                "de": "Volksinitiative",
+                "fr": "Initiative populaire",
+                "it": "Iniziativa popolare"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/volksinitiative/"
+            },
+            {
+              "code": "2.1.4",
+              "labels": {
+                "de": "Landsgemeinde",
+                "fr": "Landsgemeinde",
+                "it": "Landsgemeinde"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/landsgemeinde/"
+            },
+            {
+              "code": "2.1.5",
+              "labels": {
+                "de": "Wahl- und Abstimmungsverfahren",
+                "fr": "Procédure de vote et d'élection",
+                "it": "Procedura di voto e di elezione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wahl-und-abstimmungsverfahren/"
+            },
+            {
+              "code": "2.1.6",
+              "labels": {
+                "de": "Stimm- und Wahlrecht",
+                "fr": "Droit de vote et d'éligibilité",
+                "it": "Diritto di voto e di eleggibilità"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/stimm-und-wahlrecht/"
+            },
+            {
+              "code": "2.1.7",
+              "labels": {
+                "de": "Politische Beteiligung",
+                "fr": "Participation politique",
+                "it": "Partecipazione politica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/politische-beteiligung/"
+            },
+            {
+              "code": "2.1.8",
+              "labels": {
+                "de": "Politische Kampagnen",
+                "fr": "Campagnes politiques",
+                "it": "Campagne politiche"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/politische-kampagnen/"
+            },
+            {
+              "code": "2.1.9",
+              "labels": {
+                "de": "Politikfinanzierung",
+                "fr": "Financement de la politique",
+                "it": "Finanziamento della politica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/politikfinanzierung/"
+            }
+          ]
+        },
+        {
+          "code": "2.2",
+          "labels": {
+            "de": "Wahlen",
+            "fr": "Elections",
+            "it": "Elezioni"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/wahlen/",
+          "topics": [
+            {
+              "code": "2.2.1",
+              "labels": {
+                "de": "National- und Ständeratswahlen",
+                "fr": "Elections du Conseil national et du Conseil des Etats",
+                "it": "Elezioni del Consiglio nazionale e del Consiglio degli Stati"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/national-und-staenderatswahlen/"
+            },
+            {
+              "code": "2.2.2",
+              "labels": {
+                "de": "Wahlen in kantonale Regierungen",
+                "fr": "Elections des gouvernements cantonaux",
+                "it": "Elezioni dei governi cantonali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wahlen-in-kantonale-regierungen/"
+            },
+            {
+              "code": "2.2.3",
+              "labels": {
+                "de": "Wahlen in kantonale Parlamente",
+                "fr": "Elections des parlements cantonaux",
+                "it": "Elezioni dei parlamenti cantonali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wahlen-in-kantonale-parlamente/"
+            },
+            {
+              "code": "2.2.4",
+              "labels": {
+                "de": "Kommunale Wahlen",
+                "fr": "Elections communales",
+                "it": "Elezioni comunali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/kommunale-wahlen/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "3",
+      "labels": {
+        "de": "Europa- und Aussenpolitik",
+        "fr": "Politique européenne et étrangère",
+        "it": "Politica europea ed estera"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "3.1",
+          "labels": {
+            "de": "Europa- und Aussenpolitik",
+            "fr": "Politique européenne et étrangère",
+            "it": "Politica europea ed estera"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/europa-und-aussenpolitik-europa-und-aussenpolitik/",
+          "topics": [
+            {
+              "code": "3.1.1",
+              "labels": {
+                "de": "Beziehungen zur EU",
+                "fr": "Relations avec l'Union européenne (UE)",
+                "it": "Relazioni con l'Unione europea (UE)"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/beziehungen-zur-eu/"
+            },
+            {
+              "code": "3.1.2",
+              "labels": {
+                "de": "Zwischenstaatliche Beziehungen",
+                "fr": "Relations avec d'autres Etats",
+                "it": "Relazioni con altri Stati"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/zwischenstaatliche-beziehungen/"
+            },
+            {
+              "code": "3.1.3",
+              "labels": {
+                "de": "Beziehungen zu internationalen Organisationen",
+                "fr": "Relations avec des organisations internationales",
+                "it": "Relazioni con organizzazioni internazionali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/beziehungen-zu-internationalen-organisationen/"
+            },
+            {
+              "code": "3.1.4",
+              "labels": {
+                "de": "Neutralität",
+                "fr": "Neutralité",
+                "it": "Neutralità"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/neutralitaet/"
+            },
+            {
+              "code": "3.1.5",
+              "labels": {
+                "de": "Gute Dienste",
+                "fr": "Bons offices",
+                "it": "Buoni uffici"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/gute-dienste/"
+            },
+            {
+              "code": "3.1.6",
+              "labels": {
+                "de": "Aussenwirtschaftspolitik",
+                "fr": "Politique économique extérieure",
+                "it": "Politica economica esterna"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/aussenwirtschaftspolitik/"
+            },
+            {
+              "code": "3.1.7",
+              "labels": {
+                "de": "Entwicklungspolitik",
+                "fr": "Politique de développement",
+                "it": "Politica di sviluppo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/entwicklungspolitik/"
+            },
+            {
+              "code": "3.1.8",
+              "labels": {
+                "de": "Auslandschweizerinnen und -schweizer",
+                "fr": "Suisses de l'étranger",
+                "it": "Svizzeri all'estero"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/auslandschweizerinnen-und-schweizer/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "4",
+      "labels": {
+        "de": "Gesellschaft und Kultur",
+        "fr": "Société et culture",
+        "it": "Società e cultura"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "4.1",
+          "labels": {
+            "de": "Soziale Gruppen",
+            "fr": "Groupes sociaux",
+            "it": "Gruppi sociali"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/soziale-gruppen/",
+          "topics": [
+            {
+              "code": "4.1.1",
+              "labels": {
+                "de": "Bevölkerungsentwicklung",
+                "fr": "Evolution de la population",
+                "it": "Evoluzione della popolazione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/bevoelkerungsentwicklung/"
+            },
+            {
+              "code": "4.1.2",
+              "labels": {
+                "de": "Migration",
+                "fr": "Migration",
+                "it": "Migrazione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/migration/"
+            },
+            {
+              "code": "4.1.3",
+              "labels": {
+                "de": "Asylwesen",
+                "fr": "Asile",
+                "it": "Asilo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/asylwesen/"
+            },
+            {
+              "code": "4.1.4",
+              "labels": {
+                "de": "Frauen- und Gleichstellungsfragen",
+                "fr": "Femmes et égalité des sexes",
+                "it": "Donne e parità dei sessi"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/frauen-und-gleichstellungsfragen/"
+            },
+            {
+              "code": "4.1.5",
+              "labels": {
+                "de": "Familien",
+                "fr": "Familles",
+                "it": "Famiglie"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/familien/"
+            },
+            {
+              "code": "4.1.6",
+              "labels": {
+                "de": "Kinder und Jugendliche",
+                "fr": "Enfants et adolescents",
+                "it": "Bambini e adolescenti"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/kinder-und-jugendliche/"
+            },
+            {
+              "code": "4.1.7",
+              "labels": {
+                "de": "Altersfragen",
+                "fr": "Questions relatives à l'âge",
+                "it": "Questioni relative all'età"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/altersfragen/"
+            },
+            {
+              "code": "4.1.8",
+              "labels": {
+                "de": "LGBTQIA+",
+                "fr": "LGBTQIA+",
+                "it": "LGBTQIA+"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/lgbtqia/"
+            },
+            {
+              "code": "4.1.9",
+              "labels": {
+                "de": "Menschen mit Behinderungen",
+                "fr": "Personnes en situation de handicap",
+                "it": "Persone con disabilità"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/menschen-mit-behinderungen/"
+            },
+            {
+              "code": "4.1.10",
+              "labels": {
+                "de": "Fahrende",
+                "fr": "Gens du voyage",
+                "it": "Popolazione itinerante"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/fahrende/"
+            }
+          ]
+        },
+        {
+          "code": "4.2",
+          "labels": {
+            "de": "Bildung und Forschung",
+            "fr": "Enseignement et recherche",
+            "it": "Formazione e ricerca"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/bildung-und-forschung/",
+          "topics": [
+            {
+              "code": "4.2.1",
+              "labels": {
+                "de": "Grundschulen",
+                "fr": "Ecole obligatoire",
+                "it": "Scuola dell'obbligo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/grundschulen/"
+            },
+            {
+              "code": "4.2.2",
+              "labels": {
+                "de": "Berufsbildung",
+                "fr": "Formation professionnelle",
+                "it": "Formazione professionale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/berufsbildung/"
+            },
+            {
+              "code": "4.2.3",
+              "labels": {
+                "de": "Mittelschulen",
+                "fr": "Enseignement secondaire supérieur",
+                "it": "Scuole medie superiori"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/mittelschulen/"
+            },
+            {
+              "code": "4.2.4",
+              "labels": {
+                "de": "Hochschulen",
+                "fr": "Hautes écoles",
+                "it": "Scuole universitarie"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/hochschulen/"
+            },
+            {
+              "code": "4.2.5",
+              "labels": {
+                "de": "Forschung",
+                "fr": "Recherche",
+                "it": "Ricerca"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/forschung/"
+            }
+          ]
+        },
+        {
+          "code": "4.3",
+          "labels": {
+            "de": "Kultur, Sprache, Kirchen",
+            "fr": "Culture, langues, églises",
+            "it": "Cultura, lingue, chiese"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/kultur-sprache-kirchen/",
+          "topics": [
+            {
+              "code": "4.3.1",
+              "labels": {
+                "de": "Kultur",
+                "fr": "Culture",
+                "it": "Cultura"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/kultur/"
+            },
+            {
+              "code": "4.3.2",
+              "labels": {
+                "de": "Sprachfragen",
+                "fr": "Questions linguistiques",
+                "it": "Questioni linguistiche"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/sprachfragen/"
+            },
+            {
+              "code": "4.3.3",
+              "labels": {
+                "de": "Religion und Kirchen",
+                "fr": "Religion et Eglises",
+                "it": "Religione e chiese"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/religion-und-kirchen/"
+            },
+            {
+              "code": "4.3.4",
+              "labels": {
+                "de": "Heimatschutz und Denkmalpflege",
+                "fr": "Protection des sites et du patrimoine",
+                "it": "Protezione dei siti e del patrimonio"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/heimatschutz-und-denkmalpflege/"
+            },
+            {
+              "code": "4.3.5",
+              "labels": {
+                "de": "Urheberrecht",
+                "fr": "Droit d'auteur",
+                "it": "Diritto d'autore"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/urheberrecht/"
+            }
+          ]
+        },
+        {
+          "code": "4.4",
+          "labels": {
+            "de": "Medien",
+            "fr": "Médias",
+            "it": "Media"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/medien/",
+          "topics": [
+            {
+              "code": "4.4.1",
+              "labels": {
+                "de": "Medienpolitische Grundfragen",
+                "fr": "Aspects généraux de la politique médiatique",
+                "it": "Questioni fondamentali della politica dei media"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/medienpolitische-grundfragen/"
+            },
+            {
+              "code": "4.4.2",
+              "labels": {
+                "de": "Presse",
+                "fr": "Presse",
+                "it": "Stampa"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/presse/"
+            },
+            {
+              "code": "4.4.3",
+              "labels": {
+                "de": "Radio und Fernsehen",
+                "fr": "Radio et télévision",
+                "it": "Radio e televisione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/radio-und-fernsehen/"
+            },
+            {
+              "code": "4.4.4",
+              "labels": {
+                "de": "Digitale Medien",
+                "fr": "Médias numériques",
+                "it": "Media digitali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/digitale-medien/"
+            },
+            {
+              "code": "4.4.5",
+              "labels": {
+                "de": "Meinungsforschung",
+                "fr": "Sondages",
+                "it": "Sondaggi"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/meinungsforschung/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "5",
+      "labels": {
+        "de": "Gesundheit und Sozialsystem",
+        "fr": "Santé et système social",
+        "it": "Sanità e sistema sociale"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "5.1",
+          "labels": {
+            "de": "Gesundheit, Sozialhilfe, Sport",
+            "fr": "Santé, assistance sociale, sport",
+            "it": "Sanità, assistenza sociale, sport"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/gesundheit-sozialhilfe-sport/",
+          "topics": [
+            {
+              "code": "5.1.1",
+              "labels": {
+                "de": "Gesundheitspolitik",
+                "fr": "Politique de la santé",
+                "it": "Politica della salute"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/gesundheitspolitik/"
+            },
+            {
+              "code": "5.1.2",
+              "labels": {
+                "de": "Ärzte und Pflegepersonal",
+                "fr": "Médecins et personnel soignant",
+                "it": "Medici e personale sanitario"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/aerzte-und-pflegepersonal/"
+            },
+            {
+              "code": "5.1.3",
+              "labels": {
+                "de": "Spitäler",
+                "fr": "Hôpitaux",
+                "it": "Ospedali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/spitaeler/"
+            },
+            {
+              "code": "5.1.4",
+              "labels": {
+                "de": "Medikamente",
+                "fr": "Médicaments",
+                "it": "Medicinali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/medikamente/"
+            },
+            {
+              "code": "5.1.5",
+              "labels": {
+                "de": "Suchtmittel",
+                "fr": "Stupéfiants",
+                "it": "Stupefacenti"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/suchtmittel/"
+            },
+            {
+              "code": "5.1.6",
+              "labels": {
+                "de": "Medizinische Forschung",
+                "fr": "Recherche médicale",
+                "it": "Ricerca medica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/medizinische-forschung/"
+            },
+            {
+              "code": "5.1.7",
+              "labels": {
+                "de": "Fortpflanzungsmedizin",
+                "fr": "Procréation médicalement assistée",
+                "it": "Procreazione medicalmente assistita"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/fortpflanzungsmedizin/"
+            },
+            {
+              "code": "5.1.8",
+              "labels": {
+                "de": "Epidemien und Pandemien",
+                "fr": "Epidémies et pandémies",
+                "it": "Epidemie e pandemie"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/epidemien-und-pandemien/"
+            },
+            {
+              "code": "5.1.9",
+              "labels": {
+                "de": "Sozialhilfe",
+                "fr": "Assistance sociale",
+                "it": "Assistenza sociale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/sozialhilfe/"
+            },
+            {
+              "code": "5.1.10",
+              "labels": {
+                "de": "Sport",
+                "fr": "Sport",
+                "it": "Sport"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/sport/"
+            }
+          ]
+        },
+        {
+          "code": "5.2",
+          "labels": {
+            "de": "Sozialversicherungen",
+            "fr": "Assurances sociales",
+            "it": "Assicurazioni sociali"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/sozialversicherungen/",
+          "topics": [
+            {
+              "code": "5.2.1",
+              "labels": {
+                "de": "Sozialversicherungen allgemein",
+                "fr": "Assurances sociales en général",
+                "it": "Assicurazioni sociali in generale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/sozialversicherungen-allgemein/"
+            },
+            {
+              "code": "5.2.2",
+              "labels": {
+                "de": "Alters- und Hinterlassenenversicherung (AHV)",
+                "fr": "Assurance-vieillesse et survivants (AVS)",
+                "it": "Assicurazione vecchiaia e superstiti (AVS)"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/alters-und-hinterlassenenversicherung-ahv/"
+            },
+            {
+              "code": "5.2.3",
+              "labels": {
+                "de": "Invalidenversicherung (IV)",
+                "fr": "Assurance-invalidité (AI)",
+                "it": "Assicurazione invalidità (AI)"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/invalidenversicherung-iv/"
+            },
+            {
+              "code": "5.2.4",
+              "labels": {
+                "de": "Krankenversicherung",
+                "fr": "Assurance-maladie",
+                "it": "Assicurazione malattia"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/krankenversicherung/"
+            },
+            {
+              "code": "5.2.5",
+              "labels": {
+                "de": "Unfallversicherung",
+                "fr": "Assurance-accidents",
+                "it": "Assicurazione infortuni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/unfallversicherung/"
+            },
+            {
+              "code": "5.2.6",
+              "labels": {
+                "de": "Arbeitslosenversicherung (ALV)",
+                "fr": "Assurance-chômage",
+                "it": "Assicurazione disoccupazione (AD)"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/arbeitslosenversicherung-alv/"
+            },
+            {
+              "code": "5.2.7",
+              "labels": {
+                "de": "Mutterschaftsversicherung",
+                "fr": "Assurance-maternité",
+                "it": "Assicurazione maternità"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/mutterschaftsversicherung/"
+            },
+            {
+              "code": "5.2.8",
+              "labels": {
+                "de": "Erwerbsersatzordnung (EO)",
+                "fr": "Allocations pour perte de gain (APG)",
+                "it": "Indennità per perdita di guadagno (IPG)"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/erwerbsersatzordnung-eo/"
+            },
+            {
+              "code": "5.2.9",
+              "labels": {
+                "de": "Berufliche Vorsorge",
+                "fr": "Prévoyance professionnelle",
+                "it": "Previdenza professionale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/berufliche-vorsorge/"
+            },
+            {
+              "code": "5.2.10",
+              "labels": {
+                "de": "Private Vorsorge",
+                "fr": "Prévoyance privée",
+                "it": "Previdenza privata"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/private-vorsorge/"
+            },
+            {
+              "code": "5.2.11",
+              "labels": {
+                "de": "Ergänzungsleistungen (EL)",
+                "fr": "Prestations complémentaires (PC)",
+                "it": "Prestazioni complementari (PC)"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/ergaenzungsleistungen-el/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "6",
+      "labels": {
+        "de": "Infrastruktur und Umwelt",
+        "fr": "Infrastructures et environnement",
+        "it": "Infrastrutture e ambiente"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "6.1",
+          "labels": {
+            "de": "Verkehr und Kommunikation",
+            "fr": "Transports et communications",
+            "it": "Trasporti e comunicazioni"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/verkehr-und-kommunikation/",
+          "topics": [
+            {
+              "code": "6.1.1",
+              "labels": {
+                "de": "Verkehrspolitik",
+                "fr": "Politique des transports",
+                "it": "Politica dei trasporti"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/verkehrspolitik/"
+            },
+            {
+              "code": "6.1.2",
+              "labels": {
+                "de": "Öffentlicher Verkehr",
+                "fr": "Transport public",
+                "it": "Trasporto pubblico"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/oeffentlicher-verkehr/"
+            },
+            {
+              "code": "6.1.3",
+              "labels": {
+                "de": "Strassenverkehr",
+                "fr": "Trafic routier",
+                "it": "Traffico stradale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/strassenverkehr/"
+            },
+            {
+              "code": "6.1.4",
+              "labels": {
+                "de": "Eisenbahn",
+                "fr": "Chemin de fer",
+                "it": "Ferrovia"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/eisenbahn/"
+            },
+            {
+              "code": "6.1.5",
+              "labels": {
+                "de": "Luftfahrt",
+                "fr": "Trafic aérien",
+                "it": "Aviazione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/luftfahrt/"
+            },
+            {
+              "code": "6.1.6",
+              "labels": {
+                "de": "Schifffahrt",
+                "fr": "Navigation",
+                "it": "Navigazione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/schifffahrt/"
+            },
+            {
+              "code": "6.1.7",
+              "labels": {
+                "de": "Post",
+                "fr": "Poste",
+                "it": "Posta"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/post/"
+            },
+            {
+              "code": "6.1.8",
+              "labels": {
+                "de": "Telekommunikation",
+                "fr": "Télécommunication",
+                "it": "Telecomunicazioni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/telekommunikation/"
+            },
+            {
+              "code": "6.1.9",
+              "labels": {
+                "de": "Digitalisierung",
+                "fr": "Numérisation",
+                "it": "Digitalizzazione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/digitalisierung/"
+            }
+          ]
+        },
+        {
+          "code": "6.2",
+          "labels": {
+            "de": "Energie",
+            "fr": "Energie",
+            "it": "Energia"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/energie/",
+          "topics": [
+            {
+              "code": "6.2.1",
+              "labels": {
+                "de": "Energiepolitik",
+                "fr": "Politique énergétique",
+                "it": "Politica energetica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/energiepolitik/"
+            },
+            {
+              "code": "6.2.2",
+              "labels": {
+                "de": "Stromnetz und -vertrieb",
+                "fr": "Réseau et distribution d'électricité",
+                "it": "Rete elettrica e distribuzione"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/stromnetz-und-vertrieb/"
+            },
+            {
+              "code": "6.2.3",
+              "labels": {
+                "de": "Erdöl und Erdgas",
+                "fr": "Produits pétroliers et gaz",
+                "it": "Petrolio e gas naturale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/erdoel-und-erdgas/"
+            },
+            {
+              "code": "6.2.4",
+              "labels": {
+                "de": "Wasserkraft",
+                "fr": "Force hydraulique",
+                "it": "Forza idraulica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wasserkraft/"
+            },
+            {
+              "code": "6.2.5",
+              "labels": {
+                "de": "Erneuerbare Energien",
+                "fr": "Energies renouvelables",
+                "it": "Energie rinnovabili"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/erneuerbare-energien/"
+            },
+            {
+              "code": "6.2.6",
+              "labels": {
+                "de": "Kernenergie",
+                "fr": "Energie nucléaire",
+                "it": "Energia nucleare"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/kernenergie/"
+            }
+          ]
+        },
+        {
+          "code": "6.3",
+          "labels": {
+            "de": "Raumplanung und Wohnungswesen",
+            "fr": "Aménagement du territoire et logement",
+            "it": "Assetto del territorio e alloggi"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/raumplanung-und-wohnungswesen/",
+          "topics": [
+            {
+              "code": "6.3.1",
+              "labels": {
+                "de": "Raumplanung",
+                "fr": "Aménagement du territoire",
+                "it": "Assetto del territorio"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/raumplanung/"
+            },
+            {
+              "code": "6.3.2",
+              "labels": {
+                "de": "Wohnungsbau und -eigentum",
+                "fr": "Construction de logements et propriété",
+                "it": "Costruzione di abitazioni e proprietà"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wohnungsbau-und-eigentum/"
+            },
+            {
+              "code": "6.3.3",
+              "labels": {
+                "de": "Mietwesen",
+                "fr": "Logement et loyer",
+                "it": "Locazioni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/mietwesen/"
+            },
+            {
+              "code": "6.3.4",
+              "labels": {
+                "de": "Bodenrecht",
+                "fr": "Droit foncier",
+                "it": "Diritto fondiario"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/bodenrecht/"
+            }
+          ]
+        },
+        {
+          "code": "6.4",
+          "labels": {
+            "de": "Umweltschutz",
+            "fr": "Protection de l'environnement",
+            "it": "Protezione dell'ambiente"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/umweltschutz/",
+          "topics": [
+            {
+              "code": "6.4.1",
+              "labels": {
+                "de": "Allgemeiner Umweltschutz",
+                "fr": "Politique de protection de l'environnement",
+                "it": "Politica di protezione dell'ambiente"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/allgemeiner-umweltschutz/"
+            },
+            {
+              "code": "6.4.2",
+              "labels": {
+                "de": "Naturschutz",
+                "fr": "Protection de la nature",
+                "it": "Protezione della natura"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/naturschutz/"
+            },
+            {
+              "code": "6.4.3",
+              "labels": {
+                "de": "Bodenschutz",
+                "fr": "Protection des sols",
+                "it": "Protezione del suolo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/bodenschutz/"
+            },
+            {
+              "code": "6.4.4",
+              "labels": {
+                "de": "Gewässerschutz",
+                "fr": "Protection des eaux",
+                "it": "Protezione delle acque"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/gewaesserschutz/"
+            },
+            {
+              "code": "6.4.5",
+              "labels": {
+                "de": "Luftreinhaltung",
+                "fr": "Gestion de la qualité de l'air",
+                "it": "Gestione della qualità dell'aria"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/luftreinhaltung/"
+            },
+            {
+              "code": "6.4.6",
+              "labels": {
+                "de": "Klimapolitik",
+                "fr": "Politique climatique",
+                "it": "Politica climatica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/klimapolitik/"
+            },
+            {
+              "code": "6.4.7",
+              "labels": {
+                "de": "Lärmschutz",
+                "fr": "Mesures contre le bruit",
+                "it": "Protezione dal rumore"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/laermschutz/"
+            },
+            {
+              "code": "6.4.8",
+              "labels": {
+                "de": "Abfälle und Recycling",
+                "fr": "Déchets et recyclage",
+                "it": "Rifiuti e riciclaggio"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/abfaelle-und-recycling/"
+            },
+            {
+              "code": "6.4.9",
+              "labels": {
+                "de": "Schutz vor Naturgefahren",
+                "fr": "Protection contre les forces naturelles",
+                "it": "Protezione contro i pericoli naturali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/schutz-vor-naturgefahren/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "7",
+      "labels": {
+        "de": "Rechts- und Sicherheitspolitik",
+        "fr": "Politique juridique et de sécurité",
+        "it": "Politica giuridica e di sicurezza"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "7.1",
+          "labels": {
+            "de": "Rechtsordnung",
+            "fr": "Ordre juridique",
+            "it": "Ordinamento giuridico"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/rechtsordnung/",
+          "topics": [
+            {
+              "code": "7.1.1",
+              "labels": {
+                "de": "Grundrechte",
+                "fr": "Droits fondamentaux",
+                "it": "Diritti fondamentali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/grundrechte/"
+            },
+            {
+              "code": "7.1.2",
+              "labels": {
+                "de": "Strafrecht",
+                "fr": "Droit pénal",
+                "it": "Diritto penale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/strafrecht/"
+            },
+            {
+              "code": "7.1.3",
+              "labels": {
+                "de": "Zivilrecht",
+                "fr": "Droit civil",
+                "it": "Diritto civile"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/zivilrecht/"
+            },
+            {
+              "code": "7.1.4",
+              "labels": {
+                "de": "Internationales Recht",
+                "fr": "Droit international",
+                "it": "Diritto internazionale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/internationales-recht/"
+            },
+            {
+              "code": "7.1.5",
+              "labels": {
+                "de": "Staatsangehörigkeit",
+                "fr": "Nationalité",
+                "it": "Cittadinanza"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/staatsangehoerigkeit/"
+            },
+            {
+              "code": "7.1.6",
+              "labels": {
+                "de": "Rechtshilfe",
+                "fr": "Entraide judiciaire",
+                "it": "Assistenza giudiziaria"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/rechtshilfe/"
+            },
+            {
+              "code": "7.1.7",
+              "labels": {
+                "de": "Datenschutz",
+                "fr": "Protection des données",
+                "it": "Protezione dei dati"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/datenschutz/"
+            }
+          ]
+        },
+        {
+          "code": "7.2",
+          "labels": {
+            "de": "Sicherheitspolitik",
+            "fr": "Politique de sécurité",
+            "it": "Politica di sicurezza"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/sicherheitspolitik/",
+          "topics": [
+            {
+              "code": "7.2.1",
+              "labels": {
+                "de": "Grundfragen zur Armee",
+                "fr": "Questions fondamentales sur l'armée",
+                "it": "Questioni fondamentali sull'esercito"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/grundfragen-zur-armee/"
+            },
+            {
+              "code": "7.2.2",
+              "labels": {
+                "de": "Militärorganisation",
+                "fr": "Organisation militaire",
+                "it": "Organizzazione militare"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/militaerorganisation/"
+            },
+            {
+              "code": "7.2.3",
+              "labels": {
+                "de": "Rüstung",
+                "fr": "Armement",
+                "it": "Armamento"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/ruestung/"
+            },
+            {
+              "code": "7.2.4",
+              "labels": {
+                "de": "Militäreinsätze",
+                "fr": "Engagements militaires",
+                "it": "Impieghi militari"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/militaereinsaetze/"
+            },
+            {
+              "code": "7.2.5",
+              "labels": {
+                "de": "Bevölkerungsschutz",
+                "fr": "Protection civile",
+                "it": "Protezione civile"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/bevoelkerungsschutz/"
+            },
+            {
+              "code": "7.2.6",
+              "labels": {
+                "de": "Zivildienst und Dienstverweigerung",
+                "fr": "Service civil et refus de servir",
+                "it": "Servizio civile e obiezione di coscienza"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/zivildienst-und-dienstverweigerung/"
+            },
+            {
+              "code": "7.2.7",
+              "labels": {
+                "de": "Öffentliche Sicherheit",
+                "fr": "Sécurité publique",
+                "it": "Sicurezza pubblica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/oeffentliche-sicherheit/"
+            },
+            {
+              "code": "7.2.8",
+              "labels": {
+                "de": "Polizei",
+                "fr": "Police",
+                "it": "Polizia"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/polizei/"
+            },
+            {
+              "code": "7.2.9",
+              "labels": {
+                "de": "Cybersicherheit",
+                "fr": "Cybersécurité",
+                "it": "Cibersicurezza"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/cybersicherheit/"
+            },
+            {
+              "code": "7.2.10",
+              "labels": {
+                "de": "Versorgungssicherheit",
+                "fr": "Sécurité d'approvisionnement",
+                "it": "Sicurezza dell'approvvigionamento"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/versorgungssicherheit/"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "8",
+      "labels": {
+        "de": "Wirtschaft und Finanzen",
+        "fr": "Economie et finances",
+        "it": "Economia e finanze"
+      },
+      "url_de": "https://anneepolitique.swiss/de/themen/",
+      "chapters": [
+        {
+          "code": "8.1",
+          "labels": {
+            "de": "Wirtschaftspolitik",
+            "fr": "Politique économique",
+            "it": "Politica economica"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/wirtschaftspolitik/",
+          "topics": [
+            {
+              "code": "8.1.1",
+              "labels": {
+                "de": "Konjunkturlage und -politik",
+                "fr": "Situation et politique conjoncturelle",
+                "it": "Situazione e politica congiunturale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/konjunkturlage-und-politik/"
+            },
+            {
+              "code": "8.1.2",
+              "labels": {
+                "de": "Strukturpolitik",
+                "fr": "Politique structurelle",
+                "it": "Politica strutturale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/strukturpolitik/"
+            },
+            {
+              "code": "8.1.3",
+              "labels": {
+                "de": "Gesellschaftsrecht",
+                "fr": "Droit des sociétés",
+                "it": "Diritto societario"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/gesellschaftsrecht/"
+            },
+            {
+              "code": "8.1.4",
+              "labels": {
+                "de": "Wettbewerb",
+                "fr": "Concurrence",
+                "it": "Concorrenza"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wettbewerb/"
+            },
+            {
+              "code": "8.1.5",
+              "labels": {
+                "de": "Konsumentinnen- und Konsumentenschutz",
+                "fr": "Protection des consommateurs/trices",
+                "it": "Protezione dei consumatori"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/konsumentinnen-und-konsumentenschutz/"
+            },
+            {
+              "code": "8.1.6",
+              "labels": {
+                "de": "Tourismus",
+                "fr": "Tourisme",
+                "it": "Turismo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/tourismus/"
+            },
+            {
+              "code": "8.1.7",
+              "labels": {
+                "de": "Wirtschaftsordnung",
+                "fr": "Ordre économique",
+                "it": "Ordine economico"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/wirtschaftsordnung/"
+            }
+          ]
+        },
+        {
+          "code": "8.2",
+          "labels": {
+            "de": "Öffentliche Finanzen",
+            "fr": "Finances publiques",
+            "it": "Finanze pubbliche"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/oeffentliche-finanzen/",
+          "topics": [
+            {
+              "code": "8.2.1",
+              "labels": {
+                "de": "Budget",
+                "fr": "Budget",
+                "it": "Preventivo"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/budget/"
+            },
+            {
+              "code": "8.2.2",
+              "labels": {
+                "de": "Staatsrechnung",
+                "fr": "Comptes d'Etat",
+                "it": "Conti dello Stato"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/staatsrechnung/"
+            },
+            {
+              "code": "8.2.3",
+              "labels": {
+                "de": "Finanzordnung und Sparmassnahmen",
+                "fr": "Ordre financier et mesures d’économie",
+                "it": "Ordinamento finanziario e misure di risparmio"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/finanzordnung-und-sparmassnahmen/"
+            },
+            {
+              "code": "8.2.4",
+              "labels": {
+                "de": "Steuern",
+                "fr": "Impôts",
+                "it": "Imposte"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/steuern/"
+            },
+            {
+              "code": "8.2.5",
+              "labels": {
+                "de": "Finanzausgleich",
+                "fr": "Péréquation financière",
+                "it": "Perequazione finanziaria"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/finanzausgleich/"
+            },
+            {
+              "code": "8.2.6",
+              "labels": {
+                "de": "Finanzhaushalt der Kantone und Gemeinden",
+                "fr": "Budgets des cantons et des communes",
+                "it": "Bilanci dei Cantoni e dei Comuni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/finanzhaushalt-der-kantone-und-gemeinden/"
+            }
+          ]
+        },
+        {
+          "code": "8.3",
+          "labels": {
+            "de": "Geld, Währung und Kredit",
+            "fr": "Credit et monnaie",
+            "it": "Moneta e credito"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/geld-waehrung-und-kredit/",
+          "topics": [
+            {
+              "code": "8.3.1",
+              "labels": {
+                "de": "Geld- und Währungspolitik",
+                "fr": "Politique monétaire",
+                "it": "Politica monetaria"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/geld-und-waehrungspolitik/"
+            },
+            {
+              "code": "8.3.2",
+              "labels": {
+                "de": "Finanzwesen",
+                "fr": "Affaires financières",
+                "it": "Sistema finanziario"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/finanzwesen/"
+            },
+            {
+              "code": "8.3.3",
+              "labels": {
+                "de": "Nationalbank",
+                "fr": "Banque nationale",
+                "it": "Banca nazionale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/nationalbank/"
+            },
+            {
+              "code": "8.3.4",
+              "labels": {
+                "de": "Banken",
+                "fr": "Banques",
+                "it": "Banche"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/banken/"
+            },
+            {
+              "code": "8.3.5",
+              "labels": {
+                "de": "Börsen",
+                "fr": "Bourses",
+                "it": "Borse"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/boersen/"
+            },
+            {
+              "code": "8.3.6",
+              "labels": {
+                "de": "Versicherungen",
+                "fr": "Assurances",
+                "it": "Assicurazioni"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/versicherungen/"
+            }
+          ]
+        },
+        {
+          "code": "8.4",
+          "labels": {
+            "de": "Landwirtschaft",
+            "fr": "Agriculture",
+            "it": "Agricoltura"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/landwirtschaft/",
+          "topics": [
+            {
+              "code": "8.4.1",
+              "labels": {
+                "de": "Agrarpolitik",
+                "fr": "Politique agricole",
+                "it": "Politica agricola"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/agrarpolitik/"
+            },
+            {
+              "code": "8.4.2",
+              "labels": {
+                "de": "Beschäftigte in der Landwirtschaft",
+                "fr": "Personnes employées dans l'agriculture",
+                "it": "Persone impiegate nell'agricoltura"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/beschaeftigte-in-der-landwirtschaft/"
+            },
+            {
+              "code": "8.4.3",
+              "labels": {
+                "de": "Lebensmittel",
+                "fr": "Denrées alimentaires",
+                "it": "Derrate alimentari"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/lebensmittel/"
+            },
+            {
+              "code": "8.4.4",
+              "labels": {
+                "de": "Pflanzliche Produktion",
+                "fr": "Production végétale",
+                "it": "Produzione vegetale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/pflanzliche-produktion/"
+            },
+            {
+              "code": "8.4.5",
+              "labels": {
+                "de": "Tierische Produktion",
+                "fr": "Production animale",
+                "it": "Produzione animale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/tierische-produktion/"
+            },
+            {
+              "code": "8.4.6",
+              "labels": {
+                "de": "Tierhaltung und Tierschutz",
+                "fr": "Détention d'animaux et protection des animaux",
+                "it": "Detenzione di animali e protezione degli animali"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/tierhaltung-und-tierschutz/"
+            },
+            {
+              "code": "8.4.7",
+              "labels": {
+                "de": "Tierversuche",
+                "fr": "Expérimentation animale",
+                "it": "Sperimentazione animale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/tierversuche/"
+            },
+            {
+              "code": "8.4.8",
+              "labels": {
+                "de": "Jagd und Fischerei",
+                "fr": "Chasse et pêche",
+                "it": "Caccia e pesca"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/jagd-und-fischerei/"
+            },
+            {
+              "code": "8.4.9",
+              "labels": {
+                "de": "Grossraubtiere",
+                "fr": "Grands prédateurs",
+                "it": "Grandi predatori"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/grossraubtiere/"
+            },
+            {
+              "code": "8.4.10",
+              "labels": {
+                "de": "Forstwirtschaft",
+                "fr": "Sylviculture",
+                "it": "Selvicoltura"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/forstwirtschaft/"
+            },
+            {
+              "code": "8.4.11",
+              "labels": {
+                "de": "Gentechnologie",
+                "fr": "Génie génétique",
+                "it": "Ingegneria genetica"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/gentechnologie/"
+            },
+            {
+              "code": "8.4.12",
+              "labels": {
+                "de": "Umweltschutz in der Landwirtschaft",
+                "fr": "Protection de l'environnement dans l'agriculture",
+                "it": "Protezione dell'ambiente nell'agricoltura"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/umweltschutz-in-der-landwirtschaft/"
+            }
+          ]
+        },
+        {
+          "code": "8.5",
+          "labels": {
+            "de": "Arbeit",
+            "fr": "Travail",
+            "it": "Lavoro"
+          },
+          "url_de": "https://anneepolitique.swiss/de/themen/arbeit/",
+          "topics": [
+            {
+              "code": "8.5.1",
+              "labels": {
+                "de": "Arbeitsrecht",
+                "fr": "Droit du travail",
+                "it": "Diritto del lavoro"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/arbeitsrecht/"
+            },
+            {
+              "code": "8.5.2",
+              "labels": {
+                "de": "Arbeitsmarkt",
+                "fr": "Marché du travail",
+                "it": "Mercato del lavoro"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/arbeitsmarkt/"
+            },
+            {
+              "code": "8.5.3",
+              "labels": {
+                "de": "Löhne",
+                "fr": "Salaires",
+                "it": "Salari"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/loehne/"
+            },
+            {
+              "code": "8.5.4",
+              "labels": {
+                "de": "Sozialpartnerschaft",
+                "fr": "Partenariat social",
+                "it": "Partenariato sociale"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/sozialpartnerschaft/"
+            },
+            {
+              "code": "8.5.5",
+              "labels": {
+                "de": "Arbeitszeit",
+                "fr": "Temps de travail",
+                "it": "Orario di lavoro"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/arbeitszeit/"
+            },
+            {
+              "code": "8.5.6",
+              "labels": {
+                "de": "Arbeitnehmendenschutz",
+                "fr": "Protection des travailleurs",
+                "it": "Protezione dei lavoratori"
+              },
+              "url_de": "https://anneepolitique.swiss/de/themen/arbeitnehmendenschutz/"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
