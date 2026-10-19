@@ -35,6 +35,8 @@ const state = {
   mapOpen: false, // the chapter map stays folded until someone opens it
   domainFilter: null, // selected domain index in the legend, or null for all
   lang: "de", // label language: de, fr or it
+  removedQueries: new Set(), // queries the user removed from the last search
+  lastSearch: null, // the last search outcome, kept so removed queries can be filtered
 };
 const APS = "aps_topics";
 
@@ -223,6 +225,7 @@ $$("#search-form [data-q]").forEach((chip) =>
 $("#search-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const out = $("#search-out");
+  state.removedQueries.clear();
   const query = $("#q").value.trim();
   const languages = $$('input[name="lang"]:checked').map((input) => input.value);
   if (query.length < 2) {
@@ -256,12 +259,16 @@ $("#search-form").addEventListener("submit", async (event) => {
 });
 
 function renderSearch(result, ms) {
-  const languages = new Set(result.hits.flatMap((h) => h.matched_by.map((m) => m.language)));
-  const bodies = new Set(result.hits.map((h) => h.affair.body_key));
+  state.lastSearch = result;
+  const visible = result.hits.filter(
+    (h) => !h.matched_by.every((m) => state.removedQueries.has(`${m.language}:${m.query}`))
+  );
+  const languages = new Set(visible.flatMap((h) => h.matched_by.map((m) => m.language)));
+  const bodies = new Set(visible.map((h) => h.affair.body_key));
   const parts = [
     `<div class="stats">
       <div class="stat"><b>${result.unique_affairs}</b><span>affairs found</span></div>
-      <div class="stat"><b>${result.hits.length}</b><span>shown</span></div>
+      <div class="stat"><b>${visible.length}</b><span>shown</span></div>
       <div class="stat"><b>${bodies.size}</b><span>parliaments</span></div>
       <div class="stat"><b>${languages.size}</b><span>languages matched</span></div>
       <div class="stat"><b>${(ms / 1000).toFixed(1)}<small> s</small></b><span>response time</span></div>
@@ -274,17 +281,21 @@ function renderSearch(result, ms) {
     `<div class="card queries"><h3>Queries Apertus wrote</h3>${result.queries
       .map(
         (q) => `<div class="query-line"><span class="lang">${esc(q.language)}</span><div>${q.queries
-          .map((text) => `<span class="qchip">${esc(text)}</span>`)
+          .map((text) => {
+            const key = `${q.language}:${text}`;
+            const removed = state.removedQueries.has(key);
+            return `<span class="qchip${removed ? " removed" : ""}">${esc(text)}<button type="button" class="qchip-x" data-query="${esc(key)}" aria-label="${removed ? "Restore" : "Remove"} this query">${icon("x")}</button></span>`;
+          })
           .join("")}</div></div>`
       )
       .join("")}</div>`,
   ];
-  if (!result.hits.length) {
+  if (!visible.length) {
     parts.push(
       `<div class="empty"><h2>No affairs matched</h2><p>Try a broader request or more languages, or switch to Full search under Search options.</p></div>`
     );
   } else {
-    parts.push(`<ol class="hits">${result.hits.map(hitHtml).join("")}</ol>`);
+    parts.push(`<ol class="hits">${visible.map(hitHtml).join("")}</ol>`);
   }
   parts.push(rawJson(result));
   $("#search-out").innerHTML = parts.join("");
@@ -323,6 +334,14 @@ function hitHtml(hit) {
 
 // Hand a search hit over to the classifier.
 $("#search-out").addEventListener("click", (event) => {
+  const qx = event.target.closest("[data-query]");
+  if (qx) {
+    const key = qx.dataset.query;
+    if (state.removedQueries.has(key)) state.removedQueries.delete(key);
+    else state.removedQueries.add(key);
+    if (state.lastSearch) renderSearch(state.lastSearch, 0);
+    return;
+  }
   const button = event.target.closest("[data-classify]");
   if (!button) return;
   setMode("link");
