@@ -8,11 +8,21 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.types import Scope
 
 from .dependencies import lifespan
 from .routes import classify, health, parliaments, search, similar, taxonomies
 
 WEB_DIR = Path(__file__).resolve().parents[1] / "web"
+
+
+class ConsoleFiles(StaticFiles):
+    """The console's files, revalidated on every load so a deploy is never hidden by a cached old copy."""
+
+    async def get_response(self, path: str, scope: Scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
 
 
 def create_app() -> FastAPI:
@@ -27,7 +37,7 @@ def create_app() -> FastAPI:
     )
     for module in (health, search, classify, similar, taxonomies, parliaments):
         app.include_router(module.router)
-    app.mount("/ui", StaticFiles(directory=WEB_DIR, html=True), name="ui")
+    app.mount("/ui", ConsoleFiles(directory=WEB_DIR, html=True), name="ui")
 
     @app.get("/", include_in_schema=False)
     def home() -> RedirectResponse:
