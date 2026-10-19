@@ -351,11 +351,7 @@ main:focus, main:focus-visible { outline: none; box-shadow: none; }
   font: 700 0.7rem var(--f-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-2);
   background: var(--surface-2); border-radius: 6px; padding: 3px 0; text-align: center;
 }
-.qchip { display: inline-flex; align-items: center; gap: 4px; font-size: 0.84rem; padding: 3px 10px; margin: 2px 4px 2px 0; border-radius: 7px; background: var(--accent-soft); color: var(--accent-strong); }
-.qchip.removed { opacity: 0.4; text-decoration: line-through; }
-.qchip-x { display: inline-grid; place-items: center; width: 16px; height: 16px; min-height: 16px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; opacity: 0.5; transition: opacity var(--t) var(--ease), background var(--t) var(--ease); }
-.qchip-x:hover { opacity: 1; background: rgba(0, 0, 0, 0.08); }
-.qchip-x .i { width: 12px; height: 12px; }
+.qchip { display: inline-block; font-size: 0.84rem; padding: 3px 10px; margin: 2px 4px 2px 0; border-radius: 7px; background: var(--accent-soft); color: var(--accent-strong); }
 
 .hits { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .hit {
