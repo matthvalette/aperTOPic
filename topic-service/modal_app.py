@@ -3,9 +3,9 @@
     modal serve modal_app.py     # temporary URL that reloads on changes
     modal deploy modal_app.py    # permanent URL
 
-Needs a Modal secret `apertopic-keys` with TYPESAFE_API_KEY and APERTUS_API_KEY, and optionally
-APERTOPIC_PASSWORD to put the site behind a browser login (anyone with the URL otherwise spends the
-API credits). The labelled data comes from ../data (see README), baked into the image.
+Needs a Modal secret `apertopic-keys` with TYPESAFE_API_KEY and APERTUS_API_KEY. The site is open:
+anyone with the URL can use it, and their requests use those API credits. The labelled data comes
+from ../data (see README), baked into the image.
 
 Cost: the app mostly waits on Jev, Apertus and OpenParlData, so it runs on half a CPU and 512 MB,
 scales to zero when idle, serves many requests per container and never runs more than two.
@@ -54,30 +54,6 @@ app = modal.App("apertopic", image=image)
 @modal.concurrent(max_inputs=40)
 @modal.asgi_app()
 def web():
-    import base64
-    import os
-    import secrets
-
-    from fastapi import Request
-    from fastapi.responses import Response
-
     from parltopics.api.main import create_app
 
-    api = create_app()
-    password = os.environ.get("APERTOPIC_PASSWORD")
-    if password:
-
-        @api.middleware("http")
-        async def login(request: Request, call_next):
-            # Browser login: any user name, the password from the secret.
-            header = request.headers.get("authorization", "")
-            if header.startswith("Basic "):
-                try:
-                    _, _, given = base64.b64decode(header[6:]).decode().partition(":")
-                except ValueError:
-                    given = ""
-                if secrets.compare_digest(given, password):
-                    return await call_next(request)
-            return Response(status_code=401, headers={"WWW-Authenticate": 'Basic realm="aperTOPic"'})
-
-    return api
+    return create_app()
