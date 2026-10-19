@@ -717,10 +717,11 @@ function barsHtml(scores, { threshold, on, limit }) {
   const rows = scores
     .map((score, index) => {
       const assigned = on.has(score.topic_id);
+      const name = topicName(score.topic_id, score.name);
       const marker =
         threshold == null ? "" : `<span class="threshold" style="left:calc(${(threshold * 100).toFixed(1)}% - 1px)"></span>`;
-      return `<div class="bar-row${assigned ? " on" : ""}"${index >= limit ? " hidden" : ""} title="${esc(score.name)}: ${score.probability.toFixed(3)}">
-        <span class="name">${esc(score.name)}</span>
+      return `<div class="bar-row${assigned ? " on" : ""}"${index >= limit ? " hidden" : ""} title="${esc(name)}: ${score.probability.toFixed(3)}">
+        <span class="name">${esc(name)}</span>
         <span class="track"><span class="fill" style="width:${(score.probability * 100).toFixed(1)}%"></span>${marker}</span>
         <span class="value">${fmt(score.probability)}</span>
       </div>`;
@@ -912,15 +913,16 @@ function reviewRowHtml(id, lbl, c) {
           .join("")}</optgroup>`)
         .join("")
     : "";
+  const displayName = topicName(id, lbl.name);
   const actions = editing
-    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(lbl.name)} with">${options}</select>
+    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(displayName)} with">${options}</select>
        <button type="button" class="icon" data-cancel-edit aria-label="Cancel">${icon("x", "i")}</button>`
     : `${lbl.status === "suggested" ? `<button type="button" class="act accept" data-accept="${esc(id)}" title="Accept">${icon("check")}<span>Accept</span></button>` : ""}
        <button type="button" class="act" data-edit="${esc(id)}" title="Change to another topic">${icon("pencil")}<span>Edit</span></button>
        <button type="button" class="act danger" data-remove="${APS}" data-topic="${esc(id)}" title="Remove this label">${icon("x")}<span>Remove</span></button>`;
   return `<li class="review ${lbl.status}" style="--hue:${hue(group)}">
     <span class="swatch" aria-hidden="true"></span>
-    <div class="review-path"><span class="review-chapter">${esc(groupLabel)}</span><strong>${esc(lbl.name)}</strong></div>
+    <div class="review-path"><span class="review-chapter">${esc(groupLabel)}</span><strong>${esc(displayName)}</strong></div>
     <div class="review-p"><span class="meter"><span style="width:${pct(lbl.p)}"></span></span><span class="num">${fmt(lbl.p)}</span></div>
     <span class="status-tag">${lbl.status === "suggested" ? "" : icon("check")}${esc(status)}</span>
     <div class="review-actions">${actions}</div>
@@ -944,9 +946,12 @@ function labelTreeHtml(set, chapterP) {
       const topics = [...set.entries()]
         .filter(([id]) => topicGroup(id) === g)
         .sort((a, b) => (b[1].p || 0) - (a[1].p || 0))
-        .map(([id, l]) => `<div class="tnode topic ${l.status}" data-parent="${esc(g)}" data-d="${chapter.domainIndex}" title="${esc(l.name)} · ${esc(l.status === "suggested" ? "suggested" : "accepted")}">
-            ${l.status === "suggested" ? "" : icon("check")}<span class="tname">${esc(l.name)}</span><span class="tp num">${fmt(l.p)}</span>
-          </div>`)
+        .map(([id, l]) => {
+          const displayName = topicName(id, l.name);
+          return `<div class="tnode topic ${l.status}" data-parent="${esc(g)}" data-d="${chapter.domainIndex}" title="${esc(displayName)} · ${esc(l.status === "suggested" ? "suggested" : "accepted")}">
+            ${l.status === "suggested" ? "" : icon("check")}<span class="tname">${esc(displayName)}</span><span class="tp num">${fmt(l.p)}</span>
+          </div>`;
+        })
         .join("");
       return `<div class="tbranch" style="--hue:${hue(g)}">
         <div class="tnode chapter" data-chapter="${esc(g)}" data-d="${chapter.domainIndex}">
@@ -1072,7 +1077,8 @@ function topicMapHtml(c, refresh) {
 function hintChip(hint, classification) {
   const score = classification.scores.find((s) => s.topic_id === hint.topic_id);
   const cases = `${hint.cases} similar ${hint.cases === 1 ? "case" : "cases"}`;
-  return `<button type="button" class="chip suggest" data-hint="${esc(hint.taxonomy_id)}" data-topic="${esc(hint.topic_id)}" title="${esc(hint.source)}: ${cases}${score ? ` · Jev ${fmt(score.probability)}` : ""}">${icon("plus")}${esc(hint.name)}<span class="count">${hint.cases}</span></button>`;
+  const name = hint.taxonomy_id === APS ? topicName(hint.topic_id, hint.name) : hint.name;
+  return `<button type="button" class="chip suggest" data-hint="${esc(hint.taxonomy_id)}" data-topic="${esc(hint.topic_id)}" title="${esc(hint.source)}: ${cases}${score ? ` · Jev ${fmt(score.probability)}` : ""}">${icon("plus")}${esc(name)}<span class="count">${hint.cases}</span></button>`;
 }
 
 function similarTopicsHtml(result) {
@@ -1088,7 +1094,8 @@ function similarTopicsHtml(result) {
         action = `<button type="button" class="ghost tiny" data-hint="${esc(h.taxonomy_id)}" data-topic="${esc(h.topic_id)}">${icon("plus")}Add</button>`;
       else
         action = `<button type="button" class="ghost tiny" data-adhoc="${esc(h.name)}" title="Adds it to the label set as a new topic; classify again to score it">${icon("plus")}Add to the label set</button>`;
-      return `<div class="topic-hint"><span class="topic-hint-name">${esc(h.name)}</span><span class="muted">${h.cases} ${h.cases === 1 ? "case" : "cases"} · ${esc(h.source)}</span>${action}</div>`;
+      const displayName = h.taxonomy_id === APS && h.topic_id ? topicName(h.topic_id, h.name) : h.name;
+      return `<div class="topic-hint"><span class="topic-hint-name">${esc(displayName)}</span><span class="muted">${h.cases} ${h.cases === 1 ? "case" : "cases"} · ${esc(h.source)}</span>${action}</div>`;
     })
     .join("");
 }
