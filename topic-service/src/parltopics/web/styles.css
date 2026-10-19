@@ -100,6 +100,7 @@ svg.i.sm { width: 15px; height: 15px; }
 }
 h1 { font-size: 1.15rem; font-weight: 700; }
 h1 .accent { color: var(--accent); }
+h1 .lambda { color: var(--swiss); font-size: 1.25em; line-height: 0; vertical-align: -0.08em; }
 .sub { color: var(--ink-3); font-size: 0.85rem; }
 .bar-end { display: flex; align-items: center; gap: 10px; }
 .status { display: flex; flex-wrap: wrap; gap: 6px; }
