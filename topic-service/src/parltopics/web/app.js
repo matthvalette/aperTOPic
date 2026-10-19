@@ -467,11 +467,24 @@ $("#aps-editor").addEventListener("keydown", (event) => {
   if (event.target.id === "new-topic-name" || event.target.id === "new-topic-desc") $("#new-topic-add").click();
 });
 $("#new-topic-add").addEventListener("click", () => {
-  const name = $("#new-topic-name").value;
-  if (!addApsTopic(name, $("#new-topic-desc").value, $("#new-topic-chapter").value)) {
+  const name = $("#new-topic-name").value.trim();
+  const message = $("#new-topic-msg");
+  const group = $("#new-topic-chapter").value;
+  if (!name) {
+    message.textContent = "Write a topic name first.";
     $("#new-topic-name").focus();
     return;
   }
+  const existing = state.aps.topics.find((t) => t.name.toLowerCase() === name.toLowerCase());
+  if (existing) {
+    // already in the set: show it in the list so it can be described or renamed there
+    message.textContent = `"${existing.name}" is already a topic in ${existing.group}. It is shown below: add a description there.`;
+    $("#aps-filter").value = existing.name;
+    renderApsEditor();
+    return;
+  }
+  addApsTopic(name, $("#new-topic-desc").value, group);
+  message.textContent = `Added "${name}" to ${group}. Classify to score it.`;
   $("#new-topic-name").value = "";
   $("#new-topic-desc").value = "";
   $("#new-topic-name").focus();
