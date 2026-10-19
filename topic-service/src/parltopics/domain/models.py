@@ -125,6 +125,12 @@ class Topic(BaseModel):
     code: str | None = None
     group: str | None = Field(default=None, description="Parent level, e.g. the APS chapter.")
     description: str | None = None
+    group_names: dict[str, str] | None = Field(
+        default=None, description="Parent (chapter) labels per language, e.g. {'de': ..., 'fr': ..., 'it': ...}."
+    )
+    domain_names: dict[str, str] | None = Field(
+        default=None, description="Top-level domain labels per language."
+    )
 
 
 class Taxonomy(BaseModel):

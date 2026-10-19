@@ -100,6 +100,7 @@ svg.i.sm { width: 15px; height: 15px; }
 }
 h1 { font-size: 1.15rem; font-weight: 700; }
 h1 .accent { color: var(--accent); }
+h1 .lambda { color: var(--swiss); font-size: 1.25em; line-height: 0; vertical-align: -0.08em; }
 .sub { color: var(--ink-3); font-size: 0.85rem; }
 .bar-end { display: flex; align-items: center; gap: 10px; }
 .status { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -114,6 +115,17 @@ h1 .accent { color: var(--accent); }
 .pill.bad { background: var(--bad-bg); color: var(--bad); }
 .pill.bad::before { background: var(--bad); }
 .pill.plain::before { display: none; }
+
+.lang-switch {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px;
+  background: var(--surface-2); border: 1px solid var(--rule); border-radius: 10px;
+  color: var(--ink-3);
+}
+.lang-switch select {
+  border: 0; background: transparent; font: 700 0.78rem var(--f-mono); letter-spacing: 0.04em;
+  color: var(--ink-2); cursor: pointer; padding: 4px 2px; min-height: 32px;
+}
+.lang-switch select:focus { box-shadow: none; }
 
 .theme-toggle {
   display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; cursor: pointer;
@@ -432,6 +444,7 @@ select.label-add { width: auto; min-width: 12em; max-width: 100%; min-height: 34
 .chip.suggest:hover { color: var(--good); border-color: var(--good); background: var(--good-bg); }
 .chip.suggest .count { font: 700 0.7rem var(--f-mono); margin-left: 2px; opacity: 0.8; }
 .label-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding-top: 8px; }
+.label-actions .spacer { flex: 1; }
 @media (max-width: 640px) {
   .label-set { grid-template-columns: minmax(0, 1fr); }
   .hint-row { grid-column: auto; }
@@ -603,7 +616,9 @@ details.same a { display: inline-block; margin: 2px 12px 0 0; font-size: 0.8rem;
 }
 
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--ink-2); }
-.legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid transparent; border-radius: 6px; padding: 4px 8px; font: inherit; color: inherit; cursor: pointer; transition: background var(--t) var(--ease), border-color var(--t) var(--ease); }
+.legend-item:hover { background: var(--surface-2); border-color: var(--rule); }
+.legend-item.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-strong); font-weight: 700; }
 .chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; align-items: start; }
 .chapter { border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: var(--surface); }
 .chapter.has-labels { border-color: var(--hue); box-shadow: 0 0 0 1px var(--hue); }

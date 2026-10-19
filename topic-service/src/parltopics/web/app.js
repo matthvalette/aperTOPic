@@ -33,6 +33,8 @@ const state = {
   editing: null, // the label whose topic is being changed
   allChapters: false,
   mapOpen: false, // the chapter map stays folded until someone opens it
+  domainFilter: null, // selected domain index in the legend, or null for all
+  lang: "de", // label language: de, fr or it
 };
 const APS = "aps_topics";
 
@@ -108,6 +110,37 @@ function setBusy(button, busy, label) {
   button.disabled = busy;
   button.setAttribute("aria-busy", String(busy));
   ($(".label", button) || button).textContent = label;
+}
+
+// Pick the label in the current UI language, falling back to German then any language.
+function label(names, fallback = "") {
+  if (!names) return fallback;
+  return names[state.lang] || names.de || Object.values(names)[0] || fallback;
+}
+
+// ---------- language switch ----------
+$("#lang-select").addEventListener("change", (event) => {
+  state.lang = event.target.value;
+  try {
+    localStorage.setItem("console-lang", state.lang);
+  } catch {
+    /* storage is optional */
+  }
+  if (state.aps) {
+    updateApsSummary();
+    renderChapterOptions();
+    renderApsEditor();
+    refreshLabels();
+  }
+});
+try {
+  const saved = localStorage.getItem("console-lang");
+  if (saved && ["de", "fr", "it"].includes(saved)) {
+    state.lang = saved;
+    $("#lang-select").value = saved;
+  }
+} catch {
+  /* storage is optional */
 }
 
 // ---------- tabs ----------
@@ -327,17 +360,36 @@ function initAps(taxonomy) {
     const code = t.code || t.id;
     const [domainCode, chapterCode] = code.split(".");
     const domain = (/domain (.*?) \(/.exec(t.description || "") || [])[1] || "";
-    if (!domains.some((d) => d.code === domainCode)) domains.push({ code: domainCode, name: domain });
+    if (!domains.some((d) => d.code === domainCode))
+      domains.push({ code: domainCode, name: domain, names: t.domain_names || {} });
     const domainIndex = domains.findIndex((d) => d.code === domainCode) + 1;
-    if (!chapters.has(t.group)) chapters.set(t.group, { name: t.group, code: `${domainCode}.${chapterCode}`, domainIndex });
-    return { uid: `t${++topicCounter}`, id: t.id, code, name: t.name, description: "", baseDescription: t.description, group: t.group };
+    if (!chapters.has(t.group))
+      chapters.set(t.group, { name: t.group, code: `${domainCode}.${chapterCode}`, domainIndex, names: t.group_names || {} });
+    return {
+      uid: `t${++topicCounter}`,
+      id: t.id,
+      code,
+      name: t.name,
+      names: t.names || {},
+      description: "",
+      baseDescription: t.description,
+      group: t.group,
+    };
   });
-  chapters.set(OWN_CHAPTER, { name: OWN_CHAPTER, code: "", domainIndex: 0 });
+  chapters.set(OWN_CHAPTER, { name: OWN_CHAPTER, code: "", domainIndex: 0, names: {} });
   state.aps = { threshold: taxonomy.default_threshold, chapters, domains, original: topics.map((t) => ({ ...t })), topics, open: new Set() };
-  $("#new-topic-chapter").innerHTML = [...chapters.values()]
-    .map((c) => `<option value="${esc(c.name)}"${c.name === OWN_CHAPTER ? " selected" : ""}>${esc(c.code ? `${c.code} ${c.name}` : `${c.name} (new chapter)`)}</option>`)
-    .join("");
+  renderChapterOptions();
   updateApsSummary();
+}
+
+function renderChapterOptions() {
+  if (!state.aps) return;
+  $("#new-topic-chapter").innerHTML = [...state.aps.chapters.values()]
+    .map((c) => {
+      const chapterLabel = label(c.names, c.name);
+      return `<option value="${esc(c.name)}"${c.name === OWN_CHAPTER ? " selected" : ""}>${esc(c.code ? `${c.code} ${chapterLabel}` : `${chapterLabel} (new chapter)`)}</option>`;
+    })
+    .join("");
 }
 
 function apsChanges() {
@@ -368,9 +420,15 @@ function updateApsSummary() {
 }
 
 function chapterOf(group) {
-  return (state.aps && state.aps.chapters.get(group)) || { name: group, code: "", domainIndex: 0 };
+  return (state.aps && state.aps.chapters.get(group)) || { name: group, code: "", domainIndex: 0, names: {} };
 }
 const hue = (group) => `var(--d${chapterOf(group).domainIndex})`;
+
+// Translated topic name: look up the APS topic's names dict, fall back to the given name.
+function topicName(topicId, fallback) {
+  const t = state.aps && state.aps.topics.find((x) => x.id === topicId);
+  return t ? label(t.names, t.name) : fallback;
+}
 
 function renderApsEditor() {
   const aps = state.aps;
@@ -398,8 +456,9 @@ function renderApsEditor() {
         )
         .join("");
       const open = filter || aps.open.has(name) ? " open" : "";
+      const chapterLabel = label(chapter.names, name);
       return `<details class="ed-chapter" data-chapter="${esc(name)}" style="--hue:${hue(name)}"${open}>
-        <summary><span class="swatch"></span><span class="ed-chapter-name">${esc(chapter.code ? `${chapter.code} ${name}` : name)}</span><span class="muted">${topics.length}</span></summary>
+        <summary><span class="swatch"></span><span class="ed-chapter-name">${esc(chapter.code ? `${chapter.code} ${chapterLabel}` : chapterLabel)}</span><span class="muted">${topics.length}</span></summary>
         <div class="ed-rows">${rows || `<p class="hint">No topics left in this chapter.</p>`}</div>
       </details>`;
     })
@@ -655,10 +714,11 @@ function barsHtml(scores, { threshold, on, limit }) {
   const rows = scores
     .map((score, index) => {
       const assigned = on.has(score.topic_id);
+      const name = topicName(score.topic_id, score.name);
       const marker =
         threshold == null ? "" : `<span class="threshold" style="left:calc(${(threshold * 100).toFixed(1)}% - 1px)"></span>`;
-      return `<div class="bar-row${assigned ? " on" : ""}"${index >= limit ? " hidden" : ""} title="${esc(score.name)}: ${score.probability.toFixed(3)}">
-        <span class="name">${esc(score.name)}</span>
+      return `<div class="bar-row${assigned ? " on" : ""}"${index >= limit ? " hidden" : ""} title="${esc(name)}: ${score.probability.toFixed(3)}">
+        <span class="name">${esc(name)}</span>
         <span class="track"><span class="fill" style="width:${(score.probability * 100).toFixed(1)}%"></span>${marker}</span>
         <span class="value">${fmt(score.probability)}</span>
       </div>`;
@@ -822,7 +882,7 @@ function labelsCardHtml(refresh = false) {
   return `<section class="card labels${refresh ? " static" : ""}" id="your-labels">
     <div class="result-head"><h3>Your labels</h3><span class="result-meta">Start from Jev's suggestions, then remove, add or take topics from similar cases</span></div>
     ${rows}
-    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Kept in this page only.</span></div>
+    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Kept in this page only.</span><span class="spacer"></span><button type="button" class="primary" id="submit-labels">Submit</button></div>
   </section>`;
 }
 
@@ -836,29 +896,32 @@ function topicGroup(topicId) {
 }
 const pct = (p) => `${Math.round((p || 0) * 100)}%`;
 
-function reviewRowHtml(id, label, c) {
+function reviewRowHtml(id, lbl, c) {
   const group = topicGroup(id);
-  const status = label.status === "suggested" ? "Suggested" : label.origin === "jev" ? "Accepted" : label.origin === "similar" ? "From similar cases" : "Added by you";
+  const chapter = chapterOf(group);
+  const groupLabel = label(chapter.names, group);
+  const status = lbl.status === "suggested" ? "Suggested" : lbl.origin === "jev" ? "Accepted" : lbl.origin === "similar" ? "From similar cases" : "Added by you";
   const editing = state.editing === id;
   const options = editing
     ? [...new Set(c.scores.map((s) => topicGroup(s.topic_id)))]
-        .map((g) => `<optgroup label="${esc(g)}">${c.scores
+        .map((g) => `<optgroup label="${esc(label(chapterOf(g).names, g))}">${c.scores
           .filter((s) => topicGroup(s.topic_id) === g)
-          .map((s) => `<option value="${esc(s.topic_id)}"${s.topic_id === id ? " selected" : ""}>${esc(s.name)} · ${fmt(s.probability)}</option>`)
+          .map((s) => `<option value="${esc(s.topic_id)}"${s.topic_id === id ? " selected" : ""}>${esc(topicName(s.topic_id, s.name))} · ${fmt(s.probability)}</option>`)
           .join("")}</optgroup>`)
         .join("")
     : "";
+  const displayName = topicName(id, lbl.name);
   const actions = editing
-    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(label.name)} with">${options}</select>
+    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(displayName)} with">${options}</select>
        <button type="button" class="icon" data-cancel-edit aria-label="Cancel">${icon("x", "i")}</button>`
-    : `${label.status === "suggested" ? `<button type="button" class="act accept" data-accept="${esc(id)}" title="Accept">${icon("check")}<span>Accept</span></button>` : ""}
+    : `${lbl.status === "suggested" ? `<button type="button" class="act accept" data-accept="${esc(id)}" title="Accept">${icon("check")}<span>Accept</span></button>` : ""}
        <button type="button" class="act" data-edit="${esc(id)}" title="Change to another topic">${icon("pencil")}<span>Edit</span></button>
        <button type="button" class="act danger" data-remove="${APS}" data-topic="${esc(id)}" title="Remove this label">${icon("x")}<span>Remove</span></button>`;
-  return `<li class="review ${label.status}" style="--hue:${hue(group)}">
+  return `<li class="review ${lbl.status}" style="--hue:${hue(group)}">
     <span class="swatch" aria-hidden="true"></span>
-    <div class="review-path"><span class="review-chapter">${esc(group)}</span><strong>${esc(label.name)}</strong></div>
-    <div class="review-p"><span class="meter"><span style="width:${pct(label.p)}"></span></span><span class="num">${fmt(label.p)}</span></div>
-    <span class="status-tag">${label.status === "suggested" ? "" : icon("check")}${esc(status)}</span>
+    <div class="review-path"><span class="review-chapter">${esc(groupLabel)}</span><strong>${esc(displayName)}</strong></div>
+    <div class="review-p"><span class="meter"><span style="width:${pct(lbl.p)}"></span></span><span class="num">${fmt(lbl.p)}</span></div>
+    <span class="status-tag">${lbl.status === "suggested" ? "" : icon("check")}${esc(status)}</span>
     <div class="review-actions">${actions}</div>
   </li>`;
 }
@@ -874,18 +937,23 @@ function labelTreeHtml(set, chapterP) {
   const branches = groups
     .map((g) => {
       const chapter = chapterOf(g);
-      const domain = state.aps && chapter.domainIndex ? (state.aps.domains[chapter.domainIndex - 1] || {}).name : "";
+      const chapterLabel = label(chapter.names, g);
+      const domainData = state.aps && chapter.domainIndex ? (state.aps.domains[chapter.domainIndex - 1] || {}) : {};
+      const domain = label(domainData.names, domainData.name || "");
       const topics = [...set.entries()]
         .filter(([id]) => topicGroup(id) === g)
         .sort((a, b) => (b[1].p || 0) - (a[1].p || 0))
-        .map(([id, l]) => `<div class="tnode topic ${l.status}" data-parent="${esc(g)}" data-d="${chapter.domainIndex}" title="${esc(l.name)} · ${esc(l.status === "suggested" ? "suggested" : "accepted")}">
-            ${l.status === "suggested" ? "" : icon("check")}<span class="tname">${esc(l.name)}</span><span class="tp num">${fmt(l.p)}</span>
-          </div>`)
+        .map(([id, l]) => {
+          const displayName = topicName(id, l.name);
+          return `<div class="tnode topic ${l.status}" data-parent="${esc(g)}" data-d="${chapter.domainIndex}" title="${esc(displayName)} · ${esc(l.status === "suggested" ? "suggested" : "accepted")}">
+            ${l.status === "suggested" ? "" : icon("check")}<span class="tname">${esc(displayName)}</span><span class="tp num">${fmt(l.p)}</span>
+          </div>`;
+        })
         .join("");
       return `<div class="tbranch" style="--hue:${hue(g)}">
         <div class="tnode chapter" data-chapter="${esc(g)}" data-d="${chapter.domainIndex}">
           <span class="swatch" aria-hidden="true"></span>
-          <span class="tchapter"><span class="tname">${esc(g)}</span>${domain ? `<span class="tdomain">${esc(domain)}</span>` : ""}</span>
+          <span class="tchapter"><span class="tname">${esc(chapterLabel)}</span>${domain ? `<span class="tdomain">${esc(domain)}</span>` : ""}</span>
           <span class="tp num" title="Highest topic probability in this chapter">${fmt(chapterP.get(g))}</span>
         </div>
         <div class="tleaves">${topics}</div>
@@ -945,32 +1013,43 @@ function topicMapHtml(c, refresh) {
     byGroup.get(g).push(s);
   }
   const chapterP = new Map(c.groups.map((g) => [g.name, g.probability]));
-  const chapters = [...byGroup.keys()].sort((a, b) => (chapterP.get(b) || 0) - (chapterP.get(a) || 0));
+  // Sort by probability by default; sort by chapter code when "show all" is on
+  const chapters = [...byGroup.keys()].sort((a, b) =>
+    state.allChapters
+      ? (chapterOf(a).code || "").localeCompare(chapterOf(b).code || "", undefined, { numeric: true })
+      : (chapterP.get(b) || 0) - (chapterP.get(a) || 0)
+  );
   const labelled = new Set([...set.keys()].map(topicGroup));
   const firstShown = Math.max(6, chapters.filter((g) => labelled.has(g)).length);
-  const blocks = chapters
+  // Filter chapters by the selected domain (legend click)
+  const visibleChapters = state.domainFilter == null
+    ? chapters
+    : chapters.filter((g) => chapterOf(g).domainIndex === state.domainFilter);
+  const blocks = visibleChapters
     .map((g, index) => {
       const chapter = chapterOf(g);
+      const chapterLabel = label(chapter.names, g);
       const p = chapterP.get(g) || 0;
       const tiles = byGroup
         .get(g)
         .map((s) => {
           const on = set.get(s.topic_id);
-          return `<button type="button" class="tile${on ? ` on ${on.status}` : ""}" data-tile="${esc(s.topic_id)}" aria-pressed="${on ? "true" : "false"}" style="--p:${pct(s.probability)};--pn:${(s.probability || 0).toFixed(3)}" title="${esc(s.name)}: ${s.probability.toFixed(3)}${on ? " · in your labels, click to remove" : " · click to add as a label"}">
-            <span class="tile-name">${on ? icon("check") : ""}${esc(s.name)}</span><span class="tile-p num">${fmt(s.probability)}</span><span class="tile-bar"></span>
+          const name = topicName(s.topic_id, s.name);
+          return `<button type="button" class="tile${on ? ` on ${on.status}` : ""}" data-tile="${esc(s.topic_id)}" aria-pressed="${on ? "true" : "false"}" style="--p:${pct(s.probability)};--pn:${(s.probability || 0).toFixed(3)}" title="${esc(name)}: ${s.probability.toFixed(3)}${on ? " · in your labels, click to remove" : " · click to add as a label"}">
+            <span class="tile-name">${on ? icon("check") : ""}${esc(name)}</span><span class="tile-p num">${fmt(s.probability)}</span><span class="tile-bar"></span>
           </button>`;
         })
         .join("");
       return `<div class="chapter${labelled.has(g) ? " has-labels" : ""}" style="--hue:${hue(g)};--p:${pct(p)}"${index >= firstShown && !state.allChapters ? " hidden" : ""}>
-        <div class="chapter-head"><span class="swatch" aria-hidden="true"></span><span class="chapter-name">${esc(chapter.code ? `${chapter.code} ${g}` : g)}</span><span class="chapter-p num" title="Highest topic probability in this chapter">${fmt(p)}</span></div>
+        <div class="chapter-head"><span class="swatch" aria-hidden="true"></span><span class="chapter-name">${esc(chapter.code ? `${chapter.code} ${chapterLabel}` : chapterLabel)}</span><span class="chapter-p num" title="Highest topic probability in this chapter">${fmt(p)}</span></div>
         <div class="tiles">${tiles}</div>
       </div>`;
     })
     .join("");
   const legend = state.aps
     ? state.aps.domains
-        .map((d, i) => `<span class="legend-item"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(d.name)}</span>`)
-        .join("") + (byGroup.has(OWN_CHAPTER) ? `<span class="legend-item"><span class="swatch" style="--hue:var(--d0)"></span>${OWN_CHAPTER}</span>` : "")
+        .map((d, i) => `<button type="button" class="legend-item${state.domainFilter === i + 1 ? " active" : ""}" data-domain="${i + 1}" aria-pressed="${state.domainFilter === i + 1}"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(label(d.names, d.name))}</button>`)
+        .join("") + (byGroup.has(OWN_CHAPTER) ? `<button type="button" class="legend-item${state.domainFilter === 0 ? " active" : ""}" data-domain="0" aria-pressed="${state.domainFilter === 0}"><span class="swatch" style="--hue:var(--d0)"></span>${OWN_CHAPTER}</button>` : "")
     : "";
   const rows = [...set.entries()].sort((a, b) => (b[1].p || 0) - (a[1].p || 0)).map(([id, l]) => reviewRowHtml(id, l, c)).join("");
   const pending = [...set.values()].filter((l) => l.status === "suggested").length;
@@ -981,21 +1060,22 @@ function topicMapHtml(c, refresh) {
     <div class="review-head"><span class="subhead">Your labels</span><span class="hint">${pending ? `${pending} suggested ${pending === 1 ? "label waits" : "labels wait"} for your review: accept, edit or remove.` : "All labels reviewed."}</span>${pending ? `<button type="button" class="ghost tiny" data-accept-all>${icon("check")}Accept all</button>` : ""}</div>
     <ol class="reviews">${rows}</ol>
     <details class="explore" id="explore-map"${state.mapOpen ? " open" : ""}>
-      <summary><span>Explore all chapters and topics</span><span class="hint">${chapters.length} chapters · colour = domain, stronger = more likely · click a topic to add or remove it</span></summary>
+      <summary><span>Explore all chapters and topics</span><span class="hint">${visibleChapters.length} of ${chapters.length} chapters · colour = domain, stronger = more likely · click a topic to add or remove it</span></summary>
       <div class="explore-body">
         <div class="legend">${legend}</div>
         <div class="chapters">${blocks}</div>
-        ${chapters.length > firstShown ? `<button type="button" class="ghost more" data-all-chapters>${state.allChapters ? "Show fewer chapters" : `Show all ${chapters.length} chapters`}</button>` : ""}
+        ${chapters.length > firstShown ? `<button type="button" class="ghost more" data-all-chapters>${state.allChapters ? "Show fewer chapters" : `Show all ${visibleChapters.length} chapters`}</button>` : ""}
       </div>
     </details>
-    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Labels are suggestions; nothing is saved outside this page.</span></div>
+    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Labels are suggestions; nothing is saved outside this page.</span><span class="spacer"></span><button type="button" class="primary" id="submit-labels">Submit</button></div>
   </section>`;
 }
 
 function hintChip(hint, classification) {
   const score = classification.scores.find((s) => s.topic_id === hint.topic_id);
   const cases = `${hint.cases} similar ${hint.cases === 1 ? "case" : "cases"}`;
-  return `<button type="button" class="chip suggest" data-hint="${esc(hint.taxonomy_id)}" data-topic="${esc(hint.topic_id)}" title="${esc(hint.source)}: ${cases}${score ? ` · Jev ${fmt(score.probability)}` : ""}">${icon("plus")}${esc(hint.name)}<span class="count">${hint.cases}</span></button>`;
+  const name = hint.taxonomy_id === APS ? topicName(hint.topic_id, hint.name) : hint.name;
+  return `<button type="button" class="chip suggest" data-hint="${esc(hint.taxonomy_id)}" data-topic="${esc(hint.topic_id)}" title="${esc(hint.source)}: ${cases}${score ? ` · Jev ${fmt(score.probability)}` : ""}">${icon("plus")}${esc(name)}<span class="count">${hint.cases}</span></button>`;
 }
 
 function similarTopicsHtml(result) {
@@ -1011,7 +1091,8 @@ function similarTopicsHtml(result) {
         action = `<button type="button" class="ghost tiny" data-hint="${esc(h.taxonomy_id)}" data-topic="${esc(h.topic_id)}">${icon("plus")}Add</button>`;
       else
         action = `<button type="button" class="ghost tiny" data-adhoc="${esc(h.name)}" title="Adds it to the label set as a new topic; classify again to score it">${icon("plus")}Add to the label set</button>`;
-      return `<div class="topic-hint"><span class="topic-hint-name">${esc(h.name)}</span><span class="muted">${h.cases} ${h.cases === 1 ? "case" : "cases"} · ${esc(h.source)}</span>${action}</div>`;
+      const displayName = h.taxonomy_id === APS && h.topic_id ? topicName(h.topic_id, h.name) : h.name;
+      return `<div class="topic-hint"><span class="topic-hint-name">${esc(displayName)}</span><span class="muted">${h.cases} ${h.cases === 1 ? "case" : "cases"} · ${esc(h.source)}</span>${action}</div>`;
     })
     .join("");
 }
@@ -1199,6 +1280,12 @@ $("#classify-out").addEventListener("click", (event) => {
     state.allChapters = !state.allChapters;
     return refreshLabels();
   }
+  const domainBtn = event.target.closest("[data-domain]");
+  if (domainBtn) {
+    const domain = Number(domainBtn.dataset.domain);
+    state.domainFilter = state.domainFilter === domain ? null : domain;
+    return refreshLabels();
+  }
   const classify = event.target.closest("[data-classify]");
   if (classify) {
     setMode("link");
@@ -1209,6 +1296,9 @@ $("#classify-out").addEventListener("click", (event) => {
   }
   const copy = event.target.closest("#copy-labels");
   if (copy) copyLabels(copy);
+  if (event.target.closest("#submit-labels")) {
+    location.reload();
+  }
 });
 $("#classify-out").addEventListener("toggle", (event) => {
   if (event.target.id === "explore-map") state.mapOpen = event.target.open;
