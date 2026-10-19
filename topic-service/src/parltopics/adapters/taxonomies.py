@@ -130,10 +130,33 @@ def build_cantonal(data_dir: Path, body_key: str, taxonomy_id: str, name: str, d
     )
 
 
+def _load_aps_translations() -> dict[str, dict[str, str]]:
+    """Load the 3-language labels (de/fr/it) from parameters/topics.json, keyed by APS code.
+
+    The Excel has only DE and FR; the JSON adds the unofficial Italian translations.
+    Returns {} when the file is missing (the Excel alone is enough to run).
+    """
+    import json
+
+    path = Path(__file__).resolve().parents[4] / "parameters" / "topics.json"
+    if not path.exists():
+        return {}
+    data = json.loads(path.read_text(encoding="utf-8"))
+    by_code: dict[str, dict[str, str]] = {}
+    for domain in data.get("domains", []):
+        by_code[domain["code"]] = domain.get("labels", {})
+        for chapter in domain.get("chapters", []):
+            by_code[chapter["code"]] = chapter.get("labels", {})
+            for topic in chapter.get("topics", []):
+                by_code[topic["code"]] = topic.get("labels", {})
+    return by_code
+
+
 def build_aps(data_dir: Path) -> Taxonomy:
     """Année Politique Suisse: domain > chapter > topic. No affair carries these labels."""
     from openpyxl import load_workbook
 
+    translations = _load_aps_translations()
     workbook = load_workbook(data_dir / "aps_topics.xlsx", read_only=True)
     rows = list(workbook["Topics"].iter_rows(values_only=True))
     header = [str(h) for h in rows[0]]
@@ -142,15 +165,28 @@ def build_aps(data_dir: Path) -> Taxonomy:
         row = dict(zip(header, values))
         if not row.get("topic_de"):
             continue
+        code = str(row["code"])
+        chapter_code = code.rsplit(".", 1)[0]
+        domain_code = code.split(".", 1)[0]
+        labels = translations.get(code, {})
+        chapter_labels = translations.get(chapter_code, {})
+        domain_labels = translations.get(domain_code, {})
         topics.append(
             Topic(
-                id=str(row["code"]),
+                id=code,
                 name=str(row["topic_de"]),
-                names={"de": str(row["topic_de"]), "fr": str(row.get("topic_fr") or "")},
-                code=str(row["code"]),
+                names={
+                    "de": str(row["topic_de"]),
+                    "fr": str(row.get("topic_fr") or ""),
+                    "it": labels.get("it", ""),
+                },
+                code=code,
                 group=str(row["chapter_de"]),
                 description=f"APS chapter {row['chapter_de']} ({row.get('chapter_fr')}), "
                 f"domain {row['domain_de']} ({row.get('domain_fr')}).",
+                # Chapter and domain labels per language, for the UI language switch.
+                group_names=chapter_labels or None,
+                domain_names=domain_labels or None,
             )
         )
     return Taxonomy(

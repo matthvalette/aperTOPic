@@ -34,6 +34,7 @@ const state = {
   allChapters: false,
   mapOpen: false, // the chapter map stays folded until someone opens it
   domainFilter: null, // selected domain index in the legend, or null for all
+  lang: "de", // label language: de, fr or it
 };
 const APS = "aps_topics";
 
@@ -109,6 +110,40 @@ function setBusy(button, busy, label) {
   button.disabled = busy;
   button.setAttribute("aria-busy", String(busy));
   ($(".label", button) || button).textContent = label;
+}
+
+// Pick the label in the current UI language, falling back to German then any language.
+function label(names, fallback = "") {
+  if (!names) return fallback;
+  return names[state.lang] || names.de || Object.values(names)[0] || fallback;
+}
+
+// ---------- language switch ----------
+$$(".lang-btn").forEach((btn) =>
+  btn.addEventListener("click", () => {
+    state.lang = btn.dataset.lang;
+    $$(".lang-btn").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+    try {
+      localStorage.setItem("console-lang", state.lang);
+    } catch {
+      /* storage is optional */
+    }
+    if (state.aps) {
+      updateApsSummary();
+      renderChapterOptions();
+      renderApsEditor();
+      refreshLabels();
+    }
+  })
+);
+try {
+  const saved = localStorage.getItem("console-lang");
+  if (saved && ["de", "fr", "it"].includes(saved)) {
+    state.lang = saved;
+    $$(".lang-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === saved)));
+  }
+} catch {
+  /* storage is optional */
 }
 
 // ---------- tabs ----------
@@ -328,17 +363,36 @@ function initAps(taxonomy) {
     const code = t.code || t.id;
     const [domainCode, chapterCode] = code.split(".");
     const domain = (/domain (.*?) \(/.exec(t.description || "") || [])[1] || "";
-    if (!domains.some((d) => d.code === domainCode)) domains.push({ code: domainCode, name: domain });
+    if (!domains.some((d) => d.code === domainCode))
+      domains.push({ code: domainCode, name: domain, names: t.domain_names || {} });
     const domainIndex = domains.findIndex((d) => d.code === domainCode) + 1;
-    if (!chapters.has(t.group)) chapters.set(t.group, { name: t.group, code: `${domainCode}.${chapterCode}`, domainIndex });
-    return { uid: `t${++topicCounter}`, id: t.id, code, name: t.name, description: "", baseDescription: t.description, group: t.group };
+    if (!chapters.has(t.group))
+      chapters.set(t.group, { name: t.group, code: `${domainCode}.${chapterCode}`, domainIndex, names: t.group_names || {} });
+    return {
+      uid: `t${++topicCounter}`,
+      id: t.id,
+      code,
+      name: t.name,
+      names: t.names || {},
+      description: "",
+      baseDescription: t.description,
+      group: t.group,
+    };
   });
-  chapters.set(OWN_CHAPTER, { name: OWN_CHAPTER, code: "", domainIndex: 0 });
+  chapters.set(OWN_CHAPTER, { name: OWN_CHAPTER, code: "", domainIndex: 0, names: {} });
   state.aps = { threshold: taxonomy.default_threshold, chapters, domains, original: topics.map((t) => ({ ...t })), topics, open: new Set() };
-  $("#new-topic-chapter").innerHTML = [...chapters.values()]
-    .map((c) => `<option value="${esc(c.name)}"${c.name === OWN_CHAPTER ? " selected" : ""}>${esc(c.code ? `${c.code} ${c.name}` : `${c.name} (new chapter)`)}</option>`)
-    .join("");
+  renderChapterOptions();
   updateApsSummary();
+}
+
+function renderChapterOptions() {
+  if (!state.aps) return;
+  $("#new-topic-chapter").innerHTML = [...state.aps.chapters.values()]
+    .map((c) => {
+      const chapterLabel = label(c.names, c.name);
+      return `<option value="${esc(c.name)}"${c.name === OWN_CHAPTER ? " selected" : ""}>${esc(c.code ? `${c.code} ${chapterLabel}` : `${chapterLabel} (new chapter)`)}</option>`;
+    })
+    .join("");
 }
 
 function apsChanges() {
@@ -369,9 +423,15 @@ function updateApsSummary() {
 }
 
 function chapterOf(group) {
-  return (state.aps && state.aps.chapters.get(group)) || { name: group, code: "", domainIndex: 0 };
+  return (state.aps && state.aps.chapters.get(group)) || { name: group, code: "", domainIndex: 0, names: {} };
 }
 const hue = (group) => `var(--d${chapterOf(group).domainIndex})`;
+
+// Translated topic name: look up the APS topic's names dict, fall back to the given name.
+function topicName(topicId, fallback) {
+  const t = state.aps && state.aps.topics.find((x) => x.id === topicId);
+  return t ? label(t.names, t.name) : fallback;
+}
 
 function renderApsEditor() {
   const aps = state.aps;
@@ -399,8 +459,9 @@ function renderApsEditor() {
         )
         .join("");
       const open = filter || aps.open.has(name) ? " open" : "";
+      const chapterLabel = label(chapter.names, name);
       return `<details class="ed-chapter" data-chapter="${esc(name)}" style="--hue:${hue(name)}"${open}>
-        <summary><span class="swatch"></span><span class="ed-chapter-name">${esc(chapter.code ? `${chapter.code} ${name}` : name)}</span><span class="muted">${topics.length}</span></summary>
+        <summary><span class="swatch"></span><span class="ed-chapter-name">${esc(chapter.code ? `${chapter.code} ${chapterLabel}` : chapterLabel)}</span><span class="muted">${topics.length}</span></summary>
         <div class="ed-rows">${rows || `<p class="hint">No topics left in this chapter.</p>`}</div>
       </details>`;
     })
@@ -837,29 +898,31 @@ function topicGroup(topicId) {
 }
 const pct = (p) => `${Math.round((p || 0) * 100)}%`;
 
-function reviewRowHtml(id, label, c) {
+function reviewRowHtml(id, lbl, c) {
   const group = topicGroup(id);
-  const status = label.status === "suggested" ? "Suggested" : label.origin === "jev" ? "Accepted" : label.origin === "similar" ? "From similar cases" : "Added by you";
+  const chapter = chapterOf(group);
+  const groupLabel = label(chapter.names, group);
+  const status = lbl.status === "suggested" ? "Suggested" : lbl.origin === "jev" ? "Accepted" : lbl.origin === "similar" ? "From similar cases" : "Added by you";
   const editing = state.editing === id;
   const options = editing
     ? [...new Set(c.scores.map((s) => topicGroup(s.topic_id)))]
-        .map((g) => `<optgroup label="${esc(g)}">${c.scores
+        .map((g) => `<optgroup label="${esc(label(chapterOf(g).names, g))}">${c.scores
           .filter((s) => topicGroup(s.topic_id) === g)
-          .map((s) => `<option value="${esc(s.topic_id)}"${s.topic_id === id ? " selected" : ""}>${esc(s.name)} · ${fmt(s.probability)}</option>`)
+          .map((s) => `<option value="${esc(s.topic_id)}"${s.topic_id === id ? " selected" : ""}>${esc(topicName(s.topic_id, s.name))} · ${fmt(s.probability)}</option>`)
           .join("")}</optgroup>`)
         .join("")
     : "";
   const actions = editing
-    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(label.name)} with">${options}</select>
+    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(lbl.name)} with">${options}</select>
        <button type="button" class="icon" data-cancel-edit aria-label="Cancel">${icon("x", "i")}</button>`
-    : `${label.status === "suggested" ? `<button type="button" class="act accept" data-accept="${esc(id)}" title="Accept">${icon("check")}<span>Accept</span></button>` : ""}
+    : `${lbl.status === "suggested" ? `<button type="button" class="act accept" data-accept="${esc(id)}" title="Accept">${icon("check")}<span>Accept</span></button>` : ""}
        <button type="button" class="act" data-edit="${esc(id)}" title="Change to another topic">${icon("pencil")}<span>Edit</span></button>
        <button type="button" class="act danger" data-remove="${APS}" data-topic="${esc(id)}" title="Remove this label">${icon("x")}<span>Remove</span></button>`;
-  return `<li class="review ${label.status}" style="--hue:${hue(group)}">
+  return `<li class="review ${lbl.status}" style="--hue:${hue(group)}">
     <span class="swatch" aria-hidden="true"></span>
-    <div class="review-path"><span class="review-chapter">${esc(group)}</span><strong>${esc(label.name)}</strong></div>
-    <div class="review-p"><span class="meter"><span style="width:${pct(label.p)}"></span></span><span class="num">${fmt(label.p)}</span></div>
-    <span class="status-tag">${label.status === "suggested" ? "" : icon("check")}${esc(status)}</span>
+    <div class="review-path"><span class="review-chapter">${esc(groupLabel)}</span><strong>${esc(lbl.name)}</strong></div>
+    <div class="review-p"><span class="meter"><span style="width:${pct(lbl.p)}"></span></span><span class="num">${fmt(lbl.p)}</span></div>
+    <span class="status-tag">${lbl.status === "suggested" ? "" : icon("check")}${esc(status)}</span>
     <div class="review-actions">${actions}</div>
   </li>`;
 }
@@ -875,7 +938,9 @@ function labelTreeHtml(set, chapterP) {
   const branches = groups
     .map((g) => {
       const chapter = chapterOf(g);
-      const domain = state.aps && chapter.domainIndex ? (state.aps.domains[chapter.domainIndex - 1] || {}).name : "";
+      const chapterLabel = label(chapter.names, g);
+      const domainData = state.aps && chapter.domainIndex ? (state.aps.domains[chapter.domainIndex - 1] || {}) : {};
+      const domain = label(domainData.names, domainData.name || "");
       const topics = [...set.entries()]
         .filter(([id]) => topicGroup(id) === g)
         .sort((a, b) => (b[1].p || 0) - (a[1].p || 0))
@@ -886,7 +951,7 @@ function labelTreeHtml(set, chapterP) {
       return `<div class="tbranch" style="--hue:${hue(g)}">
         <div class="tnode chapter" data-chapter="${esc(g)}" data-d="${chapter.domainIndex}">
           <span class="swatch" aria-hidden="true"></span>
-          <span class="tchapter"><span class="tname">${esc(g)}</span>${domain ? `<span class="tdomain">${esc(domain)}</span>` : ""}</span>
+          <span class="tchapter"><span class="tname">${esc(chapterLabel)}</span>${domain ? `<span class="tdomain">${esc(domain)}</span>` : ""}</span>
           <span class="tp num" title="Highest topic probability in this chapter">${fmt(chapterP.get(g))}</span>
         </div>
         <div class="tleaves">${topics}</div>
@@ -961,25 +1026,27 @@ function topicMapHtml(c, refresh) {
   const blocks = visibleChapters
     .map((g, index) => {
       const chapter = chapterOf(g);
+      const chapterLabel = label(chapter.names, g);
       const p = chapterP.get(g) || 0;
       const tiles = byGroup
         .get(g)
         .map((s) => {
           const on = set.get(s.topic_id);
-          return `<button type="button" class="tile${on ? ` on ${on.status}` : ""}" data-tile="${esc(s.topic_id)}" aria-pressed="${on ? "true" : "false"}" style="--p:${pct(s.probability)};--pn:${(s.probability || 0).toFixed(3)}" title="${esc(s.name)}: ${s.probability.toFixed(3)}${on ? " · in your labels, click to remove" : " · click to add as a label"}">
-            <span class="tile-name">${on ? icon("check") : ""}${esc(s.name)}</span><span class="tile-p num">${fmt(s.probability)}</span><span class="tile-bar"></span>
+          const name = topicName(s.topic_id, s.name);
+          return `<button type="button" class="tile${on ? ` on ${on.status}` : ""}" data-tile="${esc(s.topic_id)}" aria-pressed="${on ? "true" : "false"}" style="--p:${pct(s.probability)};--pn:${(s.probability || 0).toFixed(3)}" title="${esc(name)}: ${s.probability.toFixed(3)}${on ? " · in your labels, click to remove" : " · click to add as a label"}">
+            <span class="tile-name">${on ? icon("check") : ""}${esc(name)}</span><span class="tile-p num">${fmt(s.probability)}</span><span class="tile-bar"></span>
           </button>`;
         })
         .join("");
       return `<div class="chapter${labelled.has(g) ? " has-labels" : ""}" style="--hue:${hue(g)};--p:${pct(p)}"${index >= firstShown && !state.allChapters ? " hidden" : ""}>
-        <div class="chapter-head"><span class="swatch" aria-hidden="true"></span><span class="chapter-name">${esc(chapter.code ? `${chapter.code} ${g}` : g)}</span><span class="chapter-p num" title="Highest topic probability in this chapter">${fmt(p)}</span></div>
+        <div class="chapter-head"><span class="swatch" aria-hidden="true"></span><span class="chapter-name">${esc(chapter.code ? `${chapter.code} ${chapterLabel}` : chapterLabel)}</span><span class="chapter-p num" title="Highest topic probability in this chapter">${fmt(p)}</span></div>
         <div class="tiles">${tiles}</div>
       </div>`;
     })
     .join("");
   const legend = state.aps
     ? state.aps.domains
-        .map((d, i) => `<button type="button" class="legend-item${state.domainFilter === i + 1 ? " active" : ""}" data-domain="${i + 1}" aria-pressed="${state.domainFilter === i + 1}"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(d.name)}</button>`)
+        .map((d, i) => `<button type="button" class="legend-item${state.domainFilter === i + 1 ? " active" : ""}" data-domain="${i + 1}" aria-pressed="${state.domainFilter === i + 1}"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(label(d.names, d.name))}</button>`)
         .join("") + (byGroup.has(OWN_CHAPTER) ? `<button type="button" class="legend-item${state.domainFilter === 0 ? " active" : ""}" data-domain="0" aria-pressed="${state.domainFilter === 0}"><span class="swatch" style="--hue:var(--d0)"></span>${OWN_CHAPTER}</button>` : "")
     : "";
   const rows = [...set.entries()].sort((a, b) => (b[1].p || 0) - (a[1].p || 0)).map(([id, l]) => reviewRowHtml(id, l, c)).join("");
