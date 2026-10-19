@@ -604,7 +604,9 @@ details.same a { display: inline-block; margin: 2px 12px 0 0; font-size: 0.8rem;
 }
 
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--ink-2); }
-.legend-item { display: inline-flex; align-items: center; gap: 6px; }
+.legend-item { display: inline-flex; align-items: center; gap: 6px; background: none; border: 1px solid transparent; border-radius: 6px; padding: 4px 8px; font: inherit; color: inherit; cursor: pointer; transition: background var(--t) var(--ease), border-color var(--t) var(--ease); }
+.legend-item:hover { background: var(--surface-2); border-color: var(--rule); }
+.legend-item.active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-strong); font-weight: 700; }
 .chapters { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; align-items: start; }
 .chapter { border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; background: var(--surface); }
 .chapter.has-labels { border-color: var(--hue); box-shadow: 0 0 0 1px var(--hue); }

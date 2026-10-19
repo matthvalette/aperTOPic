@@ -33,6 +33,7 @@ const state = {
   editing: null, // the label whose topic is being changed
   allChapters: false,
   mapOpen: false, // the chapter map stays folded until someone opens it
+  domainFilter: null, // selected domain index in the legend, or null for all
 };
 const APS = "aps_topics";
 
@@ -945,10 +946,19 @@ function topicMapHtml(c, refresh) {
     byGroup.get(g).push(s);
   }
   const chapterP = new Map(c.groups.map((g) => [g.name, g.probability]));
-  const chapters = [...byGroup.keys()].sort((a, b) => (chapterP.get(b) || 0) - (chapterP.get(a) || 0));
+  // Sort by probability by default; sort by chapter code when "show all" is on
+  const chapters = [...byGroup.keys()].sort((a, b) =>
+    state.allChapters
+      ? (chapterOf(a).code || "").localeCompare(chapterOf(b).code || "", undefined, { numeric: true })
+      : (chapterP.get(b) || 0) - (chapterP.get(a) || 0)
+  );
   const labelled = new Set([...set.keys()].map(topicGroup));
   const firstShown = Math.max(6, chapters.filter((g) => labelled.has(g)).length);
-  const blocks = chapters
+  // Filter chapters by the selected domain (legend click)
+  const visibleChapters = state.domainFilter == null
+    ? chapters
+    : chapters.filter((g) => chapterOf(g).domainIndex === state.domainFilter);
+  const blocks = visibleChapters
     .map((g, index) => {
       const chapter = chapterOf(g);
       const p = chapterP.get(g) || 0;
@@ -969,8 +979,8 @@ function topicMapHtml(c, refresh) {
     .join("");
   const legend = state.aps
     ? state.aps.domains
-        .map((d, i) => `<span class="legend-item"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(d.name)}</span>`)
-        .join("") + (byGroup.has(OWN_CHAPTER) ? `<span class="legend-item"><span class="swatch" style="--hue:var(--d0)"></span>${OWN_CHAPTER}</span>` : "")
+        .map((d, i) => `<button type="button" class="legend-item${state.domainFilter === i + 1 ? " active" : ""}" data-domain="${i + 1}" aria-pressed="${state.domainFilter === i + 1}"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(d.name)}</button>`)
+        .join("") + (byGroup.has(OWN_CHAPTER) ? `<button type="button" class="legend-item${state.domainFilter === 0 ? " active" : ""}" data-domain="0" aria-pressed="${state.domainFilter === 0}"><span class="swatch" style="--hue:var(--d0)"></span>${OWN_CHAPTER}</button>` : "")
     : "";
   const rows = [...set.entries()].sort((a, b) => (b[1].p || 0) - (a[1].p || 0)).map(([id, l]) => reviewRowHtml(id, l, c)).join("");
   const pending = [...set.values()].filter((l) => l.status === "suggested").length;
@@ -981,11 +991,11 @@ function topicMapHtml(c, refresh) {
     <div class="review-head"><span class="subhead">Your labels</span><span class="hint">${pending ? `${pending} suggested ${pending === 1 ? "label waits" : "labels wait"} for your review: accept, edit or remove.` : "All labels reviewed."}</span>${pending ? `<button type="button" class="ghost tiny" data-accept-all>${icon("check")}Accept all</button>` : ""}</div>
     <ol class="reviews">${rows}</ol>
     <details class="explore" id="explore-map"${state.mapOpen ? " open" : ""}>
-      <summary><span>Explore all chapters and topics</span><span class="hint">${chapters.length} chapters · colour = domain, stronger = more likely · click a topic to add or remove it</span></summary>
+      <summary><span>Explore all chapters and topics</span><span class="hint">${visibleChapters.length} of ${chapters.length} chapters · colour = domain, stronger = more likely · click a topic to add or remove it</span></summary>
       <div class="explore-body">
         <div class="legend">${legend}</div>
         <div class="chapters">${blocks}</div>
-        ${chapters.length > firstShown ? `<button type="button" class="ghost more" data-all-chapters>${state.allChapters ? "Show fewer chapters" : `Show all ${chapters.length} chapters`}</button>` : ""}
+        ${chapters.length > firstShown ? `<button type="button" class="ghost more" data-all-chapters>${state.allChapters ? "Show fewer chapters" : `Show all ${visibleChapters.length} chapters`}</button>` : ""}
       </div>
     </details>
     <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Labels are suggestions; nothing is saved outside this page.</span></div>
@@ -1197,6 +1207,12 @@ $("#classify-out").addEventListener("click", (event) => {
   }
   if (event.target.closest("[data-all-chapters]")) {
     state.allChapters = !state.allChapters;
+    return refreshLabels();
+  }
+  const domainBtn = event.target.closest("[data-domain]");
+  if (domainBtn) {
+    const domain = Number(domainBtn.dataset.domain);
+    state.domainFilter = state.domainFilter === domain ? null : domain;
     return refreshLabels();
   }
   const classify = event.target.closest("[data-classify]");
