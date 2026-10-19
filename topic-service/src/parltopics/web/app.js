@@ -248,7 +248,7 @@ function renderSearch(result, ms) {
   ];
   if (!result.hits.length) {
     parts.push(
-      `<div class="empty"><h2>No affairs matched</h2><p>Try a broader request or more languages, or match in texts and documents under Options.</p></div>`
+      `<div class="empty"><h2>No affairs matched</h2><p>Try a broader request or more languages, or switch to Full search under Search options.</p></div>`
     );
   } else {
     parts.push(`<ol class="hits">${result.hits.map(hitHtml).join("")}</ol>`);
