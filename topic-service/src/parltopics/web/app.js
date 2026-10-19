@@ -119,28 +119,25 @@ function label(names, fallback = "") {
 }
 
 // ---------- language switch ----------
-$$(".lang-btn").forEach((btn) =>
-  btn.addEventListener("click", () => {
-    state.lang = btn.dataset.lang;
-    $$(".lang-btn").forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-    try {
-      localStorage.setItem("console-lang", state.lang);
-    } catch {
-      /* storage is optional */
-    }
-    if (state.aps) {
-      updateApsSummary();
-      renderChapterOptions();
-      renderApsEditor();
-      refreshLabels();
-    }
-  })
-);
+$("#lang-select").addEventListener("change", (event) => {
+  state.lang = event.target.value;
+  try {
+    localStorage.setItem("console-lang", state.lang);
+  } catch {
+    /* storage is optional */
+  }
+  if (state.aps) {
+    updateApsSummary();
+    renderChapterOptions();
+    renderApsEditor();
+    refreshLabels();
+  }
+});
 try {
   const saved = localStorage.getItem("console-lang");
   if (saved && ["de", "fr", "it"].includes(saved)) {
     state.lang = saved;
-    $$(".lang-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === saved)));
+    $("#lang-select").value = saved;
   }
 } catch {
   /* storage is optional */
@@ -885,7 +882,7 @@ function labelsCardHtml(refresh = false) {
   return `<section class="card labels${refresh ? " static" : ""}" id="your-labels">
     <div class="result-head"><h3>Your labels</h3><span class="result-meta">Start from Jev's suggestions, then remove, add or take topics from similar cases</span></div>
     ${rows}
-    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Kept in this page only.</span></div>
+    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Kept in this page only.</span><span class="spacer"></span><button type="button" class="primary" id="submit-labels">Submit</button></div>
   </section>`;
 }
 
@@ -1070,7 +1067,7 @@ function topicMapHtml(c, refresh) {
         ${chapters.length > firstShown ? `<button type="button" class="ghost more" data-all-chapters>${state.allChapters ? "Show fewer chapters" : `Show all ${visibleChapters.length} chapters`}</button>` : ""}
       </div>
     </details>
-    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Labels are suggestions; nothing is saved outside this page.</span></div>
+    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Labels are suggestions; nothing is saved outside this page.</span><span class="spacer"></span><button type="button" class="primary" id="submit-labels">Submit</button></div>
   </section>`;
 }
 
@@ -1299,6 +1296,9 @@ $("#classify-out").addEventListener("click", (event) => {
   }
   const copy = event.target.closest("#copy-labels");
   if (copy) copyLabels(copy);
+  if (event.target.closest("#submit-labels")) {
+    location.reload();
+  }
 });
 $("#classify-out").addEventListener("toggle", (event) => {
   if (event.target.id === "explore-map") state.mapOpen = event.target.open;
