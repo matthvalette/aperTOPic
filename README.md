@@ -5,6 +5,14 @@ OpenParlData: Topic classification for Swiss parliaments with Apertus
 Submissions must use the v1.5 Apertus model family.
 The submission must comply with the [HackApertus T&C](https://hackapertus.ch/terms-and-conditions).
 
+## 🚀 Live demo
+
+**[samanhazemijebelli--apertopic-web.us-east.modal.run](https://samanhazemijebelli--apertopic-web.us-east.modal.run/ui/)** — search every Swiss parliament in four languages, and classify an affair, a document or any text into the 165 Année Politique Suisse topics.
+
+<a href="https://samanhazemijebelli--apertopic-web.us-east.modal.run/ui/"><img src="docs/live-demo-qr.svg" alt="QR code linking to the aperTOPic live demo" width="200"></a>
+
+The demo is password protected, since every request uses the team's Apertus and Jev credits: ask the team for access (any user name). It runs on [Modal](https://modal.com) and scales to zero, so the first request after a quiet spell takes a few seconds. To deploy your own copy, see `topic-service/modal_app.py`.
+
 ## 🎯 The Challenge
 
 # Context and Background
