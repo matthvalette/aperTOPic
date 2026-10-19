@@ -16,7 +16,11 @@ from pathlib import Path
 import modal
 
 HERE = Path(__file__).parent
-DATA = (HERE / "../data").resolve()
+REPO = HERE.parent
+DATA = REPO / "data"
+# The code finds some files relative to its own location (web/, ../../parameters/topics.json), so the
+# container keeps the repository layout under /app.
+APP_SRC = "/app/topic-service/src"
 
 # The files the service reads at startup (about 60 MB). The large affair texts are for evaluation only.
 DATA_FILES = [
@@ -36,8 +40,10 @@ image = (
 )
 for name in DATA_FILES:
     image = image.add_local_file(DATA / name, f"/data/{name}", copy=True)
+# DE/FR/IT names of the APS topics, read by the taxonomy loader.
+image = image.add_local_file(REPO / "parameters/topics.json", "/app/parameters/topics.json", copy=True)
 # The package with its web console (HTML, CSS, JS), so not only the .py files.
-image = image.add_local_dir(HERE / "src/parltopics", "/root/parltopics", ignore=["**/__pycache__/**"])
+image = image.add_local_dir(HERE / "src/parltopics", f"{APP_SRC}/parltopics", ignore=["**/__pycache__/**"])
 
 app = modal.App("apertopic", image=image)
 
@@ -54,6 +60,9 @@ app = modal.App("apertopic", image=image)
 @modal.concurrent(max_inputs=40)
 @modal.asgi_app()
 def web():
+    import sys
+
+    sys.path.insert(0, APP_SRC)
     from parltopics.api.main import create_app
 
     return create_app()
