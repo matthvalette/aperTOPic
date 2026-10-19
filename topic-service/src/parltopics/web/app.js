@@ -21,7 +21,20 @@ const SECTION_LABEL = {
 };
 const MAX_SECTION_CHARS = 6000; // matches max_section_chars in config.py
 
-const state = { parliaments: {}, taxonomies: [] };
+const state = {
+  parliaments: {},
+  taxonomies: [],
+  health: null,
+  classification: null,
+  labels: {},
+  similar: null,
+  aps: null, // the editable APS label set, see "APS label set" below
+  apsSent: null, // the APS topics as sent with the last classification, by id
+  editing: null, // the label whose topic is being changed
+  allChapters: false,
+  mapOpen: false, // the chapter map stays folded until someone opens it
+};
+const APS = "aps_topics";
 
 // ---------- helpers ----------
 
@@ -83,14 +96,18 @@ function bestTitle(titles, prefer) {
   return first ? { text: first[1], lang: first[0] } : { text: "(no title)", lang: "" };
 }
 
-const loading = (text) => `<div class="loading"><span class="spinner" aria-hidden="true"></span>${esc(text)}</div>`;
-const errorBox = (text) => `<div class="error" role="alert">${esc(text)}</div>`;
+const icon = (name, cls = "i sm") => `<svg class="${cls}" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+const loading = (text) =>
+  `<div class="loading" role="status"><div class="loading-line"><span class="spinner" aria-hidden="true"></span>${esc(text)}</div>` +
+  `<div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>`;
+const errorBox = (text) => `<div class="error" role="alert">${icon("alert", "i")}<span>${esc(text)}</span></div>`;
 const rawJson = (data) =>
   `<details class="raw"><summary>Raw response</summary><pre>${esc(JSON.stringify(data, null, 2))}</pre></details>`;
 
 function setBusy(button, busy, label) {
   button.disabled = busy;
-  button.textContent = label;
+  button.setAttribute("aria-busy", String(busy));
+  ($(".label", button) || button).textContent = label;
 }
 
 // ---------- tabs ----------
@@ -108,6 +125,16 @@ function selectTab(name) {
   }
 }
 $("#tab-search").addEventListener("click", () => selectTab("search"));
+$("#theme-toggle").addEventListener("click", () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  try {
+    localStorage.setItem("console-theme", root.dataset.theme);
+  } catch {
+    /* storage is optional */
+  }
+});
 $("#tab-classify").addEventListener("click", () => selectTab("classify"));
 
 // ---------- startup data ----------
@@ -118,6 +145,7 @@ async function loadHealth() {
     `<span class="pill ${ok ? "good" : "bad"}" title="${esc(hint)}">${esc(label)}</span>`;
   try {
     const { data } = await api("/health");
+    state.health = data;
     box.innerHTML =
       pill(data.search, `Search · ${data.apertus_model}`, data.search ? "Apertus is configured" : "APERTUS_API_KEY is missing") +
       pill(data.classification, `Classify · ${data.jev_model}`, data.classification ? "Jev is configured" : "TYPESAFE_API_KEY is missing");
@@ -127,23 +155,12 @@ async function loadHealth() {
 }
 
 async function loadTaxonomies() {
-  const box = $("#taxonomies");
   try {
-    const { data } = await api("/taxonomies");
-    state.taxonomies = data;
-    box.innerHTML = data
-      .map((t) => {
-        const note =
-          t.id === "curia_subject_areas" ? " · labelled, accuracy known" : t.id === "aps_topics" ? " · no labelled examples" : "";
-        return `<label class="taxonomy-option">
-          <input type="checkbox" name="taxonomy" value="${esc(t.id)}"${t.id === "curia_subject_areas" ? " checked" : ""}>
-          <span>${esc(t.name)} <span class="muted">· ${t.topics} ${t.topics === 1 ? "topic" : "topics"}</span></span>
-          <small>${esc(KIND_LABEL[t.kind] || t.kind)}${esc(note)}</small>
-        </label>`;
-      })
-      .join("");
+    const [{ data: list }, { data: aps }] = await Promise.all([api("/taxonomies"), api(`/taxonomies/${APS}`)]);
+    state.taxonomies = list;
+    initAps(aps);
   } catch (error) {
-    box.innerHTML = errorBox(error.message);
+    $("#aps-summary").innerHTML = errorBox(error.message);
   }
 }
 
@@ -186,7 +203,7 @@ $("#search-form").addEventListener("submit", async (event) => {
   const body = {
     query,
     languages,
-    scope: $("#scope").value,
+    scope: $('input[name="scope"]:checked').value,
     rank: $("#rank").checked,
     body_keys: $("#bodies").value.split(/[\s,;]+/).map((s) => s.trim()).filter(Boolean),
     variants_per_language: clampInt($("#variants").value, 1, 5, 3),
@@ -209,13 +226,16 @@ function renderSearch(result, ms) {
   const languages = new Set(result.hits.flatMap((h) => h.matched_by.map((m) => m.language)));
   const bodies = new Set(result.hits.map((h) => h.affair.body_key));
   const parts = [
-    `<div class="summary">
-      <span><strong>${result.unique_affairs}</strong> affairs found</span>
-      <span>showing <strong>${result.hits.length}</strong></span>
-      <span>from <strong>${bodies.size}</strong> parliaments</span>
-      <span>matched in ${esc([...languages].map((l) => LANG_NAMES[l] || l).join(", ") || "no language")}</span>
-      <span>${result.ranked ? "ranked by Jev relevance" : "ordered by number of matching queries, then date"}</span>
-      <span class="muted">${(ms / 1000).toFixed(1)} s</span>
+    `<div class="stats">
+      <div class="stat"><b>${result.unique_affairs}</b><span>affairs found</span></div>
+      <div class="stat"><b>${result.hits.length}</b><span>shown</span></div>
+      <div class="stat"><b>${bodies.size}</b><span>parliaments</span></div>
+      <div class="stat"><b>${languages.size}</b><span>languages matched</span></div>
+      <div class="stat"><b>${(ms / 1000).toFixed(1)}<small> s</small></b><span>response time</span></div>
+    </div>
+    <div class="summary">
+      <span>Matched in ${esc([...languages].map((l) => LANG_NAMES[l] || l).join(", ") || "no language")}</span>
+      <span>${result.ranked ? "Ranked by Jev relevance" : "Ordered by number of matching queries, then date"}</span>
     </div>`,
     ...result.warnings.map((w) => `<div class="warning">${esc(w)}</div>`),
     `<div class="card queries"><h3>Queries Apertus wrote</h3>${result.queries
@@ -259,8 +279,8 @@ function hitHtml(hit) {
     <div class="hit-side">
       ${relevance}
       <div class="hit-actions">
-        <a class="ghost" href="${esc(affair.url)}" target="_blank" rel="noopener">Open ↗</a>
-        <button type="button" class="ghost" data-classify="${esc(affair.url)}">Classify →</button>
+        <a class="ghost" href="${esc(affair.url)}" target="_blank" rel="noopener">Open${icon("external")}</a>
+        <button type="button" class="ghost go" data-classify="${esc(affair.url)}">Classify${icon("arrow")}</button>
       </div>
     </div>
     <div class="hit-title">${esc(title.text)}<span class="tl">${esc(title.lang)}</span></div>
@@ -293,18 +313,190 @@ $$("#classify-form [data-ref]").forEach((chip) =>
   })
 );
 
-function addTopic(name = "", description = "") {
-  const existing = $$("#custom-topics .topic-name").map((input) => input.value.trim().toLowerCase());
-  if (name && existing.includes(name.toLowerCase())) return;
-  const row = $("#topic-row").content.firstElementChild.cloneNode(true);
-  $(".topic-name", row).value = name;
-  $(".topic-desc", row).value = description;
-  $(".remove", row).addEventListener("click", () => row.remove());
-  $("#custom-topics").appendChild(row);
-  if (!name) $(".topic-name", row).focus();
+// ---------- APS label set ----------
+// The 165 APS topics in 22 chapters (8 domains). People can rename, describe, delete or add topics in the
+// page; an edited set is sent with the request as `aps_topics` and replaces the stored one for that call.
+
+const OWN_CHAPTER = "Your topics";
+let topicCounter = 0;
+
+function initAps(taxonomy) {
+  const chapters = new Map();
+  const domains = [];
+  const topics = taxonomy.topics.map((t) => {
+    const code = t.code || t.id;
+    const [domainCode, chapterCode] = code.split(".");
+    const domain = (/domain (.*?) \(/.exec(t.description || "") || [])[1] || "";
+    if (!domains.some((d) => d.code === domainCode)) domains.push({ code: domainCode, name: domain });
+    const domainIndex = domains.findIndex((d) => d.code === domainCode) + 1;
+    if (!chapters.has(t.group)) chapters.set(t.group, { name: t.group, code: `${domainCode}.${chapterCode}`, domainIndex });
+    return { uid: `t${++topicCounter}`, id: t.id, code, name: t.name, description: "", baseDescription: t.description, group: t.group };
+  });
+  chapters.set(OWN_CHAPTER, { name: OWN_CHAPTER, code: "", domainIndex: 0 });
+  state.aps = { threshold: taxonomy.default_threshold, chapters, domains, original: topics.map((t) => ({ ...t })), topics, open: new Set() };
+  $("#new-topic-chapter").innerHTML = [...chapters.values()]
+    .map((c) => `<option value="${esc(c.name)}"${c.name === OWN_CHAPTER ? " selected" : ""}>${esc(c.code ? `${c.code} ${c.name}` : `${c.name} (new chapter)`)}</option>`)
+    .join("");
+  updateApsSummary();
 }
-$("#add-topic").addEventListener("click", () => addTopic());
-$$("#classify-form [data-topic]").forEach((chip) => chip.addEventListener("click", () => addTopic(chip.dataset.topic)));
+
+function apsChanges() {
+  const aps = state.aps;
+  const before = new Map(aps.original.map((t) => [t.uid, t]));
+  const now = new Set(aps.topics.map((t) => t.uid));
+  let added = 0, changed = 0;
+  for (const t of aps.topics) {
+    const o = before.get(t.uid);
+    if (!o) added++;
+    else if (o.name !== t.name || o.description !== t.description || o.group !== t.group) changed++;
+  }
+  const removed = aps.original.filter((t) => !now.has(t.uid)).length;
+  return { added, changed, removed, any: added + changed + removed > 0 };
+}
+
+function updateApsSummary() {
+  const aps = state.aps;
+  if (!aps) return;
+  const groups = new Set(aps.topics.map((t) => t.group));
+  $("#aps-summary").textContent = `${aps.topics.length} topics in ${groups.size} chapters`;
+  const c = apsChanges();
+  const badge = $("#aps-edited");
+  badge.hidden = !c.any;
+  badge.textContent = [c.added && `${c.added} added`, c.changed && `${c.changed} changed`, c.removed && `${c.removed} deleted`]
+    .filter(Boolean)
+    .join(" · ");
+}
+
+function chapterOf(group) {
+  return (state.aps && state.aps.chapters.get(group)) || { name: group, code: "", domainIndex: 0 };
+}
+const hue = (group) => `var(--d${chapterOf(group).domainIndex})`;
+
+function renderApsEditor() {
+  const aps = state.aps;
+  if (!aps) return;
+  const filter = $("#aps-filter").value.trim().toLowerCase();
+  const byChapter = new Map([...aps.chapters.keys()].map((name) => [name, []]));
+  for (const t of aps.topics) {
+    if (!byChapter.has(t.group)) byChapter.set(t.group, []);
+    byChapter.get(t.group).push(t);
+  }
+  $("#aps-editor-list").innerHTML = [...byChapter.entries()]
+    .map(([name, topics]) => {
+      const shown = filter
+        ? topics.filter((t) => `${name} ${t.name} ${t.description}`.toLowerCase().includes(filter))
+        : topics;
+      if (!shown.length && (filter || name === OWN_CHAPTER)) return "";
+      const chapter = chapterOf(name);
+      const rows = shown
+        .map(
+          (t) => `<div class="ed-row" data-uid="${t.uid}">
+            <input class="ed-name" value="${esc(t.name)}" aria-label="Topic name" maxlength="200">
+            <input class="ed-desc" value="${esc(t.description)}" placeholder="Description (optional)" aria-label="What ${esc(t.name)} covers" maxlength="1000">
+            <button type="button" class="icon" data-del="${t.uid}" aria-label="Delete ${esc(t.name)}">${icon("x", "i")}</button>
+          </div>`
+        )
+        .join("");
+      const open = filter || aps.open.has(name) ? " open" : "";
+      return `<details class="ed-chapter" data-chapter="${esc(name)}" style="--hue:${hue(name)}"${open}>
+        <summary><span class="swatch"></span><span class="ed-chapter-name">${esc(chapter.code ? `${chapter.code} ${name}` : name)}</span><span class="muted">${topics.length}</span></summary>
+        <div class="ed-rows">${rows || `<p class="hint">No topics left in this chapter.</p>`}</div>
+      </details>`;
+    })
+    .join("");
+}
+
+function addApsTopic(name, description = "", group = OWN_CHAPTER) {
+  const aps = state.aps;
+  name = String(name || "").trim();
+  if (!aps || !name) return false;
+  if (aps.topics.some((t) => t.name.toLowerCase() === name.toLowerCase())) return false;
+  aps.topics.push({ uid: `t${++topicCounter}`, id: null, code: "", name, description: String(description || "").trim(), baseDescription: null, group });
+  aps.open.add(group);
+  updateApsSummary();
+  if (!$("#aps-editor").hidden) renderApsEditor();
+  return true;
+}
+
+function apsRequest() {
+  // Unedited: the stored label set. Edited: the whole list, so deletions and renames count.
+  const aps = state.aps;
+  let n = 0;
+  const topics = aps.topics.map((t) => ({
+    id: t.id || `own-${++n}`,
+    name: t.name.trim() || t.id || "Untitled topic",
+    description: t.description.trim() || t.baseDescription || null,
+    group: t.group,
+  }));
+  state.apsSent = new Map(topics.map((t) => [t.id, t]));
+  return apsChanges().any ? { taxonomies: [], aps_topics: topics } : { taxonomies: [APS], aps_topics: null };
+}
+
+$("#aps-toggle").addEventListener("click", () => {
+  const editor = $("#aps-editor");
+  editor.hidden = !editor.hidden;
+  $("#aps-toggle").setAttribute("aria-expanded", String(!editor.hidden));
+  $("#aps-toggle .label").textContent = editor.hidden ? "Edit topics" : "Close editor";
+  if (!editor.hidden) renderApsEditor();
+});
+$("#aps-filter").addEventListener("input", renderApsEditor);
+$("#aps-editor").addEventListener("toggle", (event) => {
+  const details = event.target.closest && event.target.closest("details.ed-chapter");
+  if (details && !$("#aps-filter").value) state.aps.open[details.open ? "add" : "delete"](details.dataset.chapter);
+}, true);
+$("#aps-editor").addEventListener("input", (event) => {
+  const row = event.target.closest(".ed-row");
+  if (!row) return;
+  const topic = state.aps.topics.find((t) => t.uid === row.dataset.uid);
+  if (!topic) return;
+  if (event.target.classList.contains("ed-name")) topic.name = event.target.value;
+  if (event.target.classList.contains("ed-desc")) topic.description = event.target.value;
+  updateApsSummary();
+});
+$("#aps-editor").addEventListener("click", (event) => {
+  const del = event.target.closest("[data-del]");
+  if (!del) return;
+  state.aps.topics = state.aps.topics.filter((t) => t.uid !== del.dataset.del);
+  updateApsSummary();
+  renderApsEditor();
+});
+// Enter inside the editor must not submit the classify form.
+$("#aps-editor").addEventListener("keydown", (event) => {
+  if (event.key !== "Enter" || event.target.tagName === "TEXTAREA") return;
+  event.preventDefault();
+  if (event.target.id === "new-topic-name" || event.target.id === "new-topic-desc") $("#new-topic-add").click();
+});
+$("#new-topic-add").addEventListener("click", () => {
+  const name = $("#new-topic-name").value;
+  if (!addApsTopic(name, $("#new-topic-desc").value, $("#new-topic-chapter").value)) {
+    $("#new-topic-name").focus();
+    return;
+  }
+  $("#new-topic-name").value = "";
+  $("#new-topic-desc").value = "";
+  $("#new-topic-name").focus();
+});
+$("#aps-json-add").addEventListener("click", () => {
+  const message = $("#aps-json-msg");
+  let parsed;
+  try {
+    parsed = JSON.parse($("#aps-json").value);
+  } catch {
+    message.textContent = 'Not valid JSON. Write it as {"topic": "description", ...}.';
+    return;
+  }
+  const entries = Array.isArray(parsed)
+    ? parsed.map((t) => (typeof t === "string" ? [t, ""] : [t.name || t.topic, t.description || ""]))
+    : Object.entries(parsed || {});
+  const added = entries.filter(([name, description]) => addApsTopic(name, typeof description === "string" ? description : "")).length;
+  message.textContent = `${added} ${added === 1 ? "topic" : "topics"} added to "${OWN_CHAPTER}".`;
+  if (added) $("#aps-json").value = "";
+});
+$("#aps-reset").addEventListener("click", () => {
+  state.aps.topics = state.aps.original.map((t) => ({ ...t }));
+  updateApsSummary();
+  renderApsEditor();
+});
 
 $("#override").addEventListener("change", () => ($("#threshold").disabled = !$("#override").checked));
 $("#threshold").addEventListener("input", () => ($("#threshold-out").textContent = Number($("#threshold").value).toFixed(2)));
@@ -337,17 +529,20 @@ $("#classify-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const out = $("#classify-out");
   const mode = $('input[name="mode"]:checked').value;
-  const taxonomies = $$('input[name="taxonomy"]:checked').map((input) => input.value);
-  const customTopics = $$("#custom-topics .topic")
-    .map((row) => ({ name: $(".topic-name", row).value.trim(), description: $(".topic-desc", row).value.trim() || null }))
-    .filter((topic) => topic.name);
-  const threshold = $("#override").checked ? Number($("#threshold").value) : null;
-  if (!taxonomies.length && !customTopics.length) {
-    out.innerHTML = errorBox("Pick a label set or add an ad-hoc topic.");
+  if (!state.aps) {
+    out.innerHTML = errorBox("The topics are still loading. Try again in a moment.");
     return;
   }
+  if (!state.aps.topics.length) {
+    out.innerHTML = errorBox("The label set is empty. Add a topic or reset to the original 165.");
+    return;
+  }
+  const { taxonomies, aps_topics } = apsRequest();
+  const customTopics = [];
+  const threshold = $("#override").checked ? Number($("#threshold").value) : null;
 
   let request;
+  let similarInput; // the same document, for /similar
   if (mode === "link") {
     const reference = $("#ref").value.trim();
     if (!reference) {
@@ -359,11 +554,13 @@ $("#classify-form").addEventListener("submit", async (event) => {
         reference,
         taxonomies,
         custom_topics: customTopics,
+        aps_topics,
         language: $("#language").value || null,
         include_answer: $("#include-answer").checked,
         threshold,
       },
     });
+    similarInput = { json: { reference, language: $("#language").value || null, include_answer: $("#include-answer").checked } };
   } else if (mode === "text") {
     const text = $("#text").value.trim();
     if (!text) {
@@ -371,8 +568,9 @@ $("#classify-form").addEventListener("submit", async (event) => {
       return;
     }
     request = api("/classify", {
-      json: { text, title: $("#title").value.trim() || null, taxonomies, custom_topics: customTopics, threshold },
+      json: { text, title: $("#title").value.trim() || null, taxonomies, custom_topics: customTopics, aps_topics, threshold },
     });
+    similarInput = { json: { text, title: $("#title").value.trim() || null } };
   } else {
     const file = fileInput.files[0];
     if (!file) {
@@ -383,18 +581,25 @@ $("#classify-form").addEventListener("submit", async (event) => {
     form.append("file", file);
     form.append("taxonomies", taxonomies.join(","));
     form.append("custom_topics", JSON.stringify(customTopics));
+    if (aps_topics) form.append("aps_topics", JSON.stringify(aps_topics));
     const title = $("#file-title").value.trim();
     if (title) form.append("title", title);
     if (threshold != null) form.append("threshold", String(threshold));
     request = api("/classify/upload", { form });
+    const similarForm = new FormData();
+    similarForm.append("file", file);
+    if (title) similarForm.append("title", title);
+    similarInput = { form: similarForm };
   }
 
+  const similar = startSimilar(similarInput); // runs while Jev classifies
   const button = $("#classify-submit");
   setBusy(button, true, "Classifying…");
   out.innerHTML = loading("Reading the document and asking Jev…");
   try {
     const { data, ms } = await request;
     renderClassification(data, ms);
+    afterClassification(data, similar);
   } catch (error) {
     out.innerHTML = errorBox(error.message);
   } finally {
@@ -427,7 +632,7 @@ function documentCard(doc, ms) {
       .map(([name, chars]) => `<span>${esc(label(name))} · ${chars.toLocaleString("en-US")} characters</span>`)
       .join("")}</div>
     ${cut ? `<p class="hint">Long sections are cut to ${MAX_SECTION_CHARS.toLocaleString("en-US")} characters before Jev reads them.</p>` : ""}
-    ${affair ? `<div><a class="ghost" href="${esc(affair.url)}" target="_blank" rel="noopener">Open on OpenParlData ↗</a></div>` : ""}
+    ${affair ? `<div><a class="ghost" href="${esc(affair.url)}" target="_blank" rel="noopener">Open on OpenParlData${icon("external")}</a></div>` : ""}
   </div>`;
 }
 
@@ -488,10 +693,17 @@ function classificationCard(c) {
   </section>`;
 }
 
+function allProbabilitiesHtml(c) {
+  return `<details class="card allprobs"><summary>All ${c.scores.length} topic probabilities</summary>
+    ${barsHtml(c.scores, { threshold: c.threshold, on: new Set(c.predicted), limit: c.scores.length })}
+    <p class="hint">Each bar is Jev's probability that the topic applies. Blue bars reach the threshold (dark line).</p>
+  </details>`;
+}
+
 function renderClassification(result, ms) {
   $("#classify-out").innerHTML = [
     documentCard(result.document, ms),
-    ...result.classifications.map(classificationCard),
+    ...result.classifications.map((c) => (c.taxonomy_id === APS ? allProbabilitiesHtml(c) : classificationCard(c))),
     rawJson(result),
   ].join("");
 }
@@ -504,6 +716,507 @@ $("#classify-out").addEventListener("click", (event) => {
   const expanding = button.textContent.startsWith("Show all");
   rows.forEach((row, index) => (row.hidden = !expanding && index >= limit));
   button.textContent = expanding ? "Show fewer" : `Show all ${button.dataset.total}`;
+});
+
+// ---------- your labels and similar cases ----------
+// Jev's assigned topics start the label set. Similar cases, with the labels people gave them, suggest what
+// to add or drop. The label set lives in this page only: copy it as JSON.
+
+const ORIGIN_LABEL = { jev: "suggested by Jev", similar: "taken from similar cases", you: "added by you" };
+const SUGGESTED_TOP = 5; // the APS evaluation scores the top 5 topics
+let similarToken = 0; // ignores answers that arrive after a newer classification
+
+function taxonomyName(id) {
+  if (id === "custom") return "Ad-hoc topics";
+  const taxonomy = state.taxonomies.find((t) => t.id === id);
+  return (taxonomy && taxonomy.name) || id;
+}
+
+function startSimilar(input) {
+  if (!input || !$("#find-similar").checked || (state.health && state.health.similar === false)) return null;
+  const call = input.form ? api("/similar/upload", { form: input.form }) : api("/similar", { json: input.json });
+  return call.then((response) => ({ response }), (error) => ({ error })); // never an unhandled rejection
+}
+
+function afterClassification(result, similar) {
+  state.classification = result;
+  state.similar = null;
+  state.labels = {};
+  state.editing = null;
+  state.allChapters = false;
+  for (const c of result.classifications) {
+    const byId = Object.fromEntries(c.scores.map((s) => [s.topic_id, s]));
+    const ids = c.taxonomy_id === APS ? [...new Set([...c.scores.slice(0, SUGGESTED_TOP).map((s) => s.topic_id), ...c.predicted])] : c.predicted;
+    state.labels[c.taxonomy_id] = new Map(
+      ids.filter((id) => byId[id]).map((id) => [id, { name: byId[id].name, origin: "jev", p: byId[id].probability, status: "suggested" }])
+    );
+  }
+  $("#classify-out .doc").insertAdjacentHTML("afterend", labelsCardHtml());
+  watchLabelTree();
+  const token = ++similarToken;
+  if (!similar) return;
+  $("#classify-out > details.raw").insertAdjacentHTML(
+    "beforebegin",
+    `<section id="similar-out" class="similar-block" aria-live="polite">${loading(
+      "Finding similar cases: Apertus picks title words in four languages, OpenParlData searches every parliament, Jev compares each hit with this document…"
+    )}</section>`
+  );
+  similar.then(({ response, error }) => {
+    const box = $("#similar-out");
+    if (token !== similarToken || !box) return;
+    if (error) {
+      box.innerHTML = errorBox(`Similar cases: ${error.message}`);
+      return;
+    }
+    state.similar = response.data;
+    box.innerHTML = similarHtml(response.data, response.ms);
+    refreshLabels();
+  });
+}
+
+function labelsCardHtml(refresh = false) {
+  const result = state.classification;
+  if (!result || !result.classifications.length) return "";
+  const aps = result.classifications.find((c) => c.taxonomy_id === APS);
+  if (aps) return topicMapHtml(aps, refresh);
+  const rows = result.classifications
+    .map((c) => {
+      const set = state.labels[c.taxonomy_id] || new Map();
+      const name = taxonomyName(c.taxonomy_id);
+      const chips =
+        [...set.entries()]
+          .map(
+            ([id, label]) => `<span class="lchip ${label.origin}" title="${esc(ORIGIN_LABEL[label.origin])}${label.p != null ? ` · Jev ${fmt(label.p)}` : ""}">${esc(label.name)}<button type="button" class="lchip-x" data-remove="${esc(c.taxonomy_id)}" data-topic="${esc(id)}" aria-label="Remove ${esc(label.name)}">${icon("x")}</button></span>`
+          )
+          .join("") || `<span class="none-assigned">No labels yet</span>`;
+      const options = c.scores
+        .filter((s) => !set.has(s.topic_id))
+        .map((s) => `<option value="${esc(s.topic_id)}">${esc(s.name)} · ${fmt(s.probability)}</option>`)
+        .join("");
+      const hints = (state.similar ? state.similar.topics : []).filter(
+        (h) => h.taxonomy_id === c.taxonomy_id && h.topic_id && !set.has(h.topic_id)
+      );
+      const hintRow = hints.length
+        ? `<div class="hint-row"><span class="muted">Similar cases also carry</span>${hints.map((h) => hintChip(h, c)).join("")}</div>`
+        : "";
+      return `<div class="label-set">
+        <div class="label-set-name">${esc(name)}</div>
+        <div class="label-chips">${chips}<select class="label-add" data-taxonomy="${esc(c.taxonomy_id)}" aria-label="Add a topic to ${esc(name)}"><option value="">Add a topic…</option>${options}</select></div>
+        ${hintRow}
+      </div>`;
+    })
+    .join("");
+  return `<section class="card labels${refresh ? " static" : ""}" id="your-labels">
+    <div class="result-head"><h3>Your labels</h3><span class="result-meta">Start from Jev's suggestions, then remove, add or take topics from similar cases</span></div>
+    ${rows}
+    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Kept in this page only.</span></div>
+  </section>`;
+}
+
+// ---------- topic map: domain colour, chapter blocks, topic tiles shaded by probability ----------
+
+function topicGroup(topicId) {
+  const sent = state.apsSent && state.apsSent.get(topicId);
+  if (sent) return sent.group;
+  const t = state.aps && state.aps.topics.find((x) => x.id === topicId);
+  return t ? t.group : OWN_CHAPTER;
+}
+const pct = (p) => `${Math.round((p || 0) * 100)}%`;
+
+function reviewRowHtml(id, label, c) {
+  const group = topicGroup(id);
+  const status = label.status === "suggested" ? "Suggested" : label.origin === "jev" ? "Accepted" : label.origin === "similar" ? "From similar cases" : "Added by you";
+  const editing = state.editing === id;
+  const options = editing
+    ? [...new Set(c.scores.map((s) => topicGroup(s.topic_id)))]
+        .map((g) => `<optgroup label="${esc(g)}">${c.scores
+          .filter((s) => topicGroup(s.topic_id) === g)
+          .map((s) => `<option value="${esc(s.topic_id)}"${s.topic_id === id ? " selected" : ""}>${esc(s.name)} · ${fmt(s.probability)}</option>`)
+          .join("")}</optgroup>`)
+        .join("")
+    : "";
+  const actions = editing
+    ? `<select class="label-edit" data-from="${esc(id)}" aria-label="Replace ${esc(label.name)} with">${options}</select>
+       <button type="button" class="icon" data-cancel-edit aria-label="Cancel">${icon("x", "i")}</button>`
+    : `${label.status === "suggested" ? `<button type="button" class="act accept" data-accept="${esc(id)}" title="Accept">${icon("check")}<span>Accept</span></button>` : ""}
+       <button type="button" class="act" data-edit="${esc(id)}" title="Change to another topic">${icon("pencil")}<span>Edit</span></button>
+       <button type="button" class="act danger" data-remove="${APS}" data-topic="${esc(id)}" title="Remove this label">${icon("x")}<span>Remove</span></button>`;
+  return `<li class="review ${label.status}" style="--hue:${hue(group)}">
+    <span class="swatch" aria-hidden="true"></span>
+    <div class="review-path"><span class="review-chapter">${esc(group)}</span><strong>${esc(label.name)}</strong></div>
+    <div class="review-p"><span class="meter"><span style="width:${pct(label.p)}"></span></span><span class="num">${fmt(label.p)}</span></div>
+    <span class="status-tag">${label.status === "suggested" ? "" : icon("check")}${esc(status)}</span>
+    <div class="review-actions">${actions}</div>
+  </li>`;
+}
+
+// ---------- label tree: affair → chapters → topics. Nodes are HTML; the curved links are SVG drawn between them. ----------
+
+function labelTreeHtml(set, chapterP) {
+  if (!set.size) return "";
+  const groups = [...new Set([...set.keys()].map(topicGroup))].sort((a, b) => (chapterP.get(b) || 0) - (chapterP.get(a) || 0));
+  const doc = state.classification && state.classification.document;
+  const title = doc ? doc.title || doc.reference || "This affair" : "This affair";
+  const short = title.length > 90 ? `${title.slice(0, 88)}…` : title;
+  const branches = groups
+    .map((g) => {
+      const chapter = chapterOf(g);
+      const domain = state.aps && chapter.domainIndex ? (state.aps.domains[chapter.domainIndex - 1] || {}).name : "";
+      const topics = [...set.entries()]
+        .filter(([id]) => topicGroup(id) === g)
+        .sort((a, b) => (b[1].p || 0) - (a[1].p || 0))
+        .map(([id, l]) => `<div class="tnode topic ${l.status}" data-parent="${esc(g)}" data-d="${chapter.domainIndex}" title="${esc(l.name)} · ${esc(l.status === "suggested" ? "suggested" : "accepted")}">
+            ${l.status === "suggested" ? "" : icon("check")}<span class="tname">${esc(l.name)}</span><span class="tp num">${fmt(l.p)}</span>
+          </div>`)
+        .join("");
+      return `<div class="tbranch" style="--hue:${hue(g)}">
+        <div class="tnode chapter" data-chapter="${esc(g)}" data-d="${chapter.domainIndex}">
+          <span class="swatch" aria-hidden="true"></span>
+          <span class="tchapter"><span class="tname">${esc(g)}</span>${domain ? `<span class="tdomain">${esc(domain)}</span>` : ""}</span>
+          <span class="tp num" title="Highest topic probability in this chapter">${fmt(chapterP.get(g))}</span>
+        </div>
+        <div class="tleaves">${topics}</div>
+      </div>`;
+    })
+    .join("");
+  return `<div class="ltree" id="label-tree" role="group" aria-label="Chapters and topics assigned to this affair">
+    <svg class="tlinks" aria-hidden="true"></svg>
+    <div class="troot-col"><div class="tnode troot" title="${esc(title)}">${icon("text", "i")}<span>${esc(short)}</span></div></div>
+    <div class="tbranches">${branches}</div>
+  </div>`;
+}
+
+function drawLabelTree() {
+  const tree = $("#label-tree");
+  if (!tree) return;
+  const svg = $(".tlinks", tree);
+  if (getComputedStyle(svg).display === "none") return;
+  const box = tree.getBoundingClientRect();
+  svg.setAttribute("width", box.width);
+  svg.setAttribute("height", box.height);
+  svg.setAttribute("viewBox", `0 0 ${box.width} ${box.height}`);
+  const right = (el) => { const r = el.getBoundingClientRect(); return [r.right - box.left, r.top + r.height / 2 - box.top]; };
+  const left = (el) => { const r = el.getBoundingClientRect(); return [r.left - box.left, r.top + r.height / 2 - box.top]; };
+  const curve = ([x1, y1], [x2, y2], d, dashed) => {
+    const dx = Math.max(24, (x2 - x1) / 2);
+    return `<path d="M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}" style="stroke:var(--d${d})"${dashed ? ' class="dashed"' : ""}/>`;
+  };
+  const root = $(".troot", tree);
+  const paths = [];
+  for (const branch of $$(".tbranch", tree)) {
+    const chapter = $(".tnode.chapter", branch);
+    const d = chapter.dataset.d;
+    const leaves = $$(".tnode.topic", branch);
+    paths.push(curve(right(root), left(chapter), d, leaves.every((n) => n.classList.contains("suggested"))));
+    for (const leaf of leaves) paths.push(curve(right(chapter), left(leaf), d, leaf.classList.contains("suggested")));
+  }
+  svg.innerHTML = paths.join("");
+}
+
+let treeObserver = null;
+function watchLabelTree() {
+  const tree = $("#label-tree");
+  if (treeObserver) treeObserver.disconnect();
+  if (!tree) return;
+  if (!treeObserver) treeObserver = new ResizeObserver(() => requestAnimationFrame(drawLabelTree));
+  treeObserver.observe(tree);
+  drawLabelTree();
+}
+
+function topicMapHtml(c, refresh) {
+  const set = state.labels[APS] || new Map();
+  const byGroup = new Map();
+  for (const s of c.scores) {
+    const g = topicGroup(s.topic_id);
+    if (!byGroup.has(g)) byGroup.set(g, []);
+    byGroup.get(g).push(s);
+  }
+  const chapterP = new Map(c.groups.map((g) => [g.name, g.probability]));
+  const chapters = [...byGroup.keys()].sort((a, b) => (chapterP.get(b) || 0) - (chapterP.get(a) || 0));
+  const labelled = new Set([...set.keys()].map(topicGroup));
+  const firstShown = Math.max(6, chapters.filter((g) => labelled.has(g)).length);
+  const blocks = chapters
+    .map((g, index) => {
+      const chapter = chapterOf(g);
+      const p = chapterP.get(g) || 0;
+      const tiles = byGroup
+        .get(g)
+        .map((s) => {
+          const on = set.get(s.topic_id);
+          return `<button type="button" class="tile${on ? ` on ${on.status}` : ""}" data-tile="${esc(s.topic_id)}" aria-pressed="${on ? "true" : "false"}" style="--p:${pct(s.probability)};--pn:${(s.probability || 0).toFixed(3)}" title="${esc(s.name)}: ${s.probability.toFixed(3)}${on ? " · in your labels, click to remove" : " · click to add as a label"}">
+            <span class="tile-name">${on ? icon("check") : ""}${esc(s.name)}</span><span class="tile-p num">${fmt(s.probability)}</span><span class="tile-bar"></span>
+          </button>`;
+        })
+        .join("");
+      return `<div class="chapter${labelled.has(g) ? " has-labels" : ""}" style="--hue:${hue(g)};--p:${pct(p)}"${index >= firstShown && !state.allChapters ? " hidden" : ""}>
+        <div class="chapter-head"><span class="swatch" aria-hidden="true"></span><span class="chapter-name">${esc(chapter.code ? `${chapter.code} ${g}` : g)}</span><span class="chapter-p num" title="Highest topic probability in this chapter">${fmt(p)}</span></div>
+        <div class="tiles">${tiles}</div>
+      </div>`;
+    })
+    .join("");
+  const legend = state.aps
+    ? state.aps.domains
+        .map((d, i) => `<span class="legend-item"><span class="swatch" style="--hue:var(--d${i + 1})"></span>${esc(d.name)}</span>`)
+        .join("") + (byGroup.has(OWN_CHAPTER) ? `<span class="legend-item"><span class="swatch" style="--hue:var(--d0)"></span>${OWN_CHAPTER}</span>` : "")
+    : "";
+  const rows = [...set.entries()].sort((a, b) => (b[1].p || 0) - (a[1].p || 0)).map(([id, l]) => reviewRowHtml(id, l, c)).join("");
+  const pending = [...set.values()].filter((l) => l.status === "suggested").length;
+  const glance = labelTreeHtml(set, chapterP);
+  return `<section class="card topicmap${refresh ? " static" : ""}" id="your-labels">
+    <div class="result-head"><h3>Where this affair belongs</h3><span class="result-meta">Année Politique Suisse · ${c.scores.length} topics · threshold ${fmt(c.threshold)} · ${esc(c.model)}</span></div>
+    ${glance || `<div class="glance"><span class="none-assigned">No labels. Click a topic below to add one.</span></div>`}
+    <div class="review-head"><span class="subhead">Your labels</span><span class="hint">${pending ? `${pending} suggested ${pending === 1 ? "label waits" : "labels wait"} for your review: accept, edit or remove.` : "All labels reviewed."}</span>${pending ? `<button type="button" class="ghost tiny" data-accept-all>${icon("check")}Accept all</button>` : ""}</div>
+    <ol class="reviews">${rows}</ol>
+    <details class="explore" id="explore-map"${state.mapOpen ? " open" : ""}>
+      <summary><span>Explore all chapters and topics</span><span class="hint">${chapters.length} chapters · colour = domain, stronger = more likely · click a topic to add or remove it</span></summary>
+      <div class="explore-body">
+        <div class="legend">${legend}</div>
+        <div class="chapters">${blocks}</div>
+        ${chapters.length > firstShown ? `<button type="button" class="ghost more" data-all-chapters>${state.allChapters ? "Show fewer chapters" : `Show all ${chapters.length} chapters`}</button>` : ""}
+      </div>
+    </details>
+    <div class="label-actions"><button type="button" class="ghost" id="copy-labels">Copy as JSON</button><span class="hint">Labels are suggestions; nothing is saved outside this page.</span></div>
+  </section>`;
+}
+
+function hintChip(hint, classification) {
+  const score = classification.scores.find((s) => s.topic_id === hint.topic_id);
+  const cases = `${hint.cases} similar ${hint.cases === 1 ? "case" : "cases"}`;
+  return `<button type="button" class="chip suggest" data-hint="${esc(hint.taxonomy_id)}" data-topic="${esc(hint.topic_id)}" title="${esc(hint.source)}: ${cases}${score ? ` · Jev ${fmt(score.probability)}` : ""}">${icon("plus")}${esc(hint.name)}<span class="count">${hint.cases}</span></button>`;
+}
+
+function similarTopicsHtml(result) {
+  if (!result.topics.length) {
+    return `<p class="hint">None of these cases has labels in the labelled data, which covers federal affairs, St. Gallen, Thurgau, the city of Zug, Zurich and the PolitMonitor digitalisation tag.</p>`;
+  }
+  return result.topics
+    .map((h) => {
+      const set = h.taxonomy_id ? state.labels[h.taxonomy_id] : null;
+      let action;
+      if (set && h.topic_id && set.has(h.topic_id)) action = `<span class="state">In your labels</span>`;
+      else if (set && h.topic_id)
+        action = `<button type="button" class="ghost tiny" data-hint="${esc(h.taxonomy_id)}" data-topic="${esc(h.topic_id)}">${icon("plus")}Add</button>`;
+      else
+        action = `<button type="button" class="ghost tiny" data-adhoc="${esc(h.name)}" title="Adds it to the label set as a new topic; classify again to score it">${icon("plus")}Add to the label set</button>`;
+      return `<div class="topic-hint"><span class="topic-hint-name">${esc(h.name)}</span><span class="muted">${h.cases} ${h.cases === 1 ? "case" : "cases"} · ${esc(h.source)}</span>${action}</div>`;
+    })
+    .join("");
+}
+
+function band(p) {
+  if (p == null) return "";
+  const [cls, text] = p >= 0.7 ? ["same", "Same issue"] : p >= 0.4 ? ["related", "Related"] : ["loose", "Loosely related"];
+  return `<span class="band ${cls}">${text}</span>`;
+}
+
+function caseHtml(c) {
+  const affair = c.affair;
+  const languages = [...new Set(c.matched_by.map((m) => m.language))];
+  const title = bestTitle(affair.title, languages);
+  const type = (affair.type && (affair.type.en || affair.type.de)) || "";
+  const similarity =
+    c.similarity == null
+      ? ""
+      : `<div class="relevance" title="Jev probability that this affair deals with the same specific issue">
+          <span class="track"><span class="fill" style="width:${(c.similarity * 100).toFixed(1)}%"></span></span>${fmt(c.similarity)}
+        </div>${band(c.similarity)}`;
+  const labels = c.labels.length
+    ? `<div class="case-labels">${c.labels
+        .map((l) => `<span class="klabel${l.taxonomy_id ? "" : " text"}" title="${esc(l.source)}">${esc(l.name)}</span>`)
+        .join("")}</div>`
+    : "";
+  const same = c.same_title.length
+    ? `<details class="same"><summary>${c.same_title.length} more with the same title</summary>${c.same_title
+        .map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.number || s.id)}${s.begin_date ? ` · ${esc(s.begin_date)}` : ""}</a>`)
+        .join("")}</details>`
+    : "";
+  const matched = c.matched_by.map((m) => `${m.language} “${m.query}”`).join(" · ");
+  return `<li class="card hit">
+    <div class="hit-meta">
+      <span class="body">${esc(parliamentName(affair.body_key))}</span>
+      ${type ? `<span>${esc(type)}</span>` : ""}
+      ${affair.number ? `<span class="mono">${esc(affair.number)}</span>` : ""}
+      ${affair.begin_date ? `<span>${esc(affair.begin_date)}</span>` : ""}
+    </div>
+    <div class="hit-side">
+      ${similarity}
+      <div class="hit-actions">
+        <a class="ghost" href="${esc(affair.url)}" target="_blank" rel="noopener">Open${icon("external")}</a>
+        <button type="button" class="ghost go" data-classify="${esc(affair.url)}">Classify${icon("arrow")}</button>
+      </div>
+    </div>
+    <div class="hit-title">${esc(title.text)}<span class="tl">${esc(title.lang)}</span></div>
+    ${labels}
+    <div class="hit-matched">Found by ${esc(matched)}</div>
+    ${same}
+  </li>`;
+}
+
+function similarHtml(result, ms) {
+  const bodies = new Set(result.cases.map((c) => c.affair.body_key));
+  const languages = new Set(result.cases.flatMap((c) => c.matched_by.map((m) => m.language)));
+  const runs = {};
+  for (const q of result.queries) (runs[q.language] ||= []).push(`${q.query} (${q.hits > 60 ? "60+" : q.hits})`);
+  const words = Object.entries(result.keywords)
+    .filter(([, list]) => list.length)
+    .map(
+      ([lang, list]) => `<div class="query-line"><span class="lang">${esc(lang)}</span><div>${list
+        .map((w) => `<span class="qchip">${esc(w)}</span>`)
+        .join("")}<div class="hit-matched">Searched: ${esc((runs[lang] || []).join(" · ") || "no title has these words")}</div></div></div>`
+    )
+    .join("");
+  const parts = [
+    `<div class="card similar-head">
+      <div class="result-head"><h3>Similar cases</h3><span class="result-meta">${result.cases.length} shown of ${result.candidates} found · ${bodies.size} ${bodies.size === 1 ? "parliament" : "parliaments"} · matched in ${esc([...languages].map((l) => LANG_NAMES[l] || l).join(", ") || "no language")} · ${(ms / 1000).toFixed(1)} s</span></div>
+      ${result.subject ? `<p class="similar-subject"><span class="muted">Apertus read the subject as</span> ${esc(result.subject)}</p>` : ""}
+      <details class="options"><summary>Words searched in titles</summary><div class="queries-inner">${words}</div>
+        <p class="hint">A word that matches at most 60 titles is searched on its own. Broader words are only searched together with another word, except the first two, which name the subject.</p></details>
+      <div class="subhead">Labels in these cases</div>
+      <div id="similar-topics" class="similar-topics">${similarTopicsHtml(result)}</div>
+      <p class="hint">${result.ranked ? "Ordered by Jev's probability that the case deals with the same specific issue." : "Ordered by how specific the matching words are."}</p>
+    </div>`,
+    ...result.warnings.map((w) => `<div class="warning">${esc(w)}</div>`),
+  ];
+  parts.push(
+    result.cases.length
+      ? `<details class="explore similar-list">
+          <summary><span>Show the ${result.cases.length} similar ${result.cases.length === 1 ? "case" : "cases"}</span><span class="hint">${[
+            result.cases.filter((c) => c.similarity != null && c.similarity >= 0.7).length &&
+              `${result.cases.filter((c) => c.similarity != null && c.similarity >= 0.7).length} on the same issue`,
+            `${bodies.size} ${bodies.size === 1 ? "parliament" : "parliaments"}`,
+            [...languages].map((l) => l.toUpperCase()).join(" · "),
+          ]
+            .filter(Boolean)
+            .join(" · ")}</span></summary>
+          <div class="explore-body"><ol class="hits">${result.cases.map(caseHtml).join("")}</ol></div>
+        </details>`
+      : `<div class="empty"><h2>No similar cases found</h2><p>No title in OpenParlData shares the words this document is about. Pasting a longer text can help.</p></div>`
+  );
+  return parts.join("");
+}
+
+function refreshLabels() {
+  const card = $("#your-labels");
+  if (card) card.outerHTML = labelsCardHtml(true);
+  watchLabelTree();
+  const topics = $("#similar-topics");
+  if (topics && state.similar) topics.innerHTML = similarTopicsHtml(state.similar);
+}
+
+function addLabel(taxonomyId, topicId, origin) {
+  const classification = state.classification && state.classification.classifications.find((c) => c.taxonomy_id === taxonomyId);
+  const set = state.labels[taxonomyId];
+  if (!classification || !set || set.has(topicId)) return;
+  const score = classification.scores.find((s) => s.topic_id === topicId);
+  set.set(topicId, { name: score ? score.name : topicId, origin, p: score ? score.probability : null, status: "accepted" });
+  refreshLabels();
+}
+
+async function copyLabels(button) {
+  const labels = Object.fromEntries(
+    Object.entries(state.labels).map(([id, set]) => [
+      id,
+      [...set.entries()].map(([topicId, l]) => ({
+        topic_id: topicId,
+        name: l.name,
+        ...(id === APS ? { chapter: topicGroup(topicId) } : {}),
+        origin: l.origin,
+        status: l.status || "accepted",
+        probability: l.p,
+      })),
+    ])
+  );
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(labels, null, 2));
+    button.textContent = "Copied";
+  } catch {
+    button.textContent = "Copy failed";
+  }
+  setTimeout(() => (button.textContent = "Copy as JSON"), 1600);
+}
+
+$("#classify-out").addEventListener("click", (event) => {
+  const remove = event.target.closest("[data-remove]");
+  if (remove) {
+    const set = state.labels[remove.dataset.remove];
+    if (set) set.delete(remove.dataset.topic);
+    refreshLabels();
+    return;
+  }
+  const hint = event.target.closest("[data-hint]");
+  if (hint) return addLabel(hint.dataset.hint, hint.dataset.topic, "similar");
+  const adhoc = event.target.closest("[data-adhoc]");
+  if (adhoc) {
+    addApsTopic(adhoc.dataset.adhoc);
+    adhoc.outerHTML = `<span class="state">Added to the label set</span>`;
+    return;
+  }
+  const set = state.labels[APS];
+  const accept = event.target.closest("[data-accept]");
+  if (accept && set && set.has(accept.dataset.accept)) {
+    set.get(accept.dataset.accept).status = "accepted";
+    return refreshLabels();
+  }
+  if (event.target.closest("[data-accept-all]") && set) {
+    set.forEach((l) => (l.status = "accepted"));
+    return refreshLabels();
+  }
+  const edit = event.target.closest("[data-edit]");
+  if (edit) {
+    state.editing = edit.dataset.edit;
+    refreshLabels();
+    const select = $("#your-labels select.label-edit");
+    if (select) select.focus();
+    return;
+  }
+  if (event.target.closest("[data-cancel-edit]")) {
+    state.editing = null;
+    return refreshLabels();
+  }
+  const tile = event.target.closest("[data-tile]");
+  if (tile && set) {
+    const id = tile.dataset.tile;
+    if (set.has(id)) {
+      set.delete(id);
+      refreshLabels();
+    } else addLabel(APS, id, "you");
+    return;
+  }
+  if (event.target.closest("[data-all-chapters]")) {
+    state.allChapters = !state.allChapters;
+    return refreshLabels();
+  }
+  const classify = event.target.closest("[data-classify]");
+  if (classify) {
+    setMode("link");
+    $("#ref").value = classify.dataset.classify;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    $("#classify-form").requestSubmit();
+    return;
+  }
+  const copy = event.target.closest("#copy-labels");
+  if (copy) copyLabels(copy);
+});
+$("#classify-out").addEventListener("toggle", (event) => {
+  if (event.target.id === "explore-map") state.mapOpen = event.target.open;
+}, true);
+$("#classify-out").addEventListener("change", (event) => {
+  const select = event.target.closest("select.label-add");
+  if (select && select.value) addLabel(select.dataset.taxonomy, select.value, "you");
+  const change = event.target.closest("select.label-edit");
+  const set = state.labels[APS];
+  if (change && set && change.value !== change.dataset.from) {
+    const old = set.get(change.dataset.from);
+    const score = state.classification.classifications.find((c) => c.taxonomy_id === APS).scores.find((s) => s.topic_id === change.value);
+    // keep the list order stable: rebuild the map with the replacement in place of the old label
+    state.labels[APS] = new Map(
+      [...set.entries()]
+        .filter(([id]) => id !== change.value)
+        .map(([id, l]) => (id === change.dataset.from ? [change.value, { name: score.name, origin: "you", p: score.probability, status: "accepted" }] : [id, l]))
+    );
+    state.editing = null;
+    if (old) refreshLabels();
+  }
 });
 
 // ---------- start ----------
@@ -529,8 +1242,6 @@ $("#classify-out").addEventListener("click", (event) => {
     if (params.get("rank") === "0") $("#rank").checked = false;
     $("#search-form").requestSubmit();
   } else if (params.get("ref")) {
-    const wanted = (params.get("taxonomies") || "").split(",").filter(Boolean);
-    if (wanted.length) $$('input[name="taxonomy"]').forEach((input) => (input.checked = wanted.includes(input.value)));
     setMode("link");
     $("#ref").value = params.get("ref");
     $("#classify-form").requestSubmit();

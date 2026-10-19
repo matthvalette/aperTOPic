@@ -11,6 +11,7 @@ def health(c: Container = Depends(container)) -> dict:
         "status": "ok",
         "search": c.search is not None,
         "classification": c.classification is not None,
+        "similar": c.similar is not None,
         "apertus_model": c.settings.apertus_model,
         "jev_model": c.settings.typesafe_model,
     }

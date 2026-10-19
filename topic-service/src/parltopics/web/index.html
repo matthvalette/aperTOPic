@@ -3,45 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Parliament Topics Console</title>
+  <title>aperTOPic · Parliament Topics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Apply a saved theme before first paint.
+    try { const t = localStorage.getItem("console-theme"); if (t) document.documentElement.dataset.theme = t; } catch {}
+  </script>
 </head>
 <body>
-  <header class="top">
-    <div class="brand">
-      <span class="mark" aria-hidden="true"></span>
-      <div>
-        <h1>Parliament topics</h1>
-        <p class="sub">Test console for multilingual search and topic classification</p>
+  <!-- Icon sprite (Lucide paths, ISC licence) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r="1"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></symbol>
+    <symbol id="i-heading" viewBox="0 0 24 24"><path d="M6 12h12M6 20V4M18 20V4"/></symbol>
+    <symbol id="i-files" viewBox="0 0 24 24"><path d="M20 7h-3a2 2 0 0 1-2-2V2"/><path d="M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z"/><path d="M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24"><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6"/></symbol>
+  </svg>
+
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="appbar">
+    <div class="wrap">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <div>
+          <h1>aper<span class="accent">TOP</span>ic</h1>
+        </div>
+      </div>
+      <nav class="tabs" role="tablist" aria-label="Tools">
+        <button type="button" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="true"><svg class="i"><use href="#i-search"/></svg>Search</button>
+        <button type="button" role="tab" id="tab-classify" aria-controls="panel-classify" aria-selected="false"><svg class="i"><use href="#i-tag"/></svg>Classify</button>
+      </nav>
+      <div class="bar-end">
+        <div class="status" id="status" aria-live="polite"><span class="pill">Checking the service…</span></div>
+        <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch between light and dark theme">
+          <svg class="i moon"><use href="#i-moon"/></svg><svg class="i sun"><use href="#i-sun"/></svg>
+        </button>
       </div>
     </div>
-    <div class="status" id="status" aria-live="polite"><span class="pill">Checking the service…</span></div>
   </header>
 
-  <nav class="tabs" role="tablist" aria-label="Tools">
-    <button type="button" role="tab" id="tab-search" aria-controls="panel-search" aria-selected="true">Search</button>
-    <button type="button" role="tab" id="tab-classify" aria-controls="panel-classify" aria-selected="false">Classify</button>
-  </nav>
-
-  <main>
+  <main id="main" class="wrap" tabindex="-1">
     <!-- ================= SEARCH ================= -->
     <section id="panel-search" role="tabpanel" aria-labelledby="tab-search">
+      <div class="intro">
+        <h2>Search Anything!</h2>
+      </div>
       <form id="search-form" class="card form" autocomplete="off">
         <div class="query-row">
-          <label for="q" class="sr-only">Search request</label>
-          <input id="q" name="q" type="search" required minlength="2" maxlength="500"
-                 placeholder="Describe what you are looking for, in any language">
-          <button type="submit" class="primary" id="search-submit">Search</button>
-        </div>
-        <div class="examples" aria-label="Example requests">
-          <span class="muted">Try</span>
-          <button type="button" class="chip" data-q="artificial intelligence in public administration">AI in public administration</button>
-          <button type="button" class="chip" data-q="Lärmschutz an Autobahnen">Lärmschutz an Autobahnen</button>
-          <button type="button" class="chip" data-q="logements abordables pour les familles">logements abordables</button>
-          <button type="button" class="chip" data-q="cybersecurity of hospitals">cybersecurity of hospitals</button>
+          <div class="search-box">
+            <svg class="i" aria-hidden="true"><use href="#i-search"/></svg>
+            <label for="q" class="sr-only">Search request</label>
+            <input id="q" name="q" type="search" required minlength="2" maxlength="500"
+                   placeholder="e.g. artificial intelligence in public administration">
+          </div>
+          <button type="submit" class="primary" id="search-submit"><span class="label">Search</span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg></button>
         </div>
         <details class="options">
-          <summary>Options</summary>
+          <summary>Search options</summary>
           <div class="option-grid">
             <fieldset>
               <legend>Search in these languages</legend>
@@ -50,15 +85,35 @@
               <label class="check"><input type="checkbox" name="lang" value="it" checked> Italian</label>
               <label class="check"><input type="checkbox" name="lang" value="rm" checked> Romansh</label>
             </fieldset>
-            <div class="field">
-              <label for="scope">Match in</label>
-              <select id="scope">
-                <option value="metadata" selected>Titles (fast)</option>
-                <option value="metadata,texts">Titles and texts (slower)</option>
-                <option value="docs">Documents (about 10 s)</option>
-                <option value="all">Everything (about 10 s)</option>
-              </select>
-            </div>
+            <fieldset class="scope-field">
+              <legend>Where to look</legend>
+              <div class="scopes">
+                <label class="scope"><input type="radio" name="scope" value="metadata" checked>
+                  <span class="scope-icon"><svg class="i" aria-hidden="true"><use href="#i-heading"/></svg></span>
+                  <span class="scope-name">Titles</span>
+                  <span class="scope-desc">Affair titles and key facts</span>
+                  <span class="speed s1">Fast</span>
+                </label>
+                <label class="scope"><input type="radio" name="scope" value="metadata,texts">
+                  <span class="scope-icon"><svg class="i" aria-hidden="true"><use href="#i-text"/></svg></span>
+                  <span class="scope-name">Titles + full text</span>
+                  <span class="scope-desc">Also the submitted text and reasoning</span>
+                  <span class="speed s2">Slower</span>
+                </label>
+                <label class="scope"><input type="radio" name="scope" value="docs">
+                  <span class="scope-icon"><svg class="i" aria-hidden="true"><use href="#i-files"/></svg></span>
+                  <span class="scope-name">Attached documents</span>
+                  <span class="scope-desc">Inside the PDFs and files only</span>
+                  <span class="speed s3">About 10 s</span>
+                </label>
+                <label class="scope"><input type="radio" name="scope" value="all">
+                  <span class="scope-icon"><svg class="i" aria-hidden="true"><use href="#i-layers"/></svg></span>
+                  <span class="scope-name">Everything</span>
+                  <span class="scope-desc">Titles, texts, documents and speeches</span>
+                  <span class="speed s3">About 10 s</span>
+                </label>
+              </div>
+            </fieldset>
             <div class="field">
               <label for="bodies">Parliaments</label>
               <input id="bodies" list="parliament-list" placeholder="All, or e.g. CHE, BE, 261">
@@ -77,24 +132,26 @@
         </details>
       </form>
       <div id="search-out" class="out" aria-live="polite">
-        <div class="empty">
-          <h2>Search every parliament in every language</h2>
-          <p>Apertus writes short queries in German, French, Italian and Romansh. OpenParlData runs them, and the hits are merged per affair. With ranking on, Jev orders them by relevance.</p>
-        </div>
       </div>
     </section>
 
     <!-- ================= CLASSIFY ================= -->
     <section id="panel-classify" role="tabpanel" aria-labelledby="tab-classify" hidden>
-      <div class="split">
-        <form id="classify-form" class="card form" autocomplete="off">
-          <div class="segmented" role="radiogroup" aria-label="What to classify">
-            <label><input type="radio" name="mode" value="link" checked><span>Link or id</span></label>
-            <label><input type="radio" name="mode" value="text"><span>Text</span></label>
-            <label><input type="radio" name="mode" value="file"><span>File</span></label>
+      <div class="intro">
+        <h2>Classify a new affair!</h2>
+      </div>
+      <form id="classify-form" class="card form classify-form" autocomplete="off">
+          <div class="mode" data-mode="file">
+            <label for="file" class="drop hero-drop" id="drop">
+              <span class="drop-icon"><svg class="i" aria-hidden="true"><use href="#i-upload"/></svg></span>
+              <input id="file" type="file" accept=".pdf,.docx,.html,.htm,.txt,.md">
+              <span id="file-label"><strong>Drop a document here</strong> or click to choose one<br><span class="muted">PDF, DOCX, HTML or text, up to 25 MB</span></span>
+            </label>
+            <label for="file-title">Title (optional)</label>
+            <input id="file-title" maxlength="500">
           </div>
 
-          <div class="mode" data-mode="link">
+          <div class="mode" data-mode="link" hidden>
             <label for="ref">OpenParlData link, document link, Curia Vista link or affair id</label>
             <input id="ref" placeholder="https://openparldata.ch/item/affairs/70435">
             <div class="examples">
@@ -113,33 +170,46 @@
             <textarea id="text" rows="8" maxlength="200000" placeholder="Paste a motion, a question or any text, in any language"></textarea>
           </div>
 
-          <div class="mode" data-mode="file" hidden>
-            <label for="file" class="drop" id="drop">
-              <input id="file" type="file" accept=".pdf,.docx,.html,.htm,.txt,.md">
-              <span id="file-label"><strong>Choose a file</strong> or drop it here<br><span class="muted">PDF, DOCX, HTML or text, up to 25 MB</span></span>
-            </label>
-            <label for="file-title">Title (optional)</label>
-            <input id="file-title" maxlength="500">
+
+          <div class="modes" role="radiogroup" aria-label="What to classify">
+            <span class="muted">Or classify</span>
+            <label title="Upload a file"><input type="radio" name="mode" value="file" checked><span><svg class="i sm" aria-hidden="true"><use href="#i-upload"/></svg>File</span></label>
+            <label title="An OpenParlData, document or Curia Vista link, or an affair id"><input type="radio" name="mode" value="link"><span><svg class="i sm" aria-hidden="true"><use href="#i-link"/></svg>Link</span></label>
+            <label title="Paste the text of a motion, question or any document"><input type="radio" name="mode" value="text"><span><svg class="i sm" aria-hidden="true"><use href="#i-text"/></svg>Text</span></label>
           </div>
 
-          <fieldset>
-            <legend>Label sets</legend>
-            <div id="taxonomies" class="taxonomies"><span class="muted">Loading…</span></div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Ad-hoc topics <span class="muted">(no training needed)</span></legend>
-            <div id="custom-topics" class="custom-topics"></div>
-            <div class="examples">
-              <button type="button" class="chip add" id="add-topic">+ Add topic</button>
-              <button type="button" class="chip" data-topic="Digitalisierung">Digitalisierung</button>
-              <button type="button" class="chip" data-topic="Covid-19">Covid-19</button>
-              <button type="button" class="chip" data-topic="Klimawandel">Klimawandel</button>
+          <section class="labelset" aria-labelledby="labelset-title">
+            <div class="labelset-bar">
+              <div>
+                <div id="labelset-title" class="labelset-title">Label set: Année Politique Suisse</div>
+                <div class="labelset-sub"><span id="aps-summary">Loading topics…</span> <span id="aps-edited" class="pill plain" hidden></span></div>
+              </div>
+              <button type="button" class="ghost" id="aps-toggle" aria-expanded="false" aria-controls="aps-editor"><svg class="i sm" aria-hidden="true"><use href="#i-pencil"/></svg><span class="label">Edit topics</span></button>
             </div>
-          </fieldset>
+            <div id="aps-editor" class="aps-editor" hidden>
+              <div class="ed-add">
+                <div class="ed-add-row">
+                  <input id="new-topic-name" placeholder="New topic, e.g. Digitalisierung" aria-label="New topic" maxlength="200">
+                  <input id="new-topic-desc" placeholder="Description: what it covers" aria-label="What the new topic covers" maxlength="1000">
+                  <select id="new-topic-chapter" aria-label="Chapter of the new topic"></select>
+                  <button type="button" class="primary" id="new-topic-add"><svg class="i sm" aria-hidden="true"><use href="#i-plus"/></svg>Add</button>
+                </div>
+                <details class="ed-json">
+                  <summary>Add several at once as {"topic": "description"}</summary>
+                  <textarea id="aps-json" rows="3" placeholder='{"Digitalisierung": "E-government, AI, cybersecurity", "Covid-19": "Pandemic measures and their effects"}'></textarea>
+                  <div class="ed-json-actions"><button type="button" class="ghost" id="aps-json-add">Add these topics</button><span id="aps-json-msg" class="hint" aria-live="polite"></span></div>
+                </details>
+              </div>
+              <div class="ed-tools">
+                <input type="search" id="aps-filter" placeholder="Filter topics and chapters" aria-label="Filter topics">
+                <button type="button" class="ghost" id="aps-reset">Reset to the original 165</button>
+              </div>
+              <div id="aps-editor-list" class="ed-list"></div>
+            </div>
+          </section>
 
           <details class="options">
-            <summary>Options</summary>
+            <summary>Advanced options</summary>
             <div class="option-grid">
               <div class="field">
                 <label for="language">Text language for federal affairs</label>
@@ -162,27 +232,23 @@
             </div>
           </details>
 
-          <button type="submit" class="primary wide" id="classify-submit">Classify</button>
-        </form>
+          <label class="check"><input type="checkbox" id="find-similar" checked> Also find similar cases in every parliament and language, with the labels people gave them</label>
 
-        <div id="classify-out" class="out" aria-live="polite">
-          <div class="empty">
-            <h2>Topic probabilities, explained</h2>
-            <p>Give an affair, a document or any text. Jev answers one yes/no question per topic and returns a probability for each one. Topics above the threshold are assigned.</p>
-            <p class="muted">The 28 Curia Vista subject areas are the default: they are the labelled set, so their accuracy is known (top topic correct for about 92% of affairs).</p>
-          </div>
-        </div>
-      </div>
+          <button type="submit" class="primary wide" id="classify-submit"><svg class="i" aria-hidden="true"><use href="#i-tag"/></svg><span class="label">Classify</span></button>
+      </form>
+
+      <div id="classify-out" class="out" aria-live="polite"></div>
     </section>
+
   </main>
 
-  <template id="topic-row">
-    <div class="topic">
-      <input type="text" class="topic-name" placeholder="Topic name" aria-label="Topic name" maxlength="200">
-      <input type="text" class="topic-desc" placeholder="What it covers (optional)" aria-label="What the topic covers" maxlength="1000">
-      <button type="button" class="icon remove" aria-label="Remove topic">×</button>
+  <footer class="foot">
+    <div class="wrap">
+      <span>Built on OpenParlData.ch, Apertus v1.5 and TypeSafe Jev</span>
+      <span><a href="/docs">API documentation</a></span>
     </div>
-  </template>
+  </footer>
+
 
   <script src="app.js"></script>
 </body>

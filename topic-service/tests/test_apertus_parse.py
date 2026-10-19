@@ -14,6 +14,13 @@ def test_invalid_json_falls_back():
     assert result[0].queries == ["Lärm"]
 
 
+def test_stray_closing_brace_is_ignored():
+    # Seen from apertus-v1-5-70b: a complete object followed by one extra "}".
+    content = '{\n  "de": ["Spitalplanung überregional"],\n  "fr": ["planification hospitalière"]}\n}'
+    result = {v.language: v.queries for v in parse_variants(content, ["de", "fr"], 3, fallback="x")}
+    assert result == {"de": ["Spitalplanung überregional"], "fr": ["planification hospitalière"]}
+
+
 def test_caps_number_of_variants():
     result = parse_variants('{"de": ["a", "b", "c", "d"]}', ["de"], 2, fallback="x")
     assert result[0].queries == ["a", "b"]

@@ -13,7 +13,9 @@ from typing import Protocol
 from .models import (
     AffairSummary,
     Classification,
+    DocumentKeywords,
     DocumentText,
+    KnownLabel,
     QueryVariants,
     SourceDocument,
     Taxonomy,
@@ -90,3 +92,21 @@ class TaxonomyProvider(Protocol):
     def list(self) -> list[Taxonomy]: ...
 
     def get(self, taxonomy_id: str) -> Taxonomy: ...
+
+
+class KeywordWriter(Protocol):
+    """Reads a document and lists, per language, the words titles of affairs on its subject contain."""
+
+    async def keywords(self, document: SourceDocument, languages: Sequence[str]) -> DocumentKeywords: ...
+
+
+class SimilarityRanker(Protocol):
+    """Scores how similar each affair is to a document (0 to 1)."""
+
+    async def score(self, document: SourceDocument, affairs: Sequence[AffairSummary]) -> list[float]: ...
+
+
+class LabelLookup(Protocol):
+    """Labels people already gave to affairs, by OpenParlData affair id."""
+
+    def labels(self, affair_ids: Sequence[int]) -> dict[int, list[KnownLabel]]: ...

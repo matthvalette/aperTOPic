@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from pydantic import BaseModel, Field, model_validator
 
-from ..services.classify import DEFAULT_TAXONOMIES, CustomTopic
+from ..services.classify import DEFAULT_TAXONOMIES, CustomTopic, EditedTopic
 from ..services.search import SearchOptions
+from ..services.similar import SimilarOptions
 
 
 class SearchRequest(SearchOptions):
@@ -25,6 +26,12 @@ class ClassifyRequest(BaseModel):
         description="Label sets to score. See GET /taxonomies.",
     )
     custom_topics: list[CustomTopic] = Field(default_factory=list, max_length=50, description="Ad-hoc topics")
+    aps_topics: list[EditedTopic] | None = Field(
+        default=None,
+        max_length=300,
+        description="An edited copy of the APS topics (rename, re-describe, delete or add, each with its chapter). "
+        "Replaces the 165 APS topics for this request; chapter scores follow the edited chapters.",
+    )
     language: str | None = Field(
         default=None, description="Preferred text language for multilingual affairs (de, fr, it)."
     )
@@ -35,6 +42,26 @@ class ClassifyRequest(BaseModel):
 
     @model_validator(mode="after")
     def one_input(self) -> "ClassifyRequest":
+        if bool(self.reference) == bool(self.text):
+            raise ValueError("Send either `reference` or `text`.")
+        return self
+
+
+class SimilarRequest(SimilarOptions):
+    reference: str | None = Field(
+        default=None,
+        description="An OpenParlData link or id, a files.openparldata.ch document link, or a Curia Vista link.",
+        examples=["https://openparldata.ch/item/affairs/70435"],
+    )
+    text: str | None = Field(default=None, max_length=200_000, description="Text to compare instead of a reference.")
+    title: str | None = Field(default=None, max_length=500)
+    language: str | None = Field(
+        default=None, description="Preferred text language for multilingual affairs (de, fr, it)."
+    )
+    include_answer: bool = Field(default=False, description="Also read the Federal Council's answer.")
+
+    @model_validator(mode="after")
+    def one_input(self) -> "SimilarRequest":
         if bool(self.reference) == bool(self.text):
             raise ValueError("Send either `reference` or `text`.")
         return self

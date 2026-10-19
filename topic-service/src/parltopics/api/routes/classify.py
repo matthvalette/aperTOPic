@@ -2,7 +2,7 @@ import json
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 
-from ...services.classify import ClassificationOutcome, ClassificationService, CustomTopic
+from ...services.classify import ClassificationOutcome, ClassificationService, CustomTopic, EditedTopic
 from ...services.documents import DocumentResolver
 from ..dependencies import classification_service, document_resolver
 from ..schemas import ClassifyRequest
@@ -25,7 +25,9 @@ async def classify(
             )
         else:
             document = resolver.from_text(body.text or "", title=body.title)
-        return await service.classify(document, body.taxonomies, body.custom_topics, body.threshold)
+        return await service.classify(
+            document, body.taxonomies, body.custom_topics, body.threshold, aps_topics=body.aps_topics
+        )
     except KeyError as error:
         raise HTTPException(422, str(error).strip("'\"")) from None
     except LookupError as error:
@@ -41,6 +43,7 @@ async def classify_upload(
     custom_topics: str = Form("", description='JSON list, e.g. [{"name": "Digitalisierung"}]'),
     title: str | None = Form(None),
     threshold: float | None = Form(None),
+    aps_topics: str = Form("", description="JSON list of edited APS topics, as in POST /classify"),
     service: ClassificationService = Depends(classification_service),
     resolver: DocumentResolver = Depends(document_resolver),
 ) -> ClassificationOutcome:
@@ -51,7 +54,10 @@ async def classify_upload(
         topics = [CustomTopic(**t) for t in json.loads(custom_topics)] if custom_topics.strip() else []
         document = resolver.from_upload(data, filename=file.filename, content_type=file.content_type, title=title)
         ids = [t.strip() for t in taxonomies.split(",") if t.strip()]
-        return await service.classify(document, ids, topics, threshold)
+        edited = [EditedTopic(**t) for t in json.loads(aps_topics)] if aps_topics.strip() else None
+        if edited is not None and len(edited) > 300:
+            raise ValueError("Send at most 300 APS topics.")
+        return await service.classify(document, ids, topics, threshold, aps_topics=edited)
     except KeyError as error:
         raise HTTPException(422, str(error).strip("'\"")) from None
     except (ValueError, json.JSONDecodeError) as error:

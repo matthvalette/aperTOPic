@@ -170,3 +170,26 @@ class Classification(BaseModel):
         description="Parent level (e.g. APS chapters): the highest probability among each group's topics.",
     )
     model: str
+
+
+# ---------- similar cases ----------
+
+
+class KnownLabel(BaseModel):
+    """A label people gave an affair: a Curia Vista subject area, a cantonal subject, an editorial tag."""
+
+    taxonomy_id: str | None = Field(
+        default=None, description="The label set it belongs to, when the service has it (see GET /taxonomies)."
+    )
+    topic_id: str | None = None
+    name: str
+    source: str = Field(description="Who assigned it, e.g. the Parliamentary Services in Curia Vista.")
+
+
+class DocumentKeywords(BaseModel):
+    """Words that titles of affairs on the same subject as a document contain."""
+
+    subject: str | None = Field(default=None, description="The document's subject in one sentence.")
+    words: dict[str, list[str]] = Field(
+        default_factory=dict, description="Per language, the title words, most distinctive first."
+    )

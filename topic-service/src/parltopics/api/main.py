@@ -10,7 +10,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from .dependencies import lifespan
-from .routes import classify, health, parliaments, search, taxonomies
+from .routes import classify, health, parliaments, search, similar, taxonomies
 
 WEB_DIR = Path(__file__).resolve().parents[1] / "web"
 
@@ -25,7 +25,7 @@ def create_app() -> FastAPI:
         ),
         lifespan=lifespan,
     )
-    for module in (health, search, classify, taxonomies, parliaments):
+    for module in (health, search, classify, similar, taxonomies, parliaments):
         app.include_router(module.router)
     app.mount("/ui", StaticFiles(directory=WEB_DIR, html=True), name="ui")
 

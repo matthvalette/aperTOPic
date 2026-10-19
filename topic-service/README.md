@@ -64,6 +64,26 @@ Deep links run on load, which is handy for demos:
 | `POST /search` | Multilingual search |
 | `POST /classify` | Topic probabilities for a link, an id or text |
 | `POST /classify/upload` | Topic probabilities for a PDF, DOCX, HTML or text file |
+| `POST /similar` | Similar cases in every parliament and language, with the labels people gave them |
+| `POST /similar/upload` | The same for a PDF, DOCX, HTML or text file |
+
+### Similar cases
+
+The Classify tab also shows similar cases and a "Your labels" card: Jev's assigned topics as chips you can
+remove, every other topic to add, and the topics similar cases carry as one-click suggestions.
+
+How it works: Apertus reads the document and lists, per language, the words titles on the same subject
+contain. The service searches each word that matches at most 60 titles on its own, the two words naming the
+subject even when broader, and pairs of broad words. Affairs with the same title in one parliament are merged,
+Jev rates how close each is to the document, and the cases come with their Curia Vista subject areas, St. Gallen
+and Thurgau subjects or PolitMonitor tag. On 22 held-out documents, 79% of the five cases shown first deal with
+the same issue; summarising the document for the /search translator instead reaches 10%. Details:
+`evaluation_runs/20261019_similar_cases/report.md`.
+
+```bash
+curl -X POST localhost:8000/similar -H 'Content-Type: application/json' \
+  -d '{"reference": "https://openparldata.ch/item/affairs/227121", "max_results": 10}'
+```
 
 ### Examples
 
@@ -159,11 +179,13 @@ src/parltopics/
     taxonomies.py         label sets built from the labelled data
     files.py              text from PDF, DOCX, HTML and text files
     bodies.py             parliament names from the bodies export
+    labels.py             labels people gave affairs (Curia Vista, SG, TG, Zug, Zurich, PolitMonitor)
   services/               the use cases, written against the ports only
     references.py         parses pasted links and ids
     documents.py          link, upload or text -> document with named sections
     search.py             multilingual search
     classify.py           topic classification
+    similar.py            similar cases: title words -> searches by hit count -> Jev ranking -> labels
   api/
     main.py               FastAPI app
     dependencies.py       wiring: which adapter implements which port
@@ -200,3 +222,5 @@ it in `api/dependencies.py`. Nothing else changes.
 - Full-text scopes (`texts`, `docs`, `all`) take about 10 seconds per query; `metadata`
   (titles) about 0.3 seconds.
 - Labels are suggestions with probabilities. A person should be able to correct them.
+- Apertus often ends its JSON with one stray `}`. The parsers read the first complete JSON object and ignore
+  the rest; before this fix, about 1 in 10 translations was discarded and the request searched untranslated.
